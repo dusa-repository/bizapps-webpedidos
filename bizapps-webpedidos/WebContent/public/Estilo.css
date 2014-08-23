@@ -1,0 +1,112 @@
+@CHARSET "UTF-8";
+
+.z-window {
+	background-image: none;
+	background-color: #661313;
+}
+
+.z-window-header {
+	color: white;
+	font-size: 18px;
+	font-weight: normal;
+	background-color: #661313;
+}
+
+.z-borderlayout {
+	background-image: none;
+	background-color: #661313;
+}
+
+.etiqueta {
+	font-weight: bold;
+	font-family: arial;
+	color: #771313;
+	font-size: 13px;
+}
+
+.z-groupbox-3d {
+	background: #FFFFFF;
+	border: 11px solid #3A0202;
+}
+
+.z-groupbox-3d>.z-groupbox-header {
+	background: #3A0202;
+	border-left: none;
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+
+}
+
+.z-groupbox-header {
+	border: #3A0202;
+	background: #3A0202;
+	font-weight: normal;
+}
+
+.z-groupbox-content {
+	border: #3A0202;
+}
+
+.z-label {
+	pre: true;
+	multiline: true;
+}
+
+.btn {
+	font-size: 18px;
+	cursor: pointer;
+	width: 145px;
+	height: 158px;
+	background: #661313;
+	border: none;
+	color: white;
+	white-space: pre-line;
+		text-shadow: 0 1px #3A0202;
+}
+
+.btn-salir {
+	font-size: 17px;
+	cursor: pointer;
+	width: 110px;
+	height: 40px;
+	background: #3A0202;
+	color: white;
+	orient: vertical;
+	text-shadow: 0 1px #3A0202;
+}
+
+.multilinea {
+	height: 35px;
+}
+
+.multilineaTab {
+	height: 250px;
+}
+
+.z-loading {
+	background-color: #771313;
+	border: 1px outset #A0A0A0;
+	font-weight: bold;
+	font-size: 18px;
+	cursor: wait;
+	width: 250px;
+	height: 45px;
+}
+
+.z-loading-indicator {
+	color: gray;
+	border: 0 none;
+}
+
+.z-caption-content {
+	border: #3A0202;
+	padding-top: none;
+	padding-right: none;
+	padding-bottom: none;
+	padding-left: none;
+}
+
+.btn img {
+	vertical-align: super;
+}
