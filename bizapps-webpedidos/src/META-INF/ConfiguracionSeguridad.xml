@@ -31,18 +31,18 @@
 
 				group-authorities-by-username-query="
 				select g.id_grupo, g.nombre, ga.id_arbol from grupo g, arbol ga, grupo_usuario gu 
-				where gu.id_usuario = (select id_usuario from usuario where id_usuario = ?) 
+				where gu.id_usuario = (select id_usuario from usuario where login = ?) 
  				and g.id_grupo=gu.id_grupo and ga.id_arbol in 
  				(select aa.id_arbol from arbol_grupo aa where aa.id_grupo=gu.id_grupo)"
 
 				users-by-username-query="
-		      	select id_usuario, password, estado 
-		      	from usuario where id_usuario=?"
+		      	select login, password, estado 
+		      	from usuario where login=?"
 
 				authorities-by-username-query="
-				select u.id_usuario, g.nombre 
-				from usuario u, grupo g where u.id_usuario=? and
-				g.id_grupo in (select us.id_grupo from grupo_usuario us where us.id_usuario=u.id_usuario)" />
+				select u.login, g.nombre 
+				from usuario u, grupo g where u.login = ? and g.id_grupo 
+				in (select us.id_grupo from grupo_usuario us where us.id_usuario=u.id_usuario)" />
 
 		</authentication-provider>
 	</authentication-manager>
