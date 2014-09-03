@@ -3,8 +3,14 @@
 	<style src="public/Estilo.css" />
 
 	<style>
-		.z-groupbox-hr { background:#661313;border-radius: 30px 30px 30px 30px }
+		.z-groupbox-hr { background:#661313;border-radius: 30px 30px
+		30px 30px }
 		.z-groupbox { border-radius: 30px 30px 30px 30px }
+
+		.z-groupbox .z-groupbox-header {
+		background: #661313;
+		border-radius: 30px 30px 30px 30px
+		}
 	</style>
 	<zscript>
 		String variable = execution.getParameter("respuesta");
@@ -54,8 +60,7 @@
 						<separator />
 						<separator />
 						<separator />
-						<label class="lblIndex"
-							value="SISTEMA INTEGRAL MEDICO Y DE SEGURIDAD" />
+						<label class="lblIndex" value="PANEL DE CONTROL WEB PEDIDOS" />
 					</div>
 					<div align="center">
 						<groupbox width="35em" height="18em">
@@ -83,7 +88,8 @@
 									<separator />
 									<hlayout width="100%">
 										<button type="submit" class="btn" label="Entrar"
-											image="/public/imagenes/botones/entrar.png" height="37px" width="170px" />
+											style="font-size:18px" image="/public/imagenes/botones/entrar.png"
+											height="37px" width="170px" />
 									</hlayout>
 								</h:form>
 							</hlayout>
@@ -100,8 +106,8 @@
 					</div>
 				</vlayout>
 			</east>
-			<south class="banner" vflex="2" border="0"
-				height="3em" collapsible="false">
+			<south class="banner" vflex="2" border="0" height="3em"
+				collapsible="false">
 				<div align="center" sclass="footer">
 					<separator></separator>
 					<label style="padding-center:35%;color: white"

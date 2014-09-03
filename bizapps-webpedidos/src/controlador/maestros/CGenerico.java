@@ -29,9 +29,12 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 
+import servicio.maestros.SProducto;
+import servicio.maestros.SVendedor;
 import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
+import servicio.transacciones.SCupo;
 
 import componente.Mensaje;
 
@@ -46,8 +49,17 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
 	protected SUsuario servicioUsuario;
+	@WireVariable("SCupo")
+	protected SCupo servicioCupo;
+	@WireVariable("SProducto")
+	protected SProducto servicioProducto;
+	@WireVariable("SVendedor")
+	protected SVendedor servicioVendedor;
+	
 	protected static SimpleDateFormat formatoFecha = new SimpleDateFormat(
 			"dd-MM-yyyy");
+	protected static SimpleDateFormat formatoFechaRara = new SimpleDateFormat(
+			"yyyyMMdd");
 	public List<Tab> tabs = new ArrayList<Tab>();
 	protected DateFormat df = new SimpleDateFormat("HH:mm:ss");
 	public Calendar calendario = Calendar.getInstance();
