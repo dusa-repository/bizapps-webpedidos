@@ -3,6 +3,7 @@ package modelo.maestros;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -91,56 +92,30 @@ public class Cupo implements Serializable {
 	}
 
 	public Date traerFechaDesde() {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
-		String ano = String.valueOf(desde.charAt(0))
-				+ String.valueOf(desde.charAt(1))
-				+ String.valueOf(desde.charAt(2))
-				+ String.valueOf(desde.charAt(3));
-		String mes = String.valueOf(desde.charAt(4))
-				+ String.valueOf(desde.charAt(5));
-		String dia = String.valueOf(desde.charAt(6))
-				+ String.valueOf(desde.charAt(7));
-
-//		System.out.println(ano);
-//		System.out.println(mes);
-//		System.out.println(dia);
-
-		Date fechaa = new Date();
-		
-		Timestamp fecha = new Timestamp(fechaa.getTime());
-
-		fecha.setYear(Integer.valueOf(ano));
-		fecha.setMonth(Integer.valueOf(mes));
-		fecha.setDate(Integer.valueOf(dia));
-
-//		System.out.println("fecha :" + fecha);
+		Date fecha = null;
+		try {
+			fecha = formatter.parse(desde);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return fecha;
 	}
 
 	public Date traerFechaHasta() {
 
-		String ano = String.valueOf(hasta.charAt(0))
-				+ String.valueOf(hasta.charAt(1))
-				+ String.valueOf(hasta.charAt(2))
-				+ String.valueOf(hasta.charAt(3));
-		String mes = String.valueOf(hasta.charAt(4))
-				+ String.valueOf(hasta.charAt(5));
-		String dia = String.valueOf(hasta.charAt(6))
-				+ String.valueOf(hasta.charAt(7));
-//
-//		System.out.println(ano);
-//		System.out.println(mes);
-//		System.out.println(dia);
-		
-		Date fechaa = new Date();
-		Timestamp fecha = new Timestamp(fechaa.getTime());
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
-		fecha.setYear(Integer.valueOf(ano));
-		fecha.setMonth(Integer.valueOf(mes));
-		fecha.setDate(Integer.valueOf(dia));
-
-		//System.out.println("fecha hasta :" + fecha);
+		Date fecha = null;
+		try {
+			fecha = formatter.parse(hasta);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return fecha;
 	}

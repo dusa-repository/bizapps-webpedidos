@@ -24,4 +24,10 @@ import org.springframework.data.jpa.repository.Query;
 
 		Object findByIdAndIdVendedor(CupoPK pk, String string);
 
+		List<Cupo> findByIdVendedor(String idVendedor);
+
+		List<Cupo> findByIdMarca(String idMarca);
+
+		List<Cupo> findByIdVendedorNot(String string);
+
 }

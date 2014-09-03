@@ -126,7 +126,7 @@
 								<hbox widths="32%,3%,65%">
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas sin Restriccion" />
-										<listbox id="ltbMarcas" height="350px" width="100%"
+										<listbox mold="paging" pagingPosition="top" pageSize="10" id="ltbMarcas" height="350px" width="100%"
 											emptyMessage="No hay Marcas Registradas">
 											<listhead>
 												<listheader label="Marca" width="100%" />
@@ -164,7 +164,7 @@
 									</vbox>
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas con Restriccion" />
-										<listbox id="ltbMarcasAgregadas" height="350px" width="100%"
+										<listbox mold="paging" pagingPosition="top" pageSize="10" id="ltbMarcasAgregadas" height="350px" width="100%"
 											emptyMessage="No ha Seleccionado Ningúna Marca">
 											<listhead>
 												<listheader label="Marca" width="30%" />
@@ -198,7 +198,7 @@
 								<hbox widths="32%,3%,65%">
 									<vbox align="center">
 										<label class="etiqueta" value="Items sin Restriccion" />
-										<listbox id="ltbItems" height="350px" width="100%"
+										<listbox mold="paging" pagingPosition="top" pageSize="10" id="ltbItems" height="350px" width="100%"
 											emptyMessage="No hay Items Registradas">
 											<listhead>
 												<listheader label="Item" width="100%" />
@@ -236,7 +236,7 @@
 									</vbox>
 									<vbox align="center">
 										<label class="etiqueta" value="Items con Restriccion" />
-										<listbox id="ltbItemsAgregados" height="350px" width="100%"
+										<listbox id="ltbItemsAgregados" mold="paging" pagingPosition="top" pageSize="10" height="350px" width="100%"
 											emptyMessage="No ha Seleccionado Ningún Item">
 											<listhead>
 												<listheader label="Item" width="40%" />

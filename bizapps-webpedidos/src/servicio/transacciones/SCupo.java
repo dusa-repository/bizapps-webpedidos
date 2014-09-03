@@ -53,4 +53,21 @@ public class SCupo {
 		return cupoDAO.findByIdAndIdVendedor(pk,"0");
 	}
 
+	public List<Cupo> buscarCuposVendedor(String idVendedor) {
+		return cupoDAO.findByIdVendedor(idVendedor);
+	}
+
+	public void eliminarVarios(List<Cupo> eliminarLista) {
+		cupoDAO.delete(eliminarLista);
+		
+	}
+
+	public List<Cupo> buscarCuposMarca(String idMarca) {
+		return cupoDAO.findByIdMarca(idMarca);
+	}
+
+	public List<Cupo> buscarCuposActivos() {
+		return cupoDAO.findByIdVendedorNot("0");
+	}
+
 }
