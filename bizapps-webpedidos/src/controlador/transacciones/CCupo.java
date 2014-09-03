@@ -16,6 +16,7 @@ import modelo.seguridad.Usuario;
 
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -26,6 +27,7 @@ import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
@@ -97,7 +99,7 @@ public class CCupo extends CGenerico {
 		listaProduct = servicioProducto.buscarMarcas();
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
-		//llenarListas();
+		 llenarListas();
 		listasMultiples();
 		Botonera botonera = new Botonera() {
 
@@ -436,6 +438,7 @@ public class CCupo extends CGenerico {
 	public void derechaItem() {
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem = ltbItems.getItems();
+		ltbItemsAgregados.renderAll();
 		if (listItem.size() != 0) {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
@@ -454,37 +457,28 @@ public class CCupo extends CGenerico {
 					pk.setProducto(item.getProductId());
 					cupoNew.setId(pk);
 					itemsRestringidos.clear();
-					for (int j = 0; j < ltbItemsAgregados
-							.getItemCount(); j++) {
+					for (int j = 0; j < ltbItemsAgregados.getItemCount(); j++) {
 						Listitem listItemj = ltbItemsAgregados
 								.getItemAtIndex(j);
-						System.out.println(((listItemj
-								.getChildren().get(3))).getFirstChild());
-						String idItem = ((Textbox) ((listItemj
-								.getChildren().get(3))).getFirstChild())
-								.getValue();
-						System.out.println(idItem);
-						System.out.println("posicion : " + j);
-						System.out.println("tamaño :" +ltbItemsAgregados
-							.getItemCount());
-						
+						String idItem = ((Textbox) ((listItemj.getChildren()
+								.get(3))).getFirstChild()).getValue();
 						Date fechaDesde = new Date();
 						Date fechaHasta = new Date();
-						String desde="";
-						String hasta="";
+						String desde = "";
+						String hasta = "";
 						if (((Datebox) ((listItemj.getChildren().get(1)))
 								.getFirstChild()).getValue() != null) {
 							fechaDesde = ((Datebox) ((listItemj.getChildren()
 									.get(1))).getFirstChild()).getValue();
 							desde = formatoFechaRara.format(fechaDesde);
-							
+
 						}
 						if (((Datebox) ((listItemj.getChildren().get(2)))
 								.getFirstChild()).getValue() != null) {
 							fechaHasta = ((Datebox) ((listItemj.getChildren()
 									.get(2))).getFirstChild()).getValue();
 							hasta = formatoFechaRara.format(fechaHasta);
-							
+
 						}
 						Product produc = servicioProducto.buscar(idItem);
 						Cupo cupo = new Cupo();
@@ -502,9 +496,8 @@ public class CCupo extends CGenerico {
 						itemsRestringidos.add(cupo);
 					}
 					itemsRestringidos.add(cupoNew);
-					ltbItemsAgregados
-							.setModel(new ListModelList<Cupo>(
-									itemsRestringidos));
+					ltbItemsAgregados.setModel(new ListModelList<Cupo>(
+							itemsRestringidos));
 					ltbItemsAgregados.renderAll();
 					listitemEliminar.add(listItem.get(i));
 				}
@@ -520,6 +513,7 @@ public class CCupo extends CGenerico {
 	public void izquierdaItem() {
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem2 = ltbItemsAgregados.getItems();
+		ltbItems.renderAll();
 		if (listItem2.size() != 0) {
 			for (int i = 0; i < listItem2.size(); i++) {
 				if (listItem2.get(i).isSelected()) {
@@ -543,6 +537,7 @@ public class CCupo extends CGenerico {
 	public void derechaEspecialista() {
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem = ltbMarcas.getItems();
+		ltbMarcasAgregadas.renderAll();
 		if (listItem.size() != 0) {
 			for (int i = 0; i < listItem.size(); i++) {
 				if (listItem.get(i).isSelected()) {
@@ -616,6 +611,7 @@ public class CCupo extends CGenerico {
 	public void izquierdaEspecialista() {
 		List<Listitem> listitemEliminar = new ArrayList<Listitem>();
 		List<Listitem> listItem2 = ltbMarcasAgregadas.getItems();
+		ltbMarcas.renderAll();
 		if (listItem2.size() != 0) {
 			for (int i = 0; i < listItem2.size(); i++) {
 				if (listItem2.get(i).isSelected()) {
@@ -656,17 +652,76 @@ public class CCupo extends CGenerico {
 		ltbMarcasAgregadas.setMultiple(true);
 		ltbMarcasAgregadas.setCheckmark(true);
 	}
-	
-//	@Listen("onClick = #btnLimpiarVendedor")
-//	public void derechaEspecialista() {
-//		
-//	}
-//	@Listen("onClick = #btnLimpiarMarca")
-//	public void derechaEspecialista() {
-//		
-//	}
-//	@Listen("onClick = #pasar1Marca")
-//	public void derechaEspecialista() {
-//		
-//	}
+
+	@Listen("onClick = #btnLimpiarVendedor")
+	public void limpiarVendedor() {
+
+		if (!idVendedor.equals("")) {
+			Salesmen vendedor = servicioVendedor.buscar(idVendedor);
+			Messagebox.show(
+					"¿Desea limpiar los cupos del Vendedor "
+							+ vendedor.getName() + " ?", "Alerta",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								List<Cupo> eliminarLista = servicioCupo
+										.buscarCuposVendedor(idVendedor);
+								servicioCupo.eliminarVarios(eliminarLista);
+								msj.mensajeInformacion(Mensaje.limpiado);
+								if (cmbMarca.getValue().compareTo("") != 0)
+									refrescar();
+							}
+						}
+					});
+		} else
+			msj.mensajeError(Mensaje.seleccionarVendedor);
+
+	}
+
+	@Listen("onClick = #btnLimpiarMarca")
+	public void limpiarMarca() {
+		if (cmbMarca.getValue().compareTo("") != 0) {
+
+			idMarca = cmbMarca.getValue();
+			Messagebox.show("¿Desea limpiar los Cupos de la Marca " + idMarca
+					+ " ?", "Alerta", Messagebox.OK | Messagebox.CANCEL,
+					Messagebox.QUESTION,
+					new org.zkoss.zk.ui.event.EventListener<Event>() {
+						public void onEvent(Event evt)
+								throws InterruptedException {
+							if (evt.getName().equals("onOK")) {
+								List<Cupo> eliminarLista = servicioCupo
+										.buscarCuposMarca(idMarca);
+								servicioCupo.eliminarVarios(eliminarLista);
+								msj.mensajeInformacion(Mensaje.limpiado);
+								if (!idVendedor.equals(""))
+									refrescar();
+							}
+						}
+					});
+		} else
+			msj.mensajeError(Mensaje.seleccionarMarca);
+	}
+
+	@Listen("onClick = #btnLimpiarTodo")
+	public void limpiarTodo() {
+
+		Messagebox.show("¿Desea limpiar todos los Cupos?", "Alerta",
+				Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+				new org.zkoss.zk.ui.event.EventListener<Event>() {
+					public void onEvent(Event evt) throws InterruptedException {
+						if (evt.getName().equals("onOK")) {
+							List<Cupo> eliminarLista = servicioCupo
+									.buscarCuposActivos();
+							servicioCupo.eliminarVarios(eliminarLista);
+							msj.mensajeInformacion(Mensaje.limpiado);
+							if (!idVendedor.equals("")
+									&& cmbMarca.getValue().compareTo("") != 0)
+								refrescar();
+						}
+					}
+				});
+	}
 }
