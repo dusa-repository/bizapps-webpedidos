@@ -1,6 +1,6 @@
 <?page id="mainPage" title="BIENVENIDO" contentType="text/html;charset=utf-8"?>
 <zk>
-	<style src="../public/Estilo.css" />
+ 	<style src="../public/Estilo.css" /> 
 	<script src="/public/progress.js" />
 	<window title="" style="zoom: 0.75" border="0" height="100%"
 		apply="arbol.CArbol">
@@ -27,7 +27,7 @@
 							<separator />
 							<separator />
 							<label style="font-size:23px;color:white;font-weight: bold"
-								value="SISTEMA DE INVENTARIO" />
+								value="PANEL DE CONTROL WEB PEDIDOS" />
 						</hbox>
 					</div>
 					<div align="center" width="100%">

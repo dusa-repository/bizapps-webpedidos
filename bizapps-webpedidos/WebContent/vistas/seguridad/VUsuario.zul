@@ -75,7 +75,6 @@
 					</tabs>
 					<tabpanels>
 						<tabpanel>
-							<groupbox width="100%" title="Datos Personales">
 								<grid width="100%">
 									<columns visible="false">
 										<column label="" width="20%" />
@@ -116,9 +115,8 @@
 										</row>
 									</rows>
 								</grid>
-							</groupbox>
 							<div align="right" style="float: right;">
-								<button id="btnSiguientePestanna" label="Siguiente"
+								<button class="btn" id="btnSiguientePestanna" label="Siguiente"
 									image="/public/imagenes/botones/adelante.png" />
 							</div>
 						</tabpanel>
@@ -164,7 +162,7 @@
 								</rows>
 							</grid>
 							<separator />
-							<groupbox width="100%"
+							<groupbox class="blanco" width="100%"
 								title="Seleccione los Grupos Correspondientes al Usuario">
 								<hbox>
 									<listbox id="ltbGruposDisponibles" height="160px"
@@ -197,7 +195,7 @@
 							<separator />
 							<separator />
 							<div align="left" style="float: right;">
-								<button label="Anterior" id="btnAnteriorPestanna"
+								<button label="Anterior"  class="btn" id="btnAnteriorPestanna"
 									image="/public/imagenes/botones/atras.png" />
 							</div>
 						</tabpanel>

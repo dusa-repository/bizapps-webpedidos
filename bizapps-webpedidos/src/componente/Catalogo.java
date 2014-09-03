@@ -43,13 +43,14 @@ public abstract class Catalogo<Clase> extends Window {
 	Label labelBuscado;
 
 	public Catalogo(final Component cGenerico, String titulo,
-			List<Clase> lista, boolean emergente, boolean udc, boolean param2,
+			List<Clase> lista, boolean emergente, boolean udc, boolean hibrido,
 			String... campos) {
 		super("", "2", false);
 		this.setId("cmpCatalogo" + titulo);
+//		this.setHeight("470px");
 		this.setStyle("background-header:#FF7925; background: #f4f2f2");
 		// this.setWidth("auto");
-		crearLista(lista, campos, emergente, udc);
+		crearLista(lista, campos, emergente, udc, hibrido);
 		lsbCatalogo.addEventListener(Events.ON_SELECT,
 				new EventListener<Event>() {
 
@@ -61,7 +62,7 @@ public abstract class Catalogo<Clase> extends Window {
 	}
 
 	public void crearLista(List<Clase> lista, String[] campos,
-			final boolean emergente, boolean udc) {
+			final boolean emergente, boolean udc, final boolean hibrido) {
 		exportador = new Button();
 		exportador.setTooltiptext("Exportar los Datos como un Archivo");
 		exportador.setSclass("catalogo");
@@ -116,7 +117,7 @@ public abstract class Catalogo<Clase> extends Window {
 							List<Clase> listaNueva = buscar(valores);
 							lsbCatalogo.setModel(new ListModelList<Clase>(
 									listaNueva));
-							if (!emergente) {
+							if (!emergente && !hibrido) {
 								lsbCatalogo.setMultiple(false);
 								lsbCatalogo.setCheckmark(false);
 								lsbCatalogo.setMultiple(true);
@@ -132,11 +133,13 @@ public abstract class Catalogo<Clase> extends Window {
 			cabeceraFila.appendChild(cajaTexto);
 			cabecera.appendChild(cabeceraFila);
 			Listheader listheader = new Listheader(campos[i]);
+			listheader.setHflex("min");
 			lhdEncabezado.appendChild(listheader);
 		}
 		lsbCatalogo.appendChild(cabecera);
+		lsbCatalogo.setWidth("100%");
 		lsbCatalogo.appendChild(lhdEncabezado);
-		lsbCatalogo.setSizedByContent(true);
+//		lsbCatalogo.setSizedByContent(true);
 		lsbCatalogo.setSpan("true");
 		cabecera.setVisible(true);
 		lhdEncabezado.setVisible(true);
@@ -199,7 +202,6 @@ public abstract class Catalogo<Clase> extends Window {
 
 				this.appendChild(div);
 			}
-
 			this.appendChild(separador2);
 			this.appendChild(lsbCatalogo);
 			// this.exportador.setVisible(false);
@@ -209,27 +211,34 @@ public abstract class Catalogo<Clase> extends Window {
 			lsbCatalogo.setMultiple(false);
 			lsbCatalogo.setCheckmark(false);
 		} else {
-			Space espacio = new Space();
-			espacio.setHeight("10px");
-			espacio.setStyle("background:white");
-			box.appendChild(espacio);
-			box.setStyle("background:white");
-			box.appendChild(exportador);
-			box.appendChild(pagineo);
-			box.setWidth("100%");
-			box.setAlign("end");
-			box.setHeight("10px");
-			box.setWidths("96%,2%,2%");
-			this.setWidth("auto");
+			this.setWidth("100%");
 			this.setClosable(false);
-			this.appendChild(separador1);
+			// this.appendChild(separador1);
 			this.appendChild(box);
 			this.appendChild(separador2);
 			this.appendChild(lsbCatalogo);
-			lsbCatalogo.setMultiple(false);
-			lsbCatalogo.setCheckmark(false);
-			lsbCatalogo.setMultiple(true);
-			lsbCatalogo.setCheckmark(true);
+			if (hibrido) {
+				lsbCatalogo.setMultiple(true);
+				lsbCatalogo.setCheckmark(true);
+				lsbCatalogo.setMultiple(false);
+				lsbCatalogo.setCheckmark(false);
+			} else {
+				Space espacio = new Space();
+				espacio.setHeight("10px");
+				espacio.setStyle("background:white");
+				box.appendChild(espacio);
+				box.setStyle("background:white");
+				box.appendChild(exportador);
+				box.appendChild(pagineo);
+				box.setWidth("100%");
+				box.setAlign("end");
+				box.setHeight("10px");
+				box.setWidths("96%,2%,2%");
+				lsbCatalogo.setMultiple(false);
+				lsbCatalogo.setCheckmark(false);
+				lsbCatalogo.setMultiple(true);
+				lsbCatalogo.setCheckmark(true);
+			}
 		}
 	}
 
@@ -296,7 +305,10 @@ public abstract class Catalogo<Clase> extends Window {
 	protected abstract String[] crearRegistros(Clase objeto);
 
 	public Clase objetoSeleccionadoDelCatalogo() {
-		return lsbCatalogo.getSelectedItem().getValue();
+		if (lsbCatalogo.getSelectedItem() != null)
+			return lsbCatalogo.getSelectedItem().getValue();
+		else
+			return null;
 	}
 
 	public Listbox getListbox() {
@@ -305,10 +317,10 @@ public abstract class Catalogo<Clase> extends Window {
 
 	public void actualizarLista(List<Clase> lista) {
 		lsbCatalogo.setModel(new ListModelList<Clase>(lista));
-		lsbCatalogo.setMultiple(false);
-		lsbCatalogo.setCheckmark(false);
-		lsbCatalogo.setMultiple(true);
-		lsbCatalogo.setCheckmark(true);
+		// lsbCatalogo.setMultiple(false);
+		// lsbCatalogo.setCheckmark(false);
+		// lsbCatalogo.setMultiple(true);
+		// lsbCatalogo.setCheckmark(true);
 	}
 
 	public List<Clase> obtenerSeleccionados() {

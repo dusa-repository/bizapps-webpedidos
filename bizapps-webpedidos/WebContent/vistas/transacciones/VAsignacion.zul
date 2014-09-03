@@ -1,0 +1,96 @@
+<zk>
+	<window id="wdwAsignacion" title="Asignar Cupos" border="normal"
+		width="40em" height="auto" contentStyle="overflow:auto"
+		apply="controlador.transacciones.CAsignacion" closable="true">
+		<div id="botoneraAsignacion" />
+		<separator />
+		<grid width="100%">
+			<columns visible="false">
+				<column label="" width="30%" />
+				<column label="" width="30%" />
+				<column label="" width="40%" />
+			</columns>
+			<rows>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Vendedor:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<cell colspan="2">
+						<label id="lblVendedor" />
+					</cell>
+				</row>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Marca:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<cell colspan="2">
+						<label id="lblMarca" />
+					</cell>
+				</row>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Item:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<cell colspan="2">
+						<label id="lblProducto" />
+					</cell>
+				</row>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Vigencia Desde:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<datebox readonly="true" width="140px" id="dtbDesde"
+						onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Vigencia"
+						constraint="no past,no empty" />
+					<hbox />
+				</row>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Vigencia Hasta:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<datebox readonly="true" width="140px" id="dtbHasta"
+						onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Vigencia"
+						constraint="no past,no empty" />
+					<hbox />
+				</row>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Cantidad:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<spinner tooltiptext="Indique la Cantidad" id="spnCantidad"
+						width="98%" constraint="min 0 max 10000" />
+					<label value="Cajas" />
+				</row>
+				<row>
+					<hbox>
+						<label class="etiqueta" value="Consumido:" />
+						<space />
+						<label value="*" style="font-weight:bold;color:red">
+						</label>
+					</hbox>
+					<spinner tooltiptext="Indique o Consumido" id="spnConsumido"
+						width="98%" constraint="min 0 max 10000" />
+					<label value="Cajas" />
+				</row>
+			</rows>
+		</grid>
+	</window>
+</zk>

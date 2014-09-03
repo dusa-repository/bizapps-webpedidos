@@ -34,7 +34,6 @@
 
 .z-groupbox-3d-hm {
 	background: #CE6464;
-	/* 	background: #DDECFD;  BC4042*/
 }
 
 .z-groupbox-3d-hl .z-groupbox-3d-header {
@@ -45,15 +44,18 @@
 }
 
 .btn {
-	font-size: 13px;
+	font-size: 12px;
 	color: white;
 	cursor: pointer;
-	width: 100px;
-	height: 33px;
+	width: 105px;
+	height: 35px;
 	-webkit-border-radius: 0.7em;
 	-moz-border-radius: 0.7em;
 	border-radius: 0.7em;
 	background: #952C2C;
+	white-space: pre-line;
+	text-shadow: 0 0 0;
+	font-family: sans-serif;
 }
 
 .multilinea {
@@ -85,6 +87,8 @@
 	-moz-border-radius: 0.7em;
 	border-radius: 0.7em;
 	background: #952C2C;
+	white-space: pre-line;
+	text-shadow: 0 1px #3A0202;
 }
 
 .catalogo {
@@ -107,11 +111,11 @@
 	font-weight: bold;
 }
 
-.azul .z-groupbox-hr {
+.azul .z-groupbox-header {
 	background: #EBE8E8;
 }
 
-.blanco .z-groupbox-hr {
+.blanco .z-groupbox-header {
 	background: white;
 }
 
