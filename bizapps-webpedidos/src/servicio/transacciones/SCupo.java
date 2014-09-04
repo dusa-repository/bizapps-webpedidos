@@ -70,4 +70,9 @@ public class SCupo {
 		return cupoDAO.findByIdVendedorNot("0");
 	}
 
+	public void guardarVarios(List<Cupo> guardarLista) {
+		cupoDAO.save(guardarLista);
+		
+	}
+
 }

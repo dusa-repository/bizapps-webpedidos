@@ -49,6 +49,8 @@ public class Mensaje {
 	public static String seleccionarMarca= "Debe Seleccionar una Marca";
 	public static String seleccionarVendedor= "Debe Seleccionar un Vendedor";
 	public static String limpiado = "Cupos Limpiados Exitosamente";
+	public static String consumidoMayor = "La cantidad total debe ser mayor a la cantidad consumida";
+	public static String fechasErroneas = "La fecha de Vigencia desde debe ser menor a la fecha de vigencia hasta";
 	
 	public void mensajeInformacion(String msj) {
 	      Messagebox.show(msj, "Informacion",

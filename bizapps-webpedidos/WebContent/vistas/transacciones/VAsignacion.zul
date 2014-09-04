@@ -52,8 +52,7 @@
 						</label>
 					</hbox>
 					<datebox readonly="true" width="140px" id="dtbDesde"
-						onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Vigencia"
-						constraint="no past,no empty" />
+						tooltiptext="Indique la Fecha de Vigencia" constraint="no empty" />
 					<hbox />
 				</row>
 				<row>
@@ -64,8 +63,7 @@
 						</label>
 					</hbox>
 					<datebox readonly="true" width="140px" id="dtbHasta"
-						onCreate="self.value = new Date()" tooltiptext="Indique la Fecha de Vigencia"
-						constraint="no past,no empty" />
+						tooltiptext="Indique la Fecha de Vigencia" constraint="no empty" />
 					<hbox />
 				</row>
 				<row>
