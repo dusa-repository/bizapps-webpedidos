@@ -83,6 +83,8 @@ public class CCupo extends CGenerico {
 
 	List<Cupo> itemsRestringidos = new ArrayList<Cupo>();
 
+	List<String> marcasRestringidas = new ArrayList<String>();
+
 	@Override
 	public void inicializar() throws IOException {
 		HashMap<String, Object> map = (HashMap<String, Object>) Sessions
@@ -99,7 +101,7 @@ public class CCupo extends CGenerico {
 		listaProduct = servicioProducto.buscarMarcas();
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
-		 llenarListas();
+		llenarListas();
 		listasMultiples();
 		Botonera botonera = new Botonera() {
 
@@ -126,7 +128,8 @@ public class CCupo extends CGenerico {
 
 			@Override
 			public void guardar() {
-				// TODO Auto-generated method stub
+				guardarItems();
+				guardarMarcas();
 
 			}
 
@@ -280,6 +283,8 @@ public class CCupo extends CGenerico {
 				map.put("idMarca", idMarca);
 				map.put("cantidad", cupo.getCantidad());
 				map.put("consumido", cupo.getConsumido());
+				map.put("desde", cupo.getDesde());
+				map.put("hasta", cupo.getHasta());
 				map.put("catalogo", catalogo);
 				map.put("lista", cupos);
 				map.put("vendedor", servicioVendedor.buscar(idVendedor)
@@ -365,7 +370,6 @@ public class CCupo extends CGenerico {
 
 		itemsRestringidos = servicioCupo.buscarItemsRestringidos();
 
-		List<String> marcasRestringidas = new ArrayList<String>();
 		marcasRestringidas = servicioCupo.buscarMarcasConCero();
 
 		List<Product> itemsPorMarca = new ArrayList<Product>();
@@ -392,6 +396,7 @@ public class CCupo extends CGenerico {
 				if (marcasDisponibles.get(i).equals(marcasRestringidas.get(j))) {
 					marcasDisponibles.remove(i);
 					i--;
+					j = marcasRestringidas.size();
 				}
 			}
 		}
@@ -524,6 +529,21 @@ public class CCupo extends CGenerico {
 					ltbItems.setModel(new ListModelList<Product>(
 							itemsDisponibles));
 					listitemEliminar.add(listItem2.get(i));
+					for (int j = 0; j < ltbMarcasAgregadas.getItemCount(); j++) {
+						Listitem listItemj = ltbMarcasAgregadas
+								.getItemAtIndex(j);
+						Cupo cupo2 = listItemj.getValue();
+						if (cupo.getId().getMarca()
+								.equals(cupo2.getId().getMarca())) {
+							ltbMarcasAgregadas.removeItemAt(j);
+							j = ltbMarcasAgregadas.getItemCount();
+							marcasFinales.remove(cupo2);
+							marcasRestringidas.remove(cupo2.getId().getMarca());
+							marcasDisponibles.add(cupo2.getId().getMarca());
+							ltbMarcas.setModel(new ListModelList<String>(
+									marcasDisponibles));
+						}
+					}
 				}
 			}
 		}
@@ -723,5 +743,125 @@ public class CCupo extends CGenerico {
 						}
 					}
 				});
+	}
+
+	public void guardarMarcas() {
+		List<Cupo> guardarLista = new ArrayList<Cupo>();
+		ltbMarcasAgregadas.renderAll();
+
+		List<Cupo> eliminar = new ArrayList<Cupo>();
+		System.out.println(marcasRestringidas.size());
+
+		for (int i = 0; i < marcasRestringidas.size(); i++) {
+			List<Product> productos = servicioProducto
+					.buscarPorMarca(marcasRestringidas.get(i));
+
+			for (int j = 0; j < productos.size(); j++) {
+				CupoPK pk = new CupoPK();
+				pk.setMarca(marcasRestringidas.get(i));
+				pk.setProducto(productos.get(j).getProductId());
+				pk.setVendedor("0");
+				Cupo cupo = servicioCupo.buscar(pk);
+				if (cupo != null)
+					eliminar.add(cupo);
+			}
+		}
+		servicioCupo.eliminarVarios(eliminar);
+
+		for (int j = 0; j < ltbMarcasAgregadas.getItemCount(); j++) {
+			Listitem listItemj = ltbMarcasAgregadas.getItemAtIndex(j);
+			String marcaj = ((Textbox) ((listItemj.getChildren().get(3)))
+					.getFirstChild()).getValue();
+			Date fechaDesde = new Date();
+			Date fechaHasta = new Date();
+			String desde = "";
+			String hasta = "";
+			if (((Datebox) ((listItemj.getChildren().get(1))).getFirstChild())
+					.getValue() != null) {
+				fechaDesde = ((Datebox) ((listItemj.getChildren().get(1)))
+						.getFirstChild()).getValue();
+				desde = formatoFechaRara.format(fechaDesde);
+
+			}
+			if (((Datebox) ((listItemj.getChildren().get(2))).getFirstChild())
+					.getValue() != null) {
+				fechaHasta = ((Datebox) ((listItemj.getChildren().get(2)))
+						.getFirstChild()).getValue();
+				hasta = formatoFechaRara.format(fechaHasta);
+
+			}
+
+			List<Product> listProductos = servicioProducto
+					.buscarPorMarca(marcaj);
+			for (int i = 0; i < listProductos.size(); i++) {
+				Cupo cupo = new Cupo();
+				cupo.setCantidad(0);
+				cupo.setConsumido(0);
+				cupo.setRestante(0);
+				cupo.setDescription(listProductos.get(i).getDescription());
+				cupo.setDesde(desde);
+				cupo.setHasta(hasta);
+				CupoPK pk2 = new CupoPK();
+				pk2.setVendedor("0");
+				pk2.setMarca(marcaj);
+				pk2.setProducto(listProductos.get(i).getProductId());
+				cupo.setId(pk2);
+
+				guardarLista.add(cupo);
+			}
+		}
+		servicioCupo.guardarVarios(guardarLista);
+	}
+
+	public void guardarItems() {
+
+		List<Cupo> guardarLista = new ArrayList<Cupo>();
+
+		List<Cupo> eliminar = new ArrayList<Cupo>();
+
+		eliminar = servicioCupo.buscarItemsRestringidos();
+		servicioCupo.eliminarVarios(eliminar);
+
+		ltbItemsAgregados.renderAll();
+		for (int j = 0; j < ltbItemsAgregados.getItemCount(); j++) {
+			Listitem listItemj = ltbItemsAgregados.getItemAtIndex(j);
+			String idItem = ((Textbox) ((listItemj.getChildren().get(3)))
+					.getFirstChild()).getValue();
+			Date fechaDesde = new Date();
+			Date fechaHasta = new Date();
+			String desde = "";
+			String hasta = "";
+			if (((Datebox) ((listItemj.getChildren().get(1))).getFirstChild())
+					.getValue() != null) {
+				fechaDesde = ((Datebox) ((listItemj.getChildren().get(1)))
+						.getFirstChild()).getValue();
+				desde = formatoFechaRara.format(fechaDesde);
+
+			}
+			if (((Datebox) ((listItemj.getChildren().get(2))).getFirstChild())
+					.getValue() != null) {
+				fechaHasta = ((Datebox) ((listItemj.getChildren().get(2)))
+						.getFirstChild()).getValue();
+				hasta = formatoFechaRara.format(fechaHasta);
+
+			}
+			Product produc = servicioProducto.buscar(idItem);
+			Cupo cupo = new Cupo();
+			cupo.setCantidad(0);
+			cupo.setConsumido(0);
+			cupo.setRestante(0);
+			cupo.setDescription(produc.getDescription());
+			cupo.setDesde(desde);
+			cupo.setHasta(hasta);
+			CupoPK pk2 = new CupoPK();
+			pk2.setVendedor("0");
+			pk2.setMarca(produc.getBrand());
+			pk2.setProducto(idItem);
+			cupo.setId(pk2);
+			guardarLista.add(cupo);
+		}
+
+		servicioCupo.guardarVarios(guardarLista);
+
 	}
 }

@@ -239,4 +239,19 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			return false;
 		}
 	}
+	
+	public Date traerFech(String fechaString) {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+
+		Date fecha = null;
+		try {
+			fecha = formatter.parse(fechaString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fecha;
+	}
 }
