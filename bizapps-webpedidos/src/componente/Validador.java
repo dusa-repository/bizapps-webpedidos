@@ -86,4 +86,13 @@ public abstract class Validador {
 		else
 			return false;
 	}
+	
+
+	public static boolean validarExcel(Media media) {
+		String extencion = media.getFormat();
+		if (extencion.equals("xls") || extencion.equals("xlsx"))
+			return true;
+		else
+			return false;
+	}
 }

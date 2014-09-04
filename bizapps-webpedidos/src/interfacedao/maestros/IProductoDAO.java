@@ -16,5 +16,7 @@ public interface IProductoDAO extends JpaRepository<Product, String> {
 
 	List<Product> findByBrand(String marca);
 
+	Product findByProductIdAndBrand(String productoRef, String marcaRef);
+
 
 }
