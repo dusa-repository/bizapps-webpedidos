@@ -32,4 +32,8 @@ public class SProducto {
 		return productoDAO.findByBrand(marca);
 	}
 
+	public Product buscarPorIdYMarca(String productoRef, String marcaRef) {
+		return productoDAO.findByProductIdAndBrand(productoRef, marcaRef);
+	}
+
 }

@@ -51,6 +51,7 @@ public class Mensaje {
 	public static String limpiado = "Cupos Limpiados Exitosamente";
 	public static String consumidoMayor = "La cantidad total debe ser mayor a la cantidad consumida";
 	public static String fechasErroneas = "La fecha de Vigencia desde debe ser menor a la fecha de vigencia hasta";
+	public static String archivoExcel = "Los Archivos deben ser de Tipo .xlsx";
 	
 	public void mensajeInformacion(String msj) {
 	      Messagebox.show(msj, "Informacion",

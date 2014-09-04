@@ -69,10 +69,9 @@ public class SCupo {
 	public List<Cupo> buscarCuposActivos() {
 		return cupoDAO.findByIdVendedorNot("0");
 	}
-
-	public void guardarVarios(List<Cupo> guardarLista) {
-		cupoDAO.save(guardarLista);
-		
+	
+	public void guardarVarios(List<Cupo> cupos) {
+		cupoDAO.save(cupos);
 	}
 
 }

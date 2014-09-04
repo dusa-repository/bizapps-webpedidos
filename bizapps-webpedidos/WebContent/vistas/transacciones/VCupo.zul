@@ -75,6 +75,33 @@
 						<label id="lblDescripcion"
 							value="* Para modificar los cupos debe hacer doble click sobre ellos ! "
 							style="font-size: 14px;font-weight:bold;"></label>
+						<grid width="100%">
+							<columns visible="false">
+								<column label="" width="35%" />
+								<column label="" width="20%" />
+								<column label="" width="35%" />
+								<column label="" width="10%" />
+							</columns>
+							<rows>
+								<row id="rowArchivo">
+									<label class="etiqueta" value="Importar:" />
+									<button autodisable="self" id="btnImportarArchivo"
+										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										upload="true" label="Buscar" tooltiptext="Importar Pacientes"
+										image="/public/imagenes/botones/importar.png" />
+									<label id="lblNombreArchivo" />
+								</row>
+								<row>
+									<button visible="false" autodisable="self" id="btnGuardarArchivo"
+										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										upload="true" label="Guardar" tooltiptext="Guardar Archivo"
+										image="/public/imagenes/botones/guardar.png" />
+									<hbox />
+									<hbox />
+									<hbox />
+								</row>
+							</rows>
+						</grid>
 					</div>
 					<separator />
 				</tabpanel>
@@ -126,7 +153,8 @@
 								<hbox widths="32%,3%,65%">
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas sin Restriccion" />
-										<listbox mold="paging" pagingPosition="top" pageSize="10" id="ltbMarcas" height="350px" width="100%"
+										<listbox mold="paging" pagingPosition="top" pageSize="10"
+											id="ltbMarcas" height="350px" width="100%"
 											emptyMessage="No hay Marcas Registradas">
 											<listhead>
 												<listheader label="Marca" width="100%" />
@@ -164,7 +192,8 @@
 									</vbox>
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas con Restriccion" />
-										<listbox mold="paging" pagingPosition="top" pageSize="10" id="ltbMarcasAgregadas" height="350px" width="100%"
+										<listbox mold="paging" pagingPosition="top" pageSize="10"
+											id="ltbMarcasAgregadas" height="350px" width="100%"
 											emptyMessage="No ha Seleccionado Ningúna Marca">
 											<listhead>
 												<listheader label="Marca" width="30%" />
@@ -198,8 +227,8 @@
 								<hbox widths="32%,3%,65%">
 									<vbox align="center">
 										<label class="etiqueta" value="Items sin Restriccion" />
-										<listbox mold="paging" pagingPosition="top" pageSize="10" id="ltbItems" height="350px" width="100%"
-											emptyMessage="No hay Items Registradas">
+										<listbox mold="paging" pagingPosition="top" pageSize="10"
+											id="ltbItems" height="350px" width="100%" emptyMessage="No hay Items Registradas">
 											<listhead>
 												<listheader label="Item" width="100%" />
 											</listhead>
@@ -214,7 +243,7 @@
 														<datebox width="98%" onCreate="self.value = new Date()" />
 													</listcell>
 													<listcell>
-														<textbox  inplace="true" width="98%" value="${each.productId}"
+														<textbox inplace="true" width="98%" value="${each.productId}"
 															visible="false" disabled="true" />
 													</listcell>
 												</listitem>
@@ -236,7 +265,8 @@
 									</vbox>
 									<vbox align="center">
 										<label class="etiqueta" value="Items con Restriccion" />
-										<listbox id="ltbItemsAgregados" mold="paging" pagingPosition="top" pageSize="10" height="350px" width="100%"
+										<listbox id="ltbItemsAgregados" mold="paging"
+											pagingPosition="top" pageSize="10" height="350px" width="100%"
 											emptyMessage="No ha Seleccionado Ningún Item">
 											<listhead>
 												<listheader label="Item" width="40%" />
