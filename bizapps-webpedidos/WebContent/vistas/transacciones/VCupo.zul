@@ -71,34 +71,37 @@
 						</rows>
 					</grid>
 					<div id="catalogoCupo" tooltiptext="Doble Click al Item para Editar" />
-					<div align="right" height="100%" width="95%">
-						<label id="lblDescripcion"
-							value="* Para modificar los cupos debe hacer doble click sobre ellos ! "
-							style="font-size: 14px;font-weight:bold;"></label>
+					<div align="right" width="100%">
 						<grid width="100%">
 							<columns visible="false">
-								<column label="" width="35%" />
 								<column label="" width="20%" />
-								<column label="" width="35%" />
-								<column label="" width="10%" />
+								<column label="" width="20%" />
+								<column label="" width="20%" />
+								<column label="" width="20%" />
+								<column label="" width="20%" />
 							</columns>
 							<rows>
+								<row>
+									<cell colspan="3">
+										<hbox />
+									</cell>
+									<cell colspan="2">
+										<label id="lblDescripcion"
+											value="* Para modificar los cupos debe hacer doble click sobre ellos ! "
+											style="font-size: 14px;font-weight:bold;font-color:black;"></label>
+									</cell>
+								</row>
 								<row id="rowArchivo">
-									<label class="etiqueta" value="Importar:" />
+									<label class="etiqueta" value="Importar Cupos desde Archivo:" />
 									<button autodisable="self" id="btnImportarArchivo"
 										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
-										upload="true" label="Buscar" tooltiptext="Importar Pacientes"
-										image="/public/imagenes/botones/importar.png" />
+										upload="true" label="Buscar" tooltiptext="Buscar Archivo de Datos"
+										image="/public/imagenes/botones/cargar.png" />
 									<label id="lblNombreArchivo" />
-								</row>
-								<row>
 									<button visible="false" autodisable="self" id="btnGuardarArchivo"
 										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
-										upload="true" label="Guardar" tooltiptext="Guardar Archivo"
+										label="Guardar" tooltiptext="Guardar Datos del Archivo"
 										image="/public/imagenes/botones/guardar.png" />
-									<hbox />
-									<hbox />
-									<hbox />
 								</row>
 							</rows>
 						</grid>
@@ -154,7 +157,7 @@
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas sin Restriccion" />
 										<listbox mold="paging" pagingPosition="top" pageSize="10"
-											id="ltbMarcas" height="350px" width="100%"
+											id="ltbMarcas" height="330px" width="100%"
 											emptyMessage="No hay Marcas Registradas">
 											<listhead>
 												<listheader label="Marca" width="100%" />
@@ -193,7 +196,7 @@
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas con Restriccion" />
 										<listbox mold="paging" pagingPosition="top" pageSize="10"
-											id="ltbMarcasAgregadas" height="350px" width="100%"
+											id="ltbMarcasAgregadas" height="330px" width="100%"
 											emptyMessage="No ha Seleccionado Ningúna Marca">
 											<listhead>
 												<listheader label="Marca" width="30%" />
@@ -228,7 +231,7 @@
 									<vbox align="center">
 										<label class="etiqueta" value="Items sin Restriccion" />
 										<listbox mold="paging" pagingPosition="top" pageSize="10"
-											id="ltbItems" height="350px" width="100%" emptyMessage="No hay Items Registradas">
+											id="ltbItems" height="330px" width="100%" emptyMessage="No hay Items Registradas">
 											<listhead>
 												<listheader label="Item" width="100%" />
 											</listhead>
@@ -266,7 +269,7 @@
 									<vbox align="center">
 										<label class="etiqueta" value="Items con Restriccion" />
 										<listbox id="ltbItemsAgregados" mold="paging"
-											pagingPosition="top" pageSize="10" height="350px" width="100%"
+											pagingPosition="top" pageSize="10" height="330px" width="100%"
 											emptyMessage="No ha Seleccionado Ningún Item">
 											<listhead>
 												<listheader label="Item" width="40%" />
@@ -298,6 +301,10 @@
 							</tabpanel>
 						</tabpanels>
 					</tabbox>
+					<separator />
+					<button id="btnGuardarListas" label="Guardar" class="btn"
+						image="/public/imagenes/botones/guardar.png" tooltiptext="Guardar Restricciones de Marca e Items" />
+					<separator />
 				</tabpanel>
 			</tabpanels>
 		</tabbox>

@@ -124,7 +124,7 @@ public class CCupo extends CGenerico {
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
 		llenarListas();
-		listasMultiples();
+
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -146,13 +146,20 @@ public class CCupo extends CGenerico {
 
 			@Override
 			public void limpiar() {
+
+				marcasFinales.clear();
+				llenarListas();
+				txtVendedor.setValue("");
+				idVendedor = "";
+				idMarca="";
+				cmbMarca.setValue("");
+				cmbMarca.setTooltiptext("Seleccione una Marca");
+				List<Cupo> cuposb = new ArrayList<Cupo>();
+				catalogo.actualizarLista(cuposb);
 			}
 
 			@Override
 			public void guardar() {
-				guardarItems();
-				guardarMarcas();
-
 			}
 
 			@Override
@@ -182,6 +189,7 @@ public class CCupo extends CGenerico {
 		botonera.getChildren().get(0).setVisible(false);
 		botonera.getChildren().get(1).setVisible(false);
 		botonera.getChildren().get(2).setVisible(false);
+		botonera.getChildren().get(3).setVisible(false);
 		botonera.getChildren().get(4).setVisible(false);
 		botonera.getChildren().get(6).setVisible(false);
 		botonera.getChildren().get(8).setVisible(false);
@@ -459,6 +467,8 @@ public class CCupo extends CGenerico {
 
 		ltbItems.setModel(new ListModelList<Product>(itemsDisponibles));
 		ltbItemsAgregados.setModel(new ListModelList<Cupo>(itemsRestringidos));
+		
+		listasMultiples();
 	}
 
 	@Listen("onClick = #pasar1Item")
@@ -772,7 +782,6 @@ public class CCupo extends CGenerico {
 		ltbMarcasAgregadas.renderAll();
 
 		List<Cupo> eliminar = new ArrayList<Cupo>();
-		System.out.println(marcasRestringidas.size());
 
 		for (int i = 0; i < marcasRestringidas.size(); i++) {
 			List<Product> productos = servicioProducto
@@ -887,25 +896,43 @@ public class CCupo extends CGenerico {
 
 	}
 	
+
+	@Listen("onClick = #btnGuardarListas")
+	public void guardar() {
+		guardarItems();
+		guardarMarcas();
+		marcasFinales.clear();
+		llenarListas();
+		msj.mensajeInformacion(Mensaje.guardado);
+	}
+
+	
 	@Listen("onUpload = #btnImportarArchivo")
 	public void cargarArchivo(UploadEvent event) {
 		mediaArchivo = event.getMedia();
+		if (mediaArchivo!=null)
+		{
+		if(validarArchivo())
+		{
 		lblNombreArchivo.setValue(mediaArchivo.getName());
-		final A rm = new A("Remover");
+		final A rm = new A("Remover Archivo");
 		rm.addEventListener(Events.ON_CLICK,
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event event) throws Exception {
 						lblNombreArchivo.setValue("");
 						rm.detach();
 						mediaArchivo = null;
+						btnGuardarArchivo.setVisible(false);
 					}
 				});
 		rowArchivo.appendChild(rm);
 		btnGuardarArchivo.setVisible(true);
+		}
+		}
 	}
 	
 	protected void importarArchivo() {
-		if (mediaArchivo != null) {
+
 			XSSFWorkbook workbook = null;
 			try {
 				workbook = new XSSFWorkbook(mediaArchivo.getStreamData());
@@ -1074,7 +1101,8 @@ public class CCupo extends CGenerico {
 			} else
 				msj.mensajeAlerta(archivoVacio + " "
 						+ lblNombreArchivo.getValue());
-		}
+		
+		
 	}
 
 	protected boolean validarArchivo() {
@@ -1106,13 +1134,11 @@ public class CCupo extends CGenerico {
 	
 	@Listen("onClick = #btnGuardarArchivo")
 	public void guardarArchivo() {
-		if (validarArchivo()) {
 			importarArchivo();
 			lblNombreArchivo.setValue("");
-			A rm = (A) rowArchivo.getChildren().get(3);
+			A rm = (A) rowArchivo.getChildren().get(4);
 			rm.detach();
 			mediaArchivo = null;
 			btnGuardarArchivo.setVisible(false);
-		}
 	}
 }
