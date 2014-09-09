@@ -155,7 +155,7 @@ public class CCupo extends CGenerico {
 				cmbMarca.setValue("");
 				cmbMarca.setTooltiptext("Seleccione una Marca");
 				List<Cupo> cuposb = new ArrayList<Cupo>();
-				catalogo.actualizarLista(cuposb);
+				catalogo.actualizarLista(cuposb,false);
 			}
 
 			@Override
@@ -369,7 +369,7 @@ public class CCupo extends CGenerico {
 					cupoNew.setId(pk);
 					cupos.add(cupoNew);
 				}
-				catalogo.actualizarLista(cupos);
+				catalogo.actualizarLista(cupos,false);
 			} else
 				msj.mensajeError(Mensaje.seleccionarMarca);
 		} else

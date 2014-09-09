@@ -1,0 +1,75 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div style="background-color: white" id="divConsulta" width="100%"
+		apply="controlador.transacciones.CConsulta">
+		<div id="botoneraConsulta" />
+		<separator />
+		<grid width="100%">
+			<columns visible="false">
+				<column label="" width="20%" />
+				<column label="" width="30%" />
+				<column label="" width="38%" />
+				<column label="" width="12%" />
+			</columns>
+			<rows>
+				<row>
+					<label class="etiqueta" value="Desde:" />
+					<datebox readonly="true" width="200px" id="dtbDesde"
+						tooltiptext="Indique la Fecha" constraint="no empty" onCreate="self.value = new Date()" />
+					<hbox />
+					<hbox />
+				</row>
+				<row>
+					<label class="etiqueta" value="Hasta:" />
+					<datebox readonly="true" width="200px" id="dtbHasta"
+						tooltiptext="Indique la Fecha" constraint="no empty" onCreate="self.value = new Date()" />
+					<hbox />
+					<hbox />
+				</row>
+				<row id="rowVendedor">
+					<label class="etiqueta" value="Vendedor:" />
+					<textbox id="txtVendedor" hflex="1" maxlength="100"
+						tooltiptext="Ingrese el Codigo del Vendedor" />
+					<cell colspan="2">
+						<button id="btnBuscarVendedor" label="Buscar" class="btn"
+							image="/public/imagenes/botones/buscar.png" />
+					</cell>
+				</row>
+				<row id="rowMarca">
+					<label class="etiqueta" value="Marca:" />
+					<combobox tooltiptext="Seleccione una Marca" placeholder="Seleccione una Marca"
+						id="cmbMarca" readonly="true" width="100%">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
+					</combobox>
+					<cell colspan="2">
+						<hbox />
+					</cell>
+				</row>
+				<row id="rowStatus">
+					<label class="etiqueta" value="Status:" />
+					<combobox tooltiptext="Seleccione un Status" placeholder="Seleccione un Status"
+						id="cmbStatus" readonly="true" width="100%">
+						<template name="model">
+							<comboitem label="${each}" />
+						</template>
+					</combobox>
+					<cell colspan="2">
+						<hbox />
+					</cell>
+				</row>
+				<row>
+					<cell colspan="3">
+						<hbox />
+					</cell>
+					<button id="btnRefrescar" label="Refrescar" class="btn"
+						image="/public/imagenes/botones/generar.png" width="115px" />
+				</row>
+			</rows>
+		</grid>
+		<separator />
+		<div id="catalogoConsulta" tooltiptext="Doble Click al Item para Editar" />
+		<div id="divCatalogoVendedor" />
+	</div>
+</zk>

@@ -3,6 +3,8 @@ package modelo.maestros;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import controlador.maestros.CGenerico;
+
 /**
  * The primary key class for the salesmen_sub database table.
  * 
@@ -53,5 +55,13 @@ public class SalesmenSubPK implements Serializable {
 		hash = hash * prime + this.salesmanIdSub.hashCode();
 		
 		return hash;
+	}
+	
+	public String nombreVendedor()
+	{
+	
+		
+		return salesmanId;
+		
 	}
 }

@@ -152,7 +152,7 @@ public class CGrupo extends CGenerico {
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 					catalogo.actualizarLista(servicioGrupo
-							.buscarTodosOrdenados());
+							.buscarTodosOrdenados(),false);
 				}
 
 			}
@@ -179,7 +179,7 @@ public class CGrupo extends CGenerico {
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													catalogo.actualizarLista(servicioGrupo
-															.buscarTodosOrdenados());
+															.buscarTodosOrdenados(),false);
 												}
 											}
 										});
@@ -202,7 +202,7 @@ public class CGrupo extends CGenerico {
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
 													catalogo.actualizarLista(servicioGrupo
-															.buscarTodosOrdenados());
+															.buscarTodosOrdenados(),false);
 												}
 											}
 										});
