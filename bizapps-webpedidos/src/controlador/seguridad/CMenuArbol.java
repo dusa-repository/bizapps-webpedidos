@@ -118,7 +118,7 @@ public class CMenuArbol extends CGenerico {
 					servicioArbol.guardar(arbol);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
-					catalogo.actualizarLista(servicioArbol.listarArbol());
+					catalogo.actualizarLista(servicioArbol.listarArbol(),false);
 				}
 
 			}
@@ -145,7 +145,7 @@ public class CMenuArbol extends CGenerico {
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													catalogo.actualizarLista(servicioArbol
-															.listarArbol());
+															.listarArbol(),false);
 												}
 											}
 										});
@@ -168,7 +168,7 @@ public class CMenuArbol extends CGenerico {
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
 													catalogo.actualizarLista(servicioArbol
-															.listarArbol());
+															.listarArbol(),false);
 												}
 											}
 										});
@@ -295,7 +295,7 @@ public class CMenuArbol extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Arbol> listArbol = servicioArbol.listarArbol();
 		catalogo = new Catalogo<Arbol>(divCatalogoMenuArbol, "Arbol",
-				listArbol, false, false, true, "Codigo", "Nombre", "Padre",
+				listArbol, false, false,false, "Codigo", "Nombre", "Padre",
 				"Url") {
 
 			@Override

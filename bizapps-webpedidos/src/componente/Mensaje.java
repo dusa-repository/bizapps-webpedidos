@@ -32,7 +32,6 @@ public class Mensaje {
 	public static String eliminacionFallida = "No puede eliminar este grupo";
 	public static String noPermitido = "El tipo de archivo que ha seleccionado no esta permitido, solo archivos con extension .jpeg y .png son permitidos";
 	public static String tamanioMuyGrande = "El archivo que ha seleccionado excede el tamaño maximo establecido (100 KB)";
-	public static String listaVacia = "Debe añadir una referencia de pago para cada Solicitud";
 	public static String noEliminar = "El Registro no se puede Eliminar, Esta siendo Usado";
 	public static String telefonoInvalido = "Formato de Telefono No Valido";
 	public static String camposPresentaciones = "Debe Llenar Todos los Campos de la Lista de Presentaciones";
@@ -52,6 +51,10 @@ public class Mensaje {
 	public static String consumidoMayor = "La cantidad total debe ser mayor a la cantidad consumida";
 	public static String fechasErroneas = "La fecha de Vigencia desde debe ser menor a la fecha de vigencia hasta";
 	public static String archivoExcel = "Los Archivos deben ser de Tipo .xlsx";
+	public static String usernameUsado  = "El Username esta siendo Usado por Otro Registro.";
+	public static String seleccionarStatus= "Debe Seleccionar un Status";
+	public static String fechaPosterior = "La Fecha de Inicio no puede ser posterior a la Fecha Fin";
+	public static String movil = "Especificar que el Usuario sera Movil, hara que el mismo no pueda Ingresar a este Sistema Administrativo";
 	
 	public void mensajeInformacion(String msj) {
 	      Messagebox.show(msj, "Informacion",

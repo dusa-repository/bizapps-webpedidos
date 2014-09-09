@@ -1,11 +1,20 @@
 package modelo.maestros;
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import servicio.maestros.SAction;
+import servicio.maestros.SVendedor;
 
 /**
  * The primary key class for the salesmen_actions database table.
  * 
  */
+
 @Embeddable
 public class SalesmenActionPK implements Serializable {
 	//default serial version id, required for serializable classes.
@@ -16,6 +25,7 @@ public class SalesmenActionPK implements Serializable {
 
 	@Column(name="action_id")
 	private int actionId;
+
 
 	public SalesmenActionPK() {
 	}
@@ -53,4 +63,6 @@ public class SalesmenActionPK implements Serializable {
 		
 		return hash;
 	}
+
+	
 }

@@ -259,7 +259,7 @@ public class CUsuario extends CGenerico {
 					servicioUsuario.guardar(usuario);
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
-					catalogo.actualizarLista(servicioUsuario.buscarTodos());
+					catalogo.actualizarLista(servicioUsuario.buscarTodos(),false);
 				}
 			}
 
@@ -285,7 +285,7 @@ public class CUsuario extends CGenerico {
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													catalogo.actualizarLista(servicioUsuario
-															.buscarTodos());
+															.buscarTodos(),false);
 												}
 											}
 										});
@@ -308,7 +308,7 @@ public class CUsuario extends CGenerico {
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
 													catalogo.actualizarLista(servicioUsuario
-															.buscarTodos());
+															.buscarTodos(),false);
 												}
 											}
 										});

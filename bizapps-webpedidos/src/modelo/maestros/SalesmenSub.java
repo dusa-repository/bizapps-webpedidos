@@ -2,6 +2,11 @@ package modelo.maestros;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import servicio.maestros.SVendedor;
+
 
 /**
  * The persistent class for the salesmen_sub database table.
@@ -14,6 +19,10 @@ public class SalesmenSub implements Serializable {
 
 	@EmbeddedId
 	private SalesmenSubPK id;
+	
+	
+	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+			"/META-INF/ConfiguracionAplicacion.xml");
 
 	public SalesmenSub() {
 	}
@@ -26,4 +35,12 @@ public class SalesmenSub implements Serializable {
 		this.id = id;
 	}
 
+
+	public static SVendedor getServicioVendedor() {
+		return applicationContext.getBean(SVendedor.class);
+	}
+	
+	public String nombre(){
+		return getServicioVendedor().buscar(id.getSalesmanIdSub()).getName();
+	}
 }

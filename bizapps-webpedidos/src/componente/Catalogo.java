@@ -315,12 +315,15 @@ public abstract class Catalogo<Clase> extends Window {
 		return lsbCatalogo;
 	}
 
-	public void actualizarLista(List<Clase> lista) {
+	public void actualizarLista(List<Clase> lista, boolean check) {
 		lsbCatalogo.setModel(new ListModelList<Clase>(lista));
-		// lsbCatalogo.setMultiple(false);
-		// lsbCatalogo.setCheckmark(false);
-		// lsbCatalogo.setMultiple(true);
-		// lsbCatalogo.setCheckmark(true);
+		if(check)
+		{
+		 lsbCatalogo.setMultiple(false);
+		 lsbCatalogo.setCheckmark(false);
+		 lsbCatalogo.setMultiple(true);
+		 lsbCatalogo.setCheckmark(true);
+		}
 	}
 
 	public List<Clase> obtenerSeleccionados() {

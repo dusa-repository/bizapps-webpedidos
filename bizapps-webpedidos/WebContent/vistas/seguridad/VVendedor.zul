@@ -1,0 +1,269 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divVendedor" width="100%" apply="controlador.seguridad.CVendedor">
+		<groupbox mold="3d" width="auto" title="Vendedor">
+			<div id="botoneraVendedor" />
+			<separator />
+			<groupbox id="gpxRegistro" class="azul" width="auto" title="">
+				<caption label="Nuevo" style="font-weight:bold"
+					tooltiptext="Presione para ingresar los Vendedores" />
+
+				<tabbox width="100%">
+					<tabs>
+						<tab label="Datos Basicos" id="tabBasicos" />
+						<tab label="Permisologia" id="tabPermisos" />
+						<tab label="Subordinados" id="tabSubordinados" />
+					</tabs>
+					<tabpanels>
+						<tabpanel>
+							<grid width="100%">
+								<columns visible="false">
+									<column label="" width="20%" />
+									<column label="" width="30%" />
+									<column label="" width="50%" />
+								</columns>
+								<rows>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="Username:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<textbox id="txtUsername" hflex="1" maxlength="3"
+											tooltiptext="Ingrese el nombre de Usuario del Vendedor" />
+										<hbox />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="Nombre:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<textbox id="txtNombre" hflex="1" maxlength="35"
+											tooltiptext="Ingrese el Nombre del Vendedor" />
+										<hbox />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="Password:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<textbox id="txtPassword" hflex="1" maxlength="10"
+											tooltiptext="Ingrese la Contraseña del Vendedor" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Region:" />
+										<textbox id="txtRegion" hflex="1" maxlength="3"
+											tooltiptext="Ingrese la Region del Vendedor" />
+										<hbox />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="Serial (desde):" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<spinner id="spnSerialDesde" constraint="min 0"
+											tooltiptext="Ingrese el Numero del Serial" step="1" hflex="1"
+											vflex="1" />
+										<hbox />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="Serial (hasta):" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<spinner id="spnSerialHasta" constraint="min 0"
+											tooltiptext="Ingrese el Numero del Serial" step="1" hflex="1"
+											vflex="1" />
+										<hbox />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="Ultimo Serial:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<spinner id="spnUltimoSerial" constraint="min 0"
+											tooltiptext="Ingrese el Numero del Serial" step="1" hflex="1"
+											vflex="1" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="Vendedor Movil?" />
+										<checkbox id="chxMovil" hflex="1" tooltiptext="Marque para Indicar" />
+									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="e-mail:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<textbox id="txtEmail" hflex="1" maxlength="50"
+											tooltiptext="Ingrese el e-mail del Vendedor" />
+										<hbox />
+									</row>
+									<row>
+										<label class="etiqueta" value="e-mail Coordinador:" />
+										<textbox id="txtEmailCoordinador" hflex="1" maxlength="50"
+											tooltiptext="Ingrese el e-mail del Vendedor" />
+										<hbox />
+									</row>
+								</rows>
+							</grid>
+							<separator />
+							<div align="right" style="float: right;">
+								<separator />
+								<separator />
+								<button class="btn" id="btnSiguientePestanna" label="Siguiente"
+									image="/public/imagenes/botones/adelante.png" />
+							</div>
+						</tabpanel>
+						<tabpanel>
+							<separator />
+							<hbox widths="45%,3%,52%">
+								<vbox align="center">
+									<label class="etiqueta" value="Acciones del Sistema" />
+									<listbox id="ltbAccionesDisponibles" height="300px"
+										emptyMessage="No hay Acciones Registradas">
+										<listhead>
+											<listheader label="Accion" width="100%" />
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell label="${each.name}">
+												</listcell>
+											</listitem>
+										</template>
+									</listbox>
+								</vbox>
+								<vbox>
+									<separator />
+									<separator />
+									<separator />
+									<button id="pasar1" class="abrir"
+										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Accion" />
+									<separator />
+									<button id="pasar2" class="abrir"
+										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Accion" />
+								</vbox>
+								<vbox align="center">
+									<label class="etiqueta" value="Acciones Permitidas" />
+									<listbox id="ltbAccionesAgregadas" height="300px"
+										emptyMessage="No ha Seleccionado ninguna Accion" checkmark="true">
+										<listhead>
+											<listheader label="Accion" width="100%" />
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell label="${each.accion()}">
+												</listcell>
+												<listcell>
+													<spinner value="${each.id.actionId}" width="98%"
+														visible="false" disabled="true" />
+												</listcell>
+											</listitem>
+										</template>
+									</listbox>
+								</vbox>
+							</hbox>
+							<separator />
+							<hbox>
+								<div align="left" style="float: right;">
+									<separator />
+									<button label="Anterior" class="btn" id="btnAnteriorPestanna"
+										image="/public/imagenes/botones/atras.png" />
+								</div>
+								<space width="1050px" />
+								<div align="right" style="float: left;">
+									<separator />
+									<button class="btn" id="btnSiguientePestanna2" label="Siguiente"
+										image="/public/imagenes/botones/adelante.png" />
+								</div>
+							</hbox>
+						</tabpanel>
+						<tabpanel>
+							<separator />
+							<hbox widths="45%,3%,52%">
+								<vbox align="center">
+									<label class="etiqueta" value="Vendedores Disponibles" />
+									<listbox id="ltbVendedoresDisponibles" height="300px"
+										emptyMessage="No hay Vendedores Registradas">
+										<listhead>
+											<listheader label="Codigo" width="20%" />
+											<listheader label="Vendedor" width="80%" />
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell label="${each.salesmanId}">
+												</listcell>
+												<listcell label="${each.name}">
+												</listcell>
+											</listitem>
+										</template>
+									</listbox>
+								</vbox>
+								<vbox>
+									<separator />
+									<separator />
+									<separator />
+									<button id="pasar11" class="abrir"
+										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Vendedor" />
+									<separator />
+									<button id="pasar22" class="abrir"
+										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Vendedores" />
+								</vbox>
+								<vbox align="center">
+									<label class="etiqueta" value="Vendedores Asignados" />
+									<listbox id="ltbVendedoresAgregados" height="300px"
+										emptyMessage="No ha Seleccionado ningun Vendedor" checkmark="true">
+										<listhead>
+											<listheader label="Codigo" width="20%" />
+											<listheader label="Vendedor" width="80%" />
+										</listhead>
+										<template name="model">
+											<listitem>
+												<listcell label="${each.id.salesmanIdSub}">
+												</listcell>
+												<listcell label="${each.nombre()}">
+												</listcell>
+												<listcell>
+													<textbox value="${each.id.salesmanIdSub}" width="98%"
+														disabled="true" />
+												</listcell>
+											</listitem>
+										</template>
+									</listbox>
+								</vbox>
+							</hbox>
+							<separator />
+							<div align="left" style="float: right;">
+								<separator />
+								<separator />
+								<button label="Anterior" class="btn" id="btnAnteriorPestanna2"
+									image="/public/imagenes/botones/atras.png" />
+							</div>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+				<separator />
+			</groupbox>
+			<separator />
+			<groupbox class="azul" id="gpxDatos" width="auto" title="">
+				<caption label="Registros" style="font-weight:bold"
+					tooltiptext="Presione para ver los Vendedores Registrados " />
+				<div id="catalogoVendedor" tooltiptext="Seleccione el vendedor para Realizar una Accion" />
+			</groupbox>
+		</groupbox>
+	</div>
+</zk>

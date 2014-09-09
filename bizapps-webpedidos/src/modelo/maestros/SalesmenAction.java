@@ -3,6 +3,12 @@ package modelo.maestros;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import servicio.maestros.SAction;
+import servicio.maestros.SVendedor;
+
 
 /**
  * The persistent class for the salesmen_actions database table.
@@ -16,6 +22,10 @@ public class SalesmenAction implements Serializable {
 	@EmbeddedId
 	private SalesmenActionPK id;
 
+	
+	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+			"/META-INF/ConfiguracionAplicacion.xml");
+	
 	public SalesmenAction() {
 	}
 
@@ -25,6 +35,17 @@ public class SalesmenAction implements Serializable {
 
 	public void setId(SalesmenActionPK id) {
 		this.id = id;
+	}	
+	
+	public static SAction getServicioAccion() {
+		return applicationContext.getBean(SAction.class);
 	}
+
+	
+	public String accion(){
+		return getServicioAccion().buscar(id.getActionId()).getName();
+	}
+	
+
 
 }

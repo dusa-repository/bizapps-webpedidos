@@ -26,4 +26,22 @@ public class SVendedor {
 		return vendedorDAO.findBySalesmanId(idVendedor);
 	}
 
+	public void guardar(Salesmen vendedor) {
+		vendedorDAO.save(vendedor);
+		
+	}
+
+	public void eliminarVarios(List<Salesmen> eliminarLista) {
+		vendedorDAO.delete(eliminarLista);
+		
+	}
+
+	public void eliminarClave(String id) {
+		vendedorDAO.delete(id);
+	}
+
+	public List<Salesmen> buscarSubordinadosDisponibles(List<String> ids) {
+		return vendedorDAO.findBySalesmanIdNotIn(ids);
+	}
+
 }
