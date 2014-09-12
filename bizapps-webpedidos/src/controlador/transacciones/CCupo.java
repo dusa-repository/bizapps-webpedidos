@@ -151,7 +151,7 @@ public class CCupo extends CGenerico {
 				llenarListas();
 				txtVendedor.setValue("");
 				idVendedor = "";
-				idMarca="";
+				idMarca = "";
 				cmbMarca.setValue("");
 				cmbMarca.setTooltiptext("Seleccione una Marca");
 				List<Cupo> cuposb = new ArrayList<Cupo>();
@@ -467,7 +467,7 @@ public class CCupo extends CGenerico {
 
 		ltbItems.setModel(new ListModelList<Product>(itemsDisponibles));
 		ltbItemsAgregados.setModel(new ListModelList<Cupo>(itemsRestringidos));
-		
+
 		listasMultiples();
 	}
 
@@ -895,7 +895,6 @@ public class CCupo extends CGenerico {
 		servicioCupo.guardarVarios(guardarLista);
 
 	}
-	
 
 	@Listen("onClick = #btnGuardarListas")
 	public void guardar() {
@@ -906,203 +905,197 @@ public class CCupo extends CGenerico {
 		msj.mensajeInformacion(Mensaje.guardado);
 	}
 
-	
 	@Listen("onUpload = #btnImportarArchivo")
 	public void cargarArchivo(UploadEvent event) {
 		mediaArchivo = event.getMedia();
-		if (mediaArchivo!=null)
-		{
-		if(validarArchivo())
-		{
-		lblNombreArchivo.setValue(mediaArchivo.getName());
-		final A rm = new A("Remover Archivo");
-		rm.addEventListener(Events.ON_CLICK,
-				new org.zkoss.zk.ui.event.EventListener<Event>() {
-					public void onEvent(Event event) throws Exception {
-						lblNombreArchivo.setValue("");
-						rm.detach();
-						mediaArchivo = null;
-						btnGuardarArchivo.setVisible(false);
-					}
-				});
-		rowArchivo.appendChild(rm);
-		btnGuardarArchivo.setVisible(true);
-		}
+		if (mediaArchivo != null) {
+			if (validarArchivo()) {
+				lblNombreArchivo.setValue(mediaArchivo.getName());
+				final A rm = new A("Remover Archivo");
+				rm.addEventListener(Events.ON_CLICK,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event event) throws Exception {
+								lblNombreArchivo.setValue("");
+								rm.detach();
+								mediaArchivo = null;
+								btnGuardarArchivo.setVisible(false);
+							}
+						});
+				rowArchivo.appendChild(rm);
+				btnGuardarArchivo.setVisible(true);
+			}
 		}
 	}
-	
+
 	protected void importarArchivo() {
 
-			XSSFWorkbook workbook = null;
-			try {
-				workbook = new XSSFWorkbook(mediaArchivo.getStreamData());
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			XSSFSheet sheet = workbook.getSheetAt(0);
-			Iterator<Row> rowIterator = sheet.iterator();
-			if (rowIterator.hasNext()) {
-				List<Cupo> cupos = new ArrayList<Cupo>();
-				int contadorRow = 0;
-				boolean error = false;
-				boolean errorLong = false;
-				while (rowIterator.hasNext() && !error && !errorLong) {
+		XSSFWorkbook workbook = null;
+		try {
+			workbook = new XSSFWorkbook(mediaArchivo.getStreamData());
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		XSSFSheet sheet = workbook.getSheetAt(0);
+		Iterator<Row> rowIterator = sheet.iterator();
+		if (rowIterator.hasNext()) {
+			List<Cupo> cupos = new ArrayList<Cupo>();
+			int contadorRow = 0;
+			boolean error = false;
+			boolean errorLong = false;
+			boolean entro = false;
+			while (rowIterator.hasNext() && !error && !errorLong) {
+				contadorRow = contadorRow + 1;
+				Row row = rowIterator.next();
+				if (!entro) {
 					contadorRow = contadorRow + 1;
-					Row row = rowIterator.next();
-					Salesmen vendedor = new Salesmen();
-					Product producto = new Product();
-					Cupo cupo = new Cupo();
-					Double vendedorReferencia = (double) 0;
-					String vendedorRef = null;
-					Double marcaReferencia = (double) 0;
-					String marcaRef = null;
-					Double productoReferencia = (double) 0;
-					String productoRef = null;
-					Date desde = null;
-					Date hasta = null;
-					Double cantidad = null;
-					Double consumido = null;
-					Double descripcionReferencia = (double) 0;
-					String descripcionRef = null;
-					Iterator<Cell> cellIterator = row.cellIterator();
-					int contadorCell = 0;
-					while (cellIterator.hasNext() && !error && !errorLong) {
-						contadorCell = contadorCell + 1;
-						Cell cell = cellIterator.next();
-						switch (cell.getColumnIndex()) {
-						case 0:
-							vendedorRef = obtenerStringCualquiera(cell,
-									vendedorReferencia, vendedorRef);
-							if (vendedorRef != null && vendedorRef.length() > 3)
-								errorLong = true;
-							break;
-						case 1:
-							marcaRef = obtenerStringCualquiera(cell,
-									marcaReferencia, marcaRef);
-							if (marcaRef != null && marcaRef.length() > 3)
-								errorLong = true;
-							break;
-						case 2:
-							productoRef = obtenerStringCualquiera(cell,
-									productoReferencia, productoRef);
-							if (productoRef != null
-									&& productoRef.length() > 50)
-								errorLong = true;
-							break;
-						case 3:
-							if (cell.getCellType() == 0) {
-								desde = cell.getDateCellValue();
-							} else
-								error = true;
-							break;
-						case 4:
-							if (cell.getCellType() == 0) {
-								hasta = cell.getDateCellValue();
-							} else
-								error = true;
-							break;
-						case 5:
-							if (cell.getCellType() == 0) {
-								cantidad = cell.getNumericCellValue();
-							} else
-								error = true;
-							break;
-						case 6:
-							if (cell.getCellType() == 0) {
-								consumido = cell.getNumericCellValue();
-							} else
-								error = true;
-							break;
-						case 7:
-							descripcionRef = obtenerStringCualquiera(cell,
-									descripcionReferencia, descripcionRef);
-							if (descripcionRef != null
-									&& descripcionRef.length() > 35)
-								errorLong = true;
-							break;
-						default:
-							break;
-						}
+					row = rowIterator.next();
+					entro = true;
+				}
+				Salesmen vendedor = new Salesmen();
+				Product producto = new Product();
+				Cupo cupo = new Cupo();
+				Double vendedorReferencia = (double) 0;
+				String vendedorRef = null;
+				Double marcaReferencia = (double) 0;
+				String marcaRef = null;
+				Double productoReferencia = (double) 0;
+				String productoRef = null;
+				Date desde = null;
+				Date hasta = null;
+				Double cantidad = null;
+				Double consumido = null;
+				Double descripcionReferencia = (double) 0;
+				String descripcionRef = null;
+				Iterator<Cell> cellIterator = row.cellIterator();
+				int contadorCell = 0;
+				while (cellIterator.hasNext() && !error && !errorLong) {
+					contadorCell = contadorCell + 1;
+					Cell cell = cellIterator.next();
+					switch (cell.getColumnIndex()) {
+					case 0:
+						vendedorRef = obtenerStringCualquiera(cell,
+								vendedorReferencia, vendedorRef);
+						if (vendedorRef != null && vendedorRef.length() > 3)
+							errorLong = true;
+						break;
+					case 1:
+						marcaRef = obtenerStringCualquiera(cell,
+								marcaReferencia, marcaRef);
+						if (marcaRef != null && marcaRef.length() > 3)
+							errorLong = true;
+						break;
+					case 2:
+						productoRef = obtenerStringCualquiera(cell,
+								productoReferencia, productoRef);
+						if (productoRef != null && productoRef.length() > 50)
+							errorLong = true;
+						break;
+					case 3:
+						if (cell.getCellType() == 0) {
+							desde = cell.getDateCellValue();
+						} else
+							error = true;
+						break;
+					case 4:
+						if (cell.getCellType() == 0) {
+							hasta = cell.getDateCellValue();
+						} else
+							error = true;
+						break;
+					case 5:
+						if (cell.getCellType() == 0) {
+							cantidad = cell.getNumericCellValue();
+						} else
+							error = true;
+						break;
+					case 6:
+						if (cell.getCellType() == 0) {
+							consumido = cell.getNumericCellValue();
+						} else
+							error = true;
+						break;
+					case 7:
+						descripcionRef = obtenerStringCualquiera(cell,
+								descripcionReferencia, descripcionRef);
+						if (descripcionRef != null
+								&& descripcionRef.length() > 35)
+							errorLong = true;
+						break;
+					default:
+						break;
 					}
-					if (!errorLong) {
-						if (!error && vendedorRef != null && marcaRef != null
-								&& productoRef != null
-								&& descripcionRef != null && desde != null
-								&& hasta != null && cantidad != null
-								&& consumido != null) {
-							if (cantidad.intValue() >= consumido.intValue()) {
-								vendedor = servicioVendedor.buscar(vendedorRef);
-								if (vendedor != null || vendedorRef.equals("0")) {
-									producto = servicioProducto
-											.buscarPorIdYMarca(productoRef,
-													marcaRef);
-									if (producto != null) {
-										CupoPK clave = new CupoPK();
-										clave.setMarca(marcaRef);
-										clave.setProducto(productoRef);
-										clave.setVendedor(vendedorRef);
-										cupo.setId(clave);
-										cupo.setDesde(formatoFecha
-												.format(desde));
-										cupo.setHasta(formatoFecha
-												.format(hasta));
-										cupo.setDescription(descripcionRef);
-										cupo.setConsumido(consumido.intValue());
-										cupo.setCantidad(cantidad.intValue());
-										cupo.setRestante(cantidad.intValue()
-												- consumido.intValue());
-										cupos.add(cupo);
-									} else {
-										msj.mensajeError(valorNoEncontrado
-												+ " el vendedor: "
-												+ vendedorRef
-												+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo."
-												+ " Fila: " + contadorRow
-												+ ". Columna: " + contadorCell);
-										error = true;
-									}
+				}
+				if (!errorLong) {
+					if (!error && vendedorRef != null && marcaRef != null
+							&& productoRef != null && descripcionRef != null
+							&& desde != null && hasta != null
+							&& cantidad != null && consumido != null) {
+						if (cantidad.intValue() >= consumido.intValue()) {
+							vendedor = servicioVendedor.buscar(vendedorRef);
+							if (vendedor != null || vendedorRef.equals("0")) {
+								producto = servicioProducto.buscarPorIdYMarca(
+										productoRef, marcaRef);
+								if (producto != null) {
+									CupoPK clave = new CupoPK();
+									clave.setMarca(marcaRef);
+									clave.setProducto(productoRef);
+									clave.setVendedor(vendedorRef);
+									cupo.setId(clave);
+									cupo.setDesde(formatoFecha.format(desde));
+									cupo.setHasta(formatoFecha.format(hasta));
+									cupo.setDescription(descripcionRef);
+									cupo.setConsumido(consumido.intValue());
+									cupo.setCantidad(cantidad.intValue());
+									cupo.setRestante(cantidad.intValue()
+											- consumido.intValue());
+									cupos.add(cupo);
 								} else {
 									msj.mensajeError(valorNoEncontrado
-											+ " el producto con ID: "
-											+ productoRef
-											+ " y Marca:"
-											+ marcaRef
-											+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
+											+ " el vendedor: "
+											+ vendedorRef
+											+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo."
 											+ " Fila: " + contadorRow
 											+ ". Columna: " + contadorCell);
 									error = true;
 								}
 							} else {
-								msj.mensajeError("La cantidad disponible debe ser mayor a la cantidad consumida. "
-										+ lblNombreArchivo.getValue()
-										+ ". Fila: " + contadorRow);
+								msj.mensajeError(valorNoEncontrado
+										+ " el producto con ID: "
+										+ productoRef
+										+ " y Marca:"
+										+ marcaRef
+										+ " no ha sido encontrado, por lo tanto no ha sido importado el archivo"
+										+ " Fila: " + contadorRow
+										+ ". Columna: " + contadorCell);
 								error = true;
 							}
 						} else {
-							msj.mensajeError(archivoConError
-									+ lblNombreArchivo.getValue() + ". Fila: "
-									+ contadorRow + ". Columna: "
-									+ contadorCell);
+							msj.mensajeError("La cantidad disponible debe ser mayor a la cantidad consumida. "
+									+ lblNombreArchivo.getValue()
+									+ ". Fila: "
+									+ contadorRow);
 							error = true;
 						}
 					} else {
-						msj.mensajeError(errorLongitud
-								+ lblNombreArchivo.getValue()
-								+ ". Fila: "
-								+ contadorRow
-								+ ". Columna: "
-								+ contadorCell
-								+ ". Longitudes permitidas: campo1 20 y campo2 12");
-						errorLong = true;
+						msj.mensajeError(archivoConError
+								+ lblNombreArchivo.getValue() + ". Fila: "
+								+ contadorRow + ". Columna: " + contadorCell);
+						error = true;
 					}
+				} else {
+					msj.mensajeError(errorLongitud
+							+ lblNombreArchivo.getValue() + ". Fila: "
+							+ contadorRow + ". Columna: " + contadorCell
+							+ ". Longitudes permitidas: campo1 20 y campo2 12");
+					errorLong = true;
+					error = true;
 				}
-				if (!error)
-					servicioCupo.guardarVarios(cupos);
-			} else
-				msj.mensajeAlerta(archivoVacio + " "
-						+ lblNombreArchivo.getValue());
-		
-		
+			}
+			if (!error)
+				servicioCupo.guardarVarios(cupos);
+		} else
+			msj.mensajeAlerta(archivoVacio + " " + lblNombreArchivo.getValue());
+
 	}
 
 	protected boolean validarArchivo() {
@@ -1131,14 +1124,14 @@ public class CCupo extends CGenerico {
 			return null;
 		}
 	}
-	
+
 	@Listen("onClick = #btnGuardarArchivo")
 	public void guardarArchivo() {
-			importarArchivo();
-			lblNombreArchivo.setValue("");
-			A rm = (A) rowArchivo.getChildren().get(4);
-			rm.detach();
-			mediaArchivo = null;
-			btnGuardarArchivo.setVisible(false);
+		importarArchivo();
+		lblNombreArchivo.setValue("");
+		A rm = (A) rowArchivo.getChildren().get(4);
+		rm.detach();
+		mediaArchivo = null;
+		btnGuardarArchivo.setVisible(false);
 	}
 }
