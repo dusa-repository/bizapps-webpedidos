@@ -766,9 +766,11 @@ public class CCupo extends CGenerico {
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-							List<Cupo> eliminarLista = servicioCupo
-									.buscarCuposActivos();
+//							List<Cupo> eliminarLista = servicioCupo
+//									.buscarCuposActivos();
+							List<Cupo> eliminarLista = servicioCupo.buscarTodos();
 							servicioCupo.eliminarVarios(eliminarLista);
+							llenarListas();
 							msj.mensajeInformacion(Mensaje.limpiado);
 							if (!idVendedor.equals("")
 									&& cmbMarca.getValue().compareTo("") != 0)
@@ -1150,6 +1152,7 @@ public class CCupo extends CGenerico {
 			mediaArchivo = null;
 			btnGuardarArchivo.setVisible(false);
 			msj.mensajeInformacion(Mensaje.guardado);
+			llenarListas();
 		}
 	}
 }
