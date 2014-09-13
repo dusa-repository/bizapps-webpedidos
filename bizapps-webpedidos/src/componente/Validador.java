@@ -90,7 +90,7 @@ public abstract class Validador {
 
 	public static boolean validarExcel(Media media) {
 		String extencion = media.getFormat();
-		if (extencion.equals("xls") || extencion.equals("xlsx"))
+		if (extencion.equals("xlsx"))
 			return true;
 		else
 			return false;
