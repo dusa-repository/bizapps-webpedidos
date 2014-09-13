@@ -106,6 +106,7 @@ public class CCupo extends CGenerico {
 	List<Cupo> itemsRestringidos = new ArrayList<Cupo>();
 
 	List<String> marcasRestringidas = new ArrayList<String>();
+	private boolean errorGeneral = false;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -146,7 +147,7 @@ public class CCupo extends CGenerico {
 
 			@Override
 			public void limpiar() {
-
+				errorGeneral = false;
 				marcasFinales.clear();
 				llenarListas();
 				txtVendedor.setValue("");
@@ -155,7 +156,7 @@ public class CCupo extends CGenerico {
 				cmbMarca.setValue("");
 				cmbMarca.setTooltiptext("Seleccione una Marca");
 				List<Cupo> cuposb = new ArrayList<Cupo>();
-				catalogo.actualizarLista(cuposb,false);
+				catalogo.actualizarLista(cuposb, false);
 			}
 
 			@Override
@@ -369,7 +370,7 @@ public class CCupo extends CGenerico {
 					cupoNew.setId(pk);
 					cupos.add(cupoNew);
 				}
-				catalogo.actualizarLista(cupos,false);
+				catalogo.actualizarLista(cupos, false);
 			} else
 				msj.mensajeError(Mensaje.seleccionarMarca);
 		} else
@@ -960,8 +961,8 @@ public class CCupo extends CGenerico {
 				String marcaRef = null;
 				Double productoReferencia = (double) 0;
 				String productoRef = null;
-				Date desde = null;
-				Date hasta = null;
+				Double desde = null;
+				Double hasta = null;
 				Double cantidad = null;
 				Double consumido = null;
 				Double descripcionReferencia = (double) 0;
@@ -992,13 +993,18 @@ public class CCupo extends CGenerico {
 						break;
 					case 3:
 						if (cell.getCellType() == 0) {
-							desde = cell.getDateCellValue();
+							desde = cell.getNumericCellValue();
+							if (String.valueOf(desde.longValue()).length() > 8) {
+								errorLong = true;
+							}
 						} else
 							error = true;
 						break;
 					case 4:
 						if (cell.getCellType() == 0) {
-							hasta = cell.getDateCellValue();
+							hasta = cell.getNumericCellValue();
+							if (String.valueOf(hasta.longValue()).length() > 8)
+								errorLong = true;
 						} else
 							error = true;
 						break;
@@ -1041,8 +1047,10 @@ public class CCupo extends CGenerico {
 									clave.setProducto(productoRef);
 									clave.setVendedor(vendedorRef);
 									cupo.setId(clave);
-									cupo.setDesde(formatoFecha.format(desde));
-									cupo.setHasta(formatoFecha.format(hasta));
+									cupo.setDesde(String.valueOf(desde
+											.longValue()));
+									cupo.setHasta(String.valueOf(hasta
+											.longValue()));
 									cupo.setDescription(descripcionRef);
 									cupo.setConsumido(consumido.intValue());
 									cupo.setCantidad(cantidad.intValue());
@@ -1084,17 +1092,24 @@ public class CCupo extends CGenerico {
 					}
 				} else {
 					msj.mensajeError(errorLongitud
-							+ lblNombreArchivo.getValue() + ". Fila: "
-							+ contadorRow + ". Columna: " + contadorCell
-							+ ". Longitudes permitidas: campo1 20 y campo2 12");
+							+ lblNombreArchivo.getValue()
+							+ ". Fila: "
+							+ contadorRow
+							+ ". Columna: "
+							+ contadorCell
+							+ ". Longitudes permitidas: campo1 3, campo2 3, campo3 50, campo4 8, campo5 8, campo9 35");
 					errorLong = true;
 					error = true;
 				}
 			}
 			if (!error)
 				servicioCupo.guardarVarios(cupos);
-		} else
+			else
+				errorGeneral = true;
+		} else {
 			msj.mensajeAlerta(archivoVacio + " " + lblNombreArchivo.getValue());
+			errorGeneral = true;
+		}
 
 	}
 
@@ -1128,10 +1143,13 @@ public class CCupo extends CGenerico {
 	@Listen("onClick = #btnGuardarArchivo")
 	public void guardarArchivo() {
 		importarArchivo();
-		lblNombreArchivo.setValue("");
-		A rm = (A) rowArchivo.getChildren().get(4);
-		rm.detach();
-		mediaArchivo = null;
-		btnGuardarArchivo.setVisible(false);
+		if (!errorGeneral) {
+			lblNombreArchivo.setValue("");
+			A rm = (A) rowArchivo.getChildren().get(4);
+			rm.detach();
+			mediaArchivo = null;
+			btnGuardarArchivo.setVisible(false);
+			msj.mensajeInformacion(Mensaje.guardado);
+		}
 	}
 }
