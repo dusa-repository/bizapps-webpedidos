@@ -1,7 +1,6 @@
 package controlador.transacciones;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,8 +11,6 @@ import modelo.maestros.Cupo;
 import modelo.maestros.CupoPK;
 import modelo.maestros.Product;
 import modelo.maestros.Salesmen;
-import modelo.seguridad.Grupo;
-import modelo.seguridad.Usuario;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -32,13 +29,11 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
-import org.zkoss.zul.Doublespinner;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -50,6 +45,7 @@ import componente.Botonera;
 import componente.Catalogo;
 import componente.Mensaje;
 import componente.Validador;
+import componente.Buscar;
 
 import controlador.maestros.CGenerico;
 
@@ -91,6 +87,10 @@ public class CCupo extends CGenerico {
 	private Label lblNombreArchivo;
 	@Wire
 	private org.zkoss.zul.Row rowArchivo;
+	@Wire
+	private Textbox txtBuscadorProducto;
+	@Wire
+	private Textbox txtBuscadorRestringido;
 	private Media mediaArchivo;
 	private String errorLongitud = "La siguiente ubicacion excede el limite establecido de longitud:";
 	private String valorNoEncontrado = "Valor no encontrado, ";
@@ -107,6 +107,8 @@ public class CCupo extends CGenerico {
 
 	List<String> marcasRestringidas = new ArrayList<String>();
 	private boolean errorGeneral = false;
+	Buscar<Product> buscarProductos;
+	Buscar<Cupo> buscarRestringidos;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -120,6 +122,8 @@ public class CCupo extends CGenerico {
 				map = null;
 			}
 		}
+		buscadorProductos();
+		buscadorRestringidos();
 		mostrarCatalogo();
 		listaProduct = servicioProducto.buscarMarcas();
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
@@ -197,10 +201,49 @@ public class CCupo extends CGenerico {
 		botoneraCupo.appendChild(botonera);
 	}
 
+	private void buscadorRestringidos() {
+		buscarRestringidos = new Buscar<Cupo>(ltbItemsAgregados,
+				txtBuscadorRestringido) {
+			@Override
+			protected List<Cupo> buscar(String valor) {
+				List<Cupo> cuposFiltrados = new ArrayList<Cupo>();
+				List<Cupo> cuposJ = servicioCupo
+						.filtroCodigoProducto(valor);
+				for (int i = 0; i < itemsRestringidos.size(); i++) {
+					Cupo cupi = itemsRestringidos.get(i);
+					for (int j = 0; j < cuposJ.size(); j++) {
+						if (cupi.getId().getProducto().equals(cuposJ.get(
+								j).getId().getProducto()))
+							cuposFiltrados.add(cupi);
+					}
+				}
+				return cuposFiltrados;
+			}
+		};
+	}
+
+	private void buscadorProductos() {
+		buscarProductos = new Buscar<Product>(ltbItems,
+				txtBuscadorProducto) {
+			@Override
+			protected List<Product> buscar(String valor) {
+				List<Product> productosFiltrados = new ArrayList<Product>();
+				List<Product> productosJ = servicioProducto
+						.filtroCodigo(valor);
+				for (int i = 0; i < itemsDisponibles.size(); i++) {
+					Product item = itemsDisponibles.get(i);
+					for (int j = 0; j < productosJ.size(); j++) {
+						if (item.getProductId().equals(productosJ.get(
+								j).getProductId()))
+							productosFiltrados.add(item);
+					}
+				}
+				return productosFiltrados;
+			}
+		};
+	}
+
 	public void mostrarCatalogo() {
-
-		// final List<Cupo> cupos = servicioCupo.buscarNinguno();
-
 		cupos = new ArrayList<Cupo>();
 		catalogo = new Catalogo<Cupo>(catalogoCupo, "", cupos, false, false,
 				true, "Codigo", "Descripcion", "Desde", "Hasta", "Cantidad",
@@ -212,22 +255,19 @@ public class CCupo extends CGenerico {
 				List<Cupo> cuposFiltro = new ArrayList<Cupo>();
 
 				for (Cupo cupo : cupos) {
-					if (cupo.getId().getProducto().toLowerCase()
-							.startsWith(valores.get(0))
+					if (cupo.getId().getProducto().startsWith(valores.get(0))
 							&& servicioProducto
 									.buscar(cupo.getId().getProducto())
-									.getDescription().toLowerCase()
+									.getDescription()
 									.startsWith(valores.get(1))
-							&& cupo.getDesde().toLowerCase()
-									.startsWith(valores.get(2))
-							&& cupo.getHasta().toLowerCase()
-									.startsWith(valores.get(3))
-							&& String.valueOf(cupo.getCantidad()).toLowerCase()
-									.startsWith(valores.get(4))
-							&& String.valueOf(cupo.getConsumido())
-									.toLowerCase().startsWith(valores.get(5))
-							&& String.valueOf(cupo.getRestante()).toLowerCase()
-									.startsWith(valores.get(6))) {
+							&& cupo.getDesde().startsWith(valores.get(2))
+							&& cupo.getHasta().startsWith(valores.get(3))
+							&& String.valueOf(cupo.getCantidad()).startsWith(
+									valores.get(4))
+							&& String.valueOf(cupo.getConsumido()).startsWith(
+									valores.get(5))
+							&& String.valueOf(cupo.getRestante()).startsWith(
+									valores.get(6))) {
 						cuposFiltro.add(cupo);
 					}
 				}
@@ -266,11 +306,10 @@ public class CCupo extends CGenerico {
 				List<Salesmen> lista = new ArrayList<Salesmen>();
 
 				for (Salesmen vendedor : vendedores) {
-					if (vendedor.getSalesmanId().toLowerCase()
-							.startsWith(valores.get(0))
-							&& vendedor.getName().trim().toLowerCase()
+					if (vendedor.getSalesmanId().startsWith(valores.get(0))
+							&& vendedor.getName().trim()
 									.startsWith(valores.get(1))
-							&& vendedor.getRegion().trim().toLowerCase()
+							&& vendedor.getRegion().trim()
 									.startsWith(valores.get(2))) {
 						lista.add(vendedor);
 					}
@@ -499,22 +538,22 @@ public class CCupo extends CGenerico {
 						Listitem listItemj = ltbItemsAgregados
 								.getItemAtIndex(j);
 						String idItem = ((Textbox) ((listItemj.getChildren()
-								.get(3))).getFirstChild()).getValue();
+								.get(4))).getFirstChild()).getValue();
 						Date fechaDesde = new Date();
 						Date fechaHasta = new Date();
 						String desde = "";
 						String hasta = "";
-						if (((Datebox) ((listItemj.getChildren().get(1)))
+						if (((Datebox) ((listItemj.getChildren().get(2)))
 								.getFirstChild()).getValue() != null) {
 							fechaDesde = ((Datebox) ((listItemj.getChildren()
-									.get(1))).getFirstChild()).getValue();
+									.get(2))).getFirstChild()).getValue();
 							desde = formatoFechaRara.format(fechaDesde);
 
 						}
-						if (((Datebox) ((listItemj.getChildren().get(2)))
+						if (((Datebox) ((listItemj.getChildren().get(3)))
 								.getFirstChild()).getValue() != null) {
 							fechaHasta = ((Datebox) ((listItemj.getChildren()
-									.get(2))).getFirstChild()).getValue();
+									.get(3))).getFirstChild()).getValue();
 							hasta = formatoFechaRara.format(fechaHasta);
 
 						}
@@ -766,9 +805,10 @@ public class CCupo extends CGenerico {
 				new org.zkoss.zk.ui.event.EventListener<Event>() {
 					public void onEvent(Event evt) throws InterruptedException {
 						if (evt.getName().equals("onOK")) {
-//							List<Cupo> eliminarLista = servicioCupo
-//									.buscarCuposActivos();
-							List<Cupo> eliminarLista = servicioCupo.buscarTodos();
+							// List<Cupo> eliminarLista = servicioCupo
+							// .buscarCuposActivos();
+							List<Cupo> eliminarLista = servicioCupo
+									.buscarTodos();
 							servicioCupo.eliminarVarios(eliminarLista);
 							llenarListas();
 							msj.mensajeInformacion(Mensaje.limpiado);
@@ -859,22 +899,22 @@ public class CCupo extends CGenerico {
 		ltbItemsAgregados.renderAll();
 		for (int j = 0; j < ltbItemsAgregados.getItemCount(); j++) {
 			Listitem listItemj = ltbItemsAgregados.getItemAtIndex(j);
-			String idItem = ((Textbox) ((listItemj.getChildren().get(3)))
+			String idItem = ((Textbox) ((listItemj.getChildren().get(4)))
 					.getFirstChild()).getValue();
 			Date fechaDesde = new Date();
 			Date fechaHasta = new Date();
 			String desde = "";
 			String hasta = "";
-			if (((Datebox) ((listItemj.getChildren().get(1))).getFirstChild())
+			if (((Datebox) ((listItemj.getChildren().get(2))).getFirstChild())
 					.getValue() != null) {
-				fechaDesde = ((Datebox) ((listItemj.getChildren().get(1)))
+				fechaDesde = ((Datebox) ((listItemj.getChildren().get(2)))
 						.getFirstChild()).getValue();
 				desde = formatoFechaRara.format(fechaDesde);
 
 			}
-			if (((Datebox) ((listItemj.getChildren().get(2))).getFirstChild())
+			if (((Datebox) ((listItemj.getChildren().get(3))).getFirstChild())
 					.getValue() != null) {
-				fechaHasta = ((Datebox) ((listItemj.getChildren().get(2)))
+				fechaHasta = ((Datebox) ((listItemj.getChildren().get(3)))
 						.getFirstChild()).getValue();
 				hasta = formatoFechaRara.format(fechaHasta);
 

@@ -11,11 +11,13 @@ import modelo.maestros.CupoPK;
 import modelo.maestros.Product;
 
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Window;
 
@@ -164,8 +166,26 @@ public class CAsignacion extends CGenerico {
 
 			@Override
 			public void eliminar() {
-				// TODO Auto-generated method stub
-
+				Messagebox.show("¿Desea Eliminar el Cupo?", "Alerta",
+						Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION,
+						new org.zkoss.zk.ui.event.EventListener<Event>() {
+							public void onEvent(Event evt)
+									throws InterruptedException {
+								if (evt.getName().equals("onOK")) {
+									CupoPK pk = new CupoPK();
+									pk.setProducto(idProducto);
+									pk.setVendedor(idVendedor);
+									pk.setMarca(idMarca);
+									servicioCupo.eliminarUno(pk);
+									msj.mensajeInformacion(Mensaje.eliminado);
+									limpiar();
+									salir();
+									controlador.recibirLista(catalogo, cupos,
+											idVendedor, idMarca, servicioCupo,
+											servicioProducto);
+								}
+							}
+						});
 			}
 
 			@Override
@@ -190,7 +210,13 @@ public class CAsignacion extends CGenerico {
 		botonera.getChildren().get(0).setVisible(false);
 		botonera.getChildren().get(1).setVisible(false);
 		botonera.getChildren().get(2).setVisible(false);
-		botonera.getChildren().get(4).setVisible(false);
+		CupoPK pk = new CupoPK();
+		pk.setProducto(idProducto);
+		pk.setVendedor(idVendedor);
+		pk.setMarca(idMarca);
+		Cupo cup = servicioCupo.buscar(pk);
+		if (cup == null)
+			botonera.getChildren().get(4).setVisible(false);
 		botonera.getChildren().get(6).setVisible(false);
 		botonera.getChildren().get(8).setVisible(false);
 		botonera.getChildren().get(5).setVisible(false);
@@ -204,15 +230,17 @@ public class CAsignacion extends CGenerico {
 				|| dtbHasta.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
-		} else {if(dtbDesde.getValue().after(dtbHasta.getValue())){
-			msj.mensajeError(Mensaje.fechasErroneas);
-			return false;}else{
-			if (spnConsumido.getValue() > spnCantidad.getValue()) {
-				msj.mensajeError(Mensaje.consumidoMayor);
+		} else {
+			if (dtbDesde.getValue().after(dtbHasta.getValue())) {
+				msj.mensajeError(Mensaje.fechasErroneas);
 				return false;
-			} else
-				return true;
-		}
+			} else {
+				if (spnConsumido.getValue() > spnCantidad.getValue()) {
+					msj.mensajeError(Mensaje.consumidoMayor);
+					return false;
+				} else
+					return true;
+			}
 		}
 	}
 

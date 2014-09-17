@@ -2,50 +2,6 @@
 	<style src="/public/Estilo.css" />
 	<div style="background-color: white" id="divCupo" width="100%"
 		apply="controlador.transacciones.CCupo">
-		<div id="botoneraCupo" />
-		<separator />
-		<grid width="100%">
-			<columns visible="false">
-				<column label="" width="20%" />
-				<column label="" width="30%" />
-				<column label="" width="38%" />
-				<column label="" width="12%" />
-			</columns>
-			<rows>
-				<row>
-					<hbox>
-						<label class="etiqueta" value="Vendedor:" />
-						<space />
-						<label value="*" style="font-weight:bold;color:red">
-						</label>
-					</hbox>
-					<textbox id="txtVendedor" hflex="1" maxlength="100"
-						tooltiptext="Ingrese el Codigo del Vendedor" />
-					<cell colspan="2">
-						<button id="btnBuscarVendedor" label="Buscar" class="btn"
-							image="/public/imagenes/botones/buscar.png" />
-					</cell>
-				</row>
-				<row>
-					<hbox>
-						<label class="etiqueta" value="Marca:" />
-						<space />
-						<label value="*" style="font-weight:bold;color:red">
-						</label>
-					</hbox>
-					<combobox tooltiptext="Seleccione una Marca" placeholder="Seleccione una Marca"
-						id="cmbMarca" readonly="true" width="100%">
-						<template name="model">
-							<comboitem label="${each}" />
-						</template>
-					</combobox>
-					<cell colspan="2">
-						<hbox />
-					</cell>
-				</row>
-			</rows>
-		</grid>
-		<separator />
 		<tabbox width="100%">
 			<tabs>
 				<tab label="Cupos" id="tabCupos" />
@@ -53,14 +9,52 @@
 			</tabs>
 			<tabpanels>
 				<tabpanel>
+					<div id="botoneraCupo" />
+					<separator />
 					<grid width="100%">
 						<columns visible="false">
 							<column label="" width="20%" />
 							<column label="" width="30%" />
-							<column label="" width="38%" />
-							<column label="" width="12%" />
+							<column label="" width="28%" />
+							<column label="" width="22%" />
 						</columns>
 						<rows>
+							<row>
+								<hbox>
+									<label class="etiqueta" value="Vendedor:" />
+									<space />
+									<label value="*" style="font-weight:bold;color:red">
+									</label>
+								</hbox>
+								<textbox id="txtVendedor" hflex="1" maxlength="100"
+									tooltiptext="Ingrese el Codigo del Vendedor" />
+								<!-- <cell colspan="2"> -->
+								<button id="btnBuscarVendedor" label="Buscar" class="btn"
+									image="/public/imagenes/botones/buscar.png" />
+								<button id="btnLimpiarVendedor" label="Limpiar Cupo por Vendedor"
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
+								<!-- </cell> -->
+							</row>
+							<row>
+								<hbox>
+									<label class="etiqueta" value="Marca:" />
+									<space />
+									<label value="*" style="font-weight:bold;color:red">
+									</label>
+								</hbox>
+								<combobox tooltiptext="Seleccione una Marca"
+									placeholder="Seleccione una Marca" id="cmbMarca" readonly="true"
+									width="100%">
+									<template name="model">
+										<comboitem label="${each}" />
+									</template>
+								</combobox>
+								<!-- <cell colspan="2"> -->
+								<hbox />
+								<button id="btnLimpiarMarca" label="Limpiar Cupo por Marca"
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
+								<!-- </cell> -->
+							</row>
 							<row>
 								<cell colspan="3">
 									<hbox />
@@ -68,8 +62,10 @@
 								<button id="btnRefrescar" label="Refrescar" class="btn"
 									image="/public/imagenes/botones/generar.png" width="115px" />
 							</row>
+							<!-- <row> <hbox /> <hbox /> </row> -->
 						</rows>
 					</grid>
+					<separator />
 					<div id="catalogoCupo" tooltiptext="Doble Click al Item para Editar" />
 					<div align="right" width="100%">
 						<grid width="100%">
@@ -119,19 +115,17 @@
 						</columns>
 						<rows>
 							<row>
-								<cell colspan="2">
+								<cell colspan="3">
 									<hbox />
 								</cell>
-								<cell colspan="3">
-									<label style="font-size: 14px;font-weight:bold;" value="Limpiar Cupos" />
+								<cell colspan="2">
+									<label style="font-size: 14px;font-weight:bold;" value="Limpiar Cupos Generales" />
 								</cell>
 							</row>
 							<row>
 								<hbox />
-								<button id="btnLimpiarVendedor" label="Limpiar Cupo por Vendedor"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
-								<button id="btnLimpiarMarca" label="Limpiar Cupo por Marca"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
+								<hbox />
+								<hbox />
 								<button id="btnLimpiarTodo" label="Limpiar Todos los Cupos"
 									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
 								<hbox />
@@ -227,16 +221,22 @@
 								</hbox>
 							</tabpanel>
 							<tabpanel>
-								<hbox widths="32%,3%,65%">
-									<vbox align="center">
+								<hbox width="100%" widths="32%,3%,65%">
+									<vbox width="100%" align="center">
 										<label class="etiqueta" value="Items sin Restriccion" />
+										<textbox width="60%" id="txtBuscadorProducto" maxlength="50"
+											placeholder="Ingrese el Codigo del Producto"
+											tooltiptext="Escriba el codigo del Producto que desee filtar en la lista de productos disponibles" />
 										<listbox mold="paging" pagingPosition="top" pageSize="10"
-											id="ltbItems" height="330px" width="100%" emptyMessage="No hay Items Registradas">
+											id="ltbItems" height="100%" width="100%" emptyMessage="No hay Items Registradas">
 											<listhead>
-												<listheader label="Item" width="100%" />
+												<listheader label="Codigo" width="30%" />
+												<listheader label="Item" width="70%" />
 											</listhead>
 											<template name="model">
 												<listitem>
+													<listcell label="${each.productId}">
+													</listcell>
 													<listcell label="${each.description}">
 													</listcell>
 													<listcell>
@@ -253,7 +253,7 @@
 											</template>
 										</listbox>
 									</vbox>
-									<vbox align="center" pack="center">
+									<vbox width="100%" align="center" pack="center">
 										<separator />
 										<separator />
 										<separator />
@@ -266,19 +266,25 @@
 										<button class="abrir" id="pasar2Item"
 											image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Items" />
 									</vbox>
-									<vbox align="center">
+									<vbox width="100%" align="center">
 										<label class="etiqueta" value="Items con Restriccion" />
+										<textbox width="25%" id="txtBuscadorRestringido" maxlength="50"
+											placeholder="Ingrese el Codigo del Item"
+											tooltiptext="Escriba el codigo del Item que desee filtar en la lista de Items Restringidos" />
 										<listbox id="ltbItemsAgregados" mold="paging"
-											pagingPosition="top" pageSize="10" height="330px" width="100%"
+											pagingPosition="top" pageSize="10" height="100%" width="100%"
 											emptyMessage="No ha Seleccionado Ningún Item">
 											<listhead>
+												<listheader label="Item" width="20%" />
 												<listheader label="Item" width="40%" />
-												<listheader label="Desde" width="30%" />
-												<listheader label="Hasta" width="30%" />
+												<listheader label="Desde" width="15%" />
+												<listheader label="Hasta" width="15%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
 												<listitem>
+													<listcell label="${each.id.producto}">
+													</listcell>
 													<listcell label="${each.description}">
 													</listcell>
 													<listcell>

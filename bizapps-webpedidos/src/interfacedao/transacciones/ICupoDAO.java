@@ -30,4 +30,7 @@ import org.springframework.data.jpa.repository.Query;
 
 		List<Cupo> findByIdVendedorNot(String string);
 
+		List<Cupo> findByIdVendedorAndIdProductoStartingWithAllIgnoreCase(
+				String string, String valor);
+
 }

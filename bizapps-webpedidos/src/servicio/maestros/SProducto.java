@@ -36,4 +36,8 @@ public class SProducto {
 		return productoDAO.findByProductIdAndBrand(productoRef, marcaRef);
 	}
 
+	public List<Product> filtroCodigo(String valor) {
+		return productoDAO.findByProductIdStartingWithAllIgnoreCase(valor);
+	}
+
 }
