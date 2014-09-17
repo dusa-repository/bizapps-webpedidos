@@ -1,4 +1,5 @@
 package servicio.transacciones;
+
 import interfacedao.transacciones.ICupoDAO;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class SCupo {
 		// TODO Auto-generated method stub
 		return cupoDAO.findAll();
 	}
-	
+
 	public List<Cupo> buscarNinguno() {
 		// TODO Auto-generated method stub
 		return cupoDAO.findByCantidad(-1);
@@ -27,11 +28,11 @@ public class SCupo {
 
 	public void guardar(Cupo cupo) {
 		cupoDAO.save(cupo);
-		
+
 	}
 
 	public List<Cupo> buscarPorVendedoryMarca(String idVendedor, String idMarca) {
-		return cupoDAO.findByIdVendedorAndIdMarca(idVendedor,idMarca);
+		return cupoDAO.findByIdVendedorAndIdMarca(idVendedor, idMarca);
 	}
 
 	public List<String> buscarMarcasConCero() {
@@ -50,7 +51,7 @@ public class SCupo {
 	}
 
 	public Object buscarPorItems(CupoPK pk) {
-		return cupoDAO.findByIdAndIdVendedor(pk,"0");
+		return cupoDAO.findByIdAndIdVendedor(pk, "0");
 	}
 
 	public List<Cupo> buscarCuposVendedor(String idVendedor) {
@@ -59,7 +60,7 @@ public class SCupo {
 
 	public void eliminarVarios(List<Cupo> eliminarLista) {
 		cupoDAO.delete(eliminarLista);
-		
+
 	}
 
 	public List<Cupo> buscarCuposMarca(String idMarca) {
@@ -69,9 +70,18 @@ public class SCupo {
 	public List<Cupo> buscarCuposActivos() {
 		return cupoDAO.findByIdVendedorNot("0");
 	}
-	
+
 	public void guardarVarios(List<Cupo> cupos) {
 		cupoDAO.save(cupos);
+	}
+
+	public List<Cupo> filtroCodigoProducto(String valor) {
+		return cupoDAO.findByIdVendedorAndIdProductoStartingWithAllIgnoreCase(
+				"0", valor);
+	}
+
+	public void eliminarUno(CupoPK pk) {
+		cupoDAO.delete(pk);
 	}
 
 }
