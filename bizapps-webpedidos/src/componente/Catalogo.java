@@ -47,7 +47,6 @@ public abstract class Catalogo<Clase> extends Window {
 			String... campos) {
 		super("", "2", false);
 		this.setId("cmpCatalogo" + titulo);
-		this.setHeight("430px");
 		this.setStyle("background-header:#FF7925; background: #f4f2f2");
 		// this.setWidth("auto");
 		crearLista(lista, campos, emergente, udc, hibrido);
