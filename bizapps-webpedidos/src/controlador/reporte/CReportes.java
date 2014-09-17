@@ -15,7 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.criteria.CriteriaBuilder.Case;
 
+import modelo.maestros.Cupo;
+import modelo.maestros.Salesmen;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -39,8 +42,8 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Timebox;
 
 import componente.Botonera;
+import componente.Catalogo;
 import componente.Mensaje;
-
 
 import controlador.maestros.CGenerico;
 
@@ -49,27 +52,18 @@ public class CReportes extends CGenerico {
 	@Wire
 	private Div divReporte;
 	@Wire
-	private Datebox dtbFechaInicio;
+	private Textbox txtVendedor;
 	@Wire
-	private Datebox dtbFechaFinal;
-	@Wire
-	private Timebox tmbHoraInicio;
-	@Wire
-	private Timebox tmbHoraFinal;
-	@Wire
-	private Combobox cmbMolineteEntrada;
-	@Wire
-	private Combobox cmbMolineteSalida;
-	@Wire
-	private Combobox cmbTurno;
-	@Wire
-	private Textbox txtFicha;
-	@Wire
-	private Combobox cmbReporte;
+	private Combobox cmbMarca;
 	@Wire
 	private Div botoneraReporte;
+	@Wire
+	private Div divCatalogoVendedor2;
+	private String nombre;
 	protected Connection conexion;
-	
+	private String tipo;
+	Catalogo<Salesmen> catalogoVendedor;
+	private String idVendedor = "";
 
 	@Override
 	public void inicializar() throws IOException {
@@ -78,20 +72,34 @@ public class CReportes extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				System.out.println(tabs.size());
+				nombre = (String) map.get("nombre");
 				map.clear();
 				map = null;
 			}
 		}
+		List<String> listaProduct = new ArrayList<String>();
+		listaProduct.add("Todas");
+		listaProduct.addAll(servicioProducto.buscarMarcas());
+		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
-		
-
+		switch (nombre) {
+		case "Cupos por Vendedor/Marca/Item":
+			tipo = "1";
+			break;
+		case "Cupos por Marca/Vendedor/Item":
+			tipo = "2";
+			break;
+		case "Cupos por Marca/Item/Vendedor":
+			tipo = "3";
+			break;
+		default:
+			break;
+		}
 		Botonera botonera = new Botonera() {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divReporte, "Reportes", tabs);
-
+				cerrarVentana(divReporte, nombre, tabs);
 			}
 
 			@Override
@@ -116,87 +124,39 @@ public class CReportes extends CGenerico {
 				// TODO Auto-generated method stub
 
 				if (validar()) {
-					
-					DateFormat fecha = new SimpleDateFormat("dd/MM/yyyy");
-					DateFormat hora = new SimpleDateFormat("hh:mm:ss");
-					String hora1 = "1";
-					String hora2 = "2";
-					String fecha1 = fecha.format(dtbFechaInicio.getValue());
-					String fecha2 = fecha.format(dtbFechaFinal.getValue());
-					
-					System.out.println(fecha1);
-					
-				
-					String ficha = txtFicha.getValue();
-					int totalNomina = 2;
-					String reporte = "";
-					System.out.println(cmbReporte.getSelectedItem().getId());
-
-					if (cmbReporte.getSelectedItem().getId().equals("R00001")) {
-						reporte = "R00001";
+					String marca = cmbMarca.getValue();
+					List<Cupo> cupos = new ArrayList<Cupo>();
+					String vendedor = idVendedor;
+					if (!idVendedor.equals("Todos") && !marca.equals("Todas")) {
+						cupos = servicioCupo.buscarPorVendedoryMarca(
+								idVendedor, marca);
 					} else {
-
-						if (cmbReporte.getSelectedItem().getId()
-								.equals("R00002")) {
-							reporte = "R00002";
+						if (marca.equals("Todas") && idVendedor.equals("Todos")) {
+							cupos = servicioCupo.buscarTodos();
 						} else {
-
-							if (cmbReporte.getSelectedItem().getId()
-									.equals("R00003")) {
-								reporte = "R00003";
+							if (idVendedor.equals("Todos")) {
+								cupos = servicioCupo.buscarCuposMarca(marca);
 							} else {
-
-								if (cmbReporte.getSelectedItem().getId()
-										.equals("R00004")) {
-									reporte = "R00004";
-								} else {
-
-									if (cmbReporte.getSelectedItem().getId()
-											.equals("R00005")) {
-										reporte = "R00005";
-									} else {
-
-										if (cmbReporte.getSelectedItem()
-												.getId().equals("R00006")) {
-											reporte = "R00006";
-										} else {
-
-											if (cmbReporte.getSelectedItem()
-													.getId().equals("R00007")) {
-												reporte = "R00007";
-											}
-										}
-									}
-								}
+								cupos = servicioCupo
+										.buscarCuposVendedor(vendedor);
 							}
-
 						}
-
 					}
 
-					System.out.println(reporte);
-
-					/*Clients.evalJavaScript("window.open('/bizapps-sca/Generador?valor=1&valor2="
-							+ reporte
-							+ "&valor3="
-							+ fecha1
-							+ "&valor4="
-							+ fecha2
-							+ "&valor5="
-							+ hora1
-							+ "&valor6="
-							+ hora2
-							+ "&valor7="
-							+ molineteEntrada
-							+ "&valor8="
-							+ molineteSalida
-							+ "&valor9="
-							+ turno
-							+ "&valor10="
-							+ ficha
-							+ "&valor11="
-							+ totalNomina
-							+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");*/
+					if (marca.equals("Todas"))
+						marca = "";
+					if (txtVendedor.getValue().equals("Todos"))
+						vendedor = "";
+					if (!cupos.isEmpty()) {
+						Clients.evalJavaScript("window.open('/bizapps-webpedidos/Generador?valor1="
+								+ tipo
+								+ "&valor2="
+								+ marca
+								+ "&valor3="
+								+ vendedor
+								+ "','','top=100,left=200,height=600,width=800,scrollbars=1,resizable=1')");
+					} else
+						msj.mensajeAlerta(Mensaje.noHayRegistros);
 
 				}
 
@@ -205,44 +165,108 @@ public class CReportes extends CGenerico {
 			@Override
 			public void seleccionar() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void buscar() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void annadir() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void ayuda() {
 				// TODO Auto-generated method stub
-				
+
 			}
 		};
-
+		Button salir = (Button) botonera.getChildren().get(7);
+		Button reporte = (Button) botonera.getChildren().get(6);
+		Button limpiar = (Button) botonera.getChildren().get(5);
+		botonera.getChildren().remove(7);
+		botonera.getChildren().remove(6);
+		botonera.getChildren().remove(5);
+		botonera.appendChild(reporte);
+		botonera.appendChild(limpiar);
+		botonera.appendChild(salir);
 		botonera.getChildren().get(0).setVisible(false);
 		botonera.getChildren().get(1).setVisible(false);
+		botonera.getChildren().get(2).setVisible(false);
+		botonera.getChildren().get(3).setVisible(false);
+		botonera.getChildren().get(4).setVisible(false);
+		botonera.getChildren().get(5).setVisible(false);
 		botoneraReporte.appendChild(botonera);
+	}
+
+	@Listen("onClick = #btnBuscarVendedor")
+	public void mostrarCatalogoVendedor() {
+		final List<Salesmen> vendedores = new ArrayList<Salesmen>();
+		Salesmen vendedorTodo = new Salesmen();
+		vendedorTodo.setSalesmanId("Todos");
+		vendedorTodo.setRegion("Todos");
+		vendedorTodo.setName("Todos");
+		vendedores.add(vendedorTodo);
+		vendedores.addAll(servicioVendedor.buscarTodosOrdenados());
+		catalogoVendedor = new Catalogo<Salesmen>(divCatalogoVendedor2,
+				"Vendedores", vendedores, true, false, false, "Codigo",
+				"Nombre", "Region") {
+
+			@Override
+			protected List<Salesmen> buscar(List<String> valores) {
+
+				List<Salesmen> lista = new ArrayList<Salesmen>();
+
+				for (Salesmen vendedor : vendedores) {
+					if ((vendedor.getSalesmanId().toLowerCase()
+							.startsWith(valores.get(0)) || vendedor
+							.getSalesmanId().toUpperCase()
+							.startsWith(valores.get(0)))
+							&& (vendedor.getName().trim().toLowerCase()
+									.startsWith(valores.get(1)) || vendedor
+									.getName().trim().toUpperCase()
+									.startsWith(valores.get(1)))
+							&& (vendedor.getRegion().trim().toLowerCase()
+									.startsWith(valores.get(2)) || vendedor
+									.getRegion().trim().toUpperCase()
+									.startsWith(valores.get(2)))) {
+						lista.add(vendedor);
+					}
+				}
+				return lista;
+			}
+
+			@Override
+			protected String[] crearRegistros(Salesmen vendedor) {
+				String[] registros = new String[3];
+				registros[0] = vendedor.getSalesmanId();
+				registros[1] = vendedor.getName();
+				registros[2] = vendedor.getRegion();
+				return registros;
+			}
+		};
+		catalogoVendedor.setParent(divCatalogoVendedor2);
+		catalogoVendedor.doModal();
+
+	}
+
+	@Listen("onSeleccion = #divCatalogoVendedor2")
+	public void seleccionar() {
+		Salesmen vendedor = catalogoVendedor.objetoSeleccionadoDelCatalogo();
+		txtVendedor.setValue(vendedor.getName());
+		idVendedor = vendedor.getSalesmanId();
+		catalogoVendedor.setParent(null);
 	}
 
 	/* Permite validar que todos los campos esten completos */
 	public boolean validar() {
-		if (dtbFechaInicio.getText().compareTo("") == 0
-				|| dtbFechaFinal.getText().compareTo("") == 0
-				|| tmbHoraInicio.getText().compareTo("") == 0
-				|| tmbHoraFinal.getText().compareTo("") == 0
-				|| cmbMolineteEntrada.getText().compareTo("") == 0
-				|| cmbMolineteSalida.getText().compareTo("") == 0
-				|| cmbTurno.getText().compareTo("") == 0
-				|| txtFicha.getText().compareTo("") == 0
-				|| cmbReporte.getText().compareTo("") == 0) {
+		if (cmbMarca.getText().compareTo("") == 0
+				|| txtVendedor.getText().compareTo("") == 0) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else
@@ -250,23 +274,12 @@ public class CReportes extends CGenerico {
 	}
 
 	public void limpiarCampos() {
-
-		dtbFechaInicio.setValue(new Date());
-		dtbFechaFinal.setValue(new Date());
-		tmbHoraInicio.setValue(new Date());
-		tmbHoraFinal.setValue(new Date());
-		cmbMolineteEntrada.setValue("");
-		cmbMolineteSalida.setValue("");
-		cmbTurno.setValue("");
-		txtFicha.setValue("");
-		cmbReporte.setValue("");
-
+		idVendedor = "";
+		cmbMarca.setValue("");
+		txtVendedor.setValue("");
 	}
 
-	public byte[] reporte(String part2, String part3, String part4,
-			String part5, String part6, String part7, String part8,
-			String part9, String part10, String part11) {
-
+	public byte[] reporte(String part1, String part2, String part3) {
 		byte[] fichero = null;
 
 		conexion = null;
@@ -274,55 +287,32 @@ public class CReportes extends CGenerico {
 
 			ClassLoader cl = this.getClass().getClassLoader();
 			InputStream fis = null;
-			
-			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-			
-			Date fechaInicio = null;
-			Timestamp fechaInicioHora = null;
-			try {
-				fechaInicio = formato.parse(part3);
-				fechaInicioHora = new Timestamp(fechaInicio.getTime());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 
 			Map parameters = new HashMap();
 
-			if(part2.equals("R00003")){
-				
-				parameters.put("fecha_desde", fechaInicioHora);
-				parameters.put("molinete_entrada", part7);
-				parameters.put("total_nomina_planificada", part11);
-				parameters.put("molinete_entrada_mostrar", part7);
-				parameters.put("turno", part9);
-
-				fis = (cl.getResourceAsStream("/reporte/R00003.jasper"));
-				
-			}
-			
-			
+			parameters.put("marca", part2);
+			parameters.put("vendedor", part3);
 
 			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-			String url = "jdbc:sqlserver://localhost:1433;DatabaseName=dusa_sca";
+			String url = "jdbc:sqlserver://localhost:1433;DatabaseName=dusa_web_pedido";
 			String user = "client";
 			String password = "123";
 
-			try {
-
-				try {
-					conexion = java.sql.DriverManager.getConnection(url, user,
-							password);
-
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
+			switch (part1) {
+			case "1":
+				fis = (cl.getResourceAsStream("/reporte/restriccion01.jasper"));
+				break;
+			case "2":
+				fis = (cl.getResourceAsStream("/reporte/restriccion02.jasper"));
+				break;
+			case "3":
+				fis = (cl.getResourceAsStream("/reporte/restriccion03.jasper"));
+				break;
+			default:
+				break;
 			}
-
-			JasperPrint jasperPrint = null;
-
+			conexion = java.sql.DriverManager
+					.getConnection(url, user, password);
 			try {
 
 				if (fichero == null) {
@@ -343,7 +333,6 @@ public class CReportes extends CGenerico {
 			System.out.println("Error de conexión: " + e.getMessage());
 			System.exit(4);
 		}
-
 		return fichero;
 
 	}
