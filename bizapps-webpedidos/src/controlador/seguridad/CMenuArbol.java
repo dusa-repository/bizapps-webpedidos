@@ -117,7 +117,7 @@ public class CMenuArbol extends CGenerico {
 					servicioArbol.guardar(arbol);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
-					catalogo.actualizarLista(servicioArbol.listarArbol(), false);
+					catalogo.actualizarLista(servicioArbol.listarArbol(), true);
 				}
 
 			}
@@ -146,7 +146,7 @@ public class CMenuArbol extends CGenerico {
 													catalogo.actualizarLista(
 															servicioArbol
 																	.listarArbol(),
-															false);
+															true);
 												}
 											}
 										});
@@ -171,7 +171,7 @@ public class CMenuArbol extends CGenerico {
 													catalogo.actualizarLista(
 															servicioArbol
 																	.listarArbol(),
-															false);
+															true);
 												}
 											}
 										});
