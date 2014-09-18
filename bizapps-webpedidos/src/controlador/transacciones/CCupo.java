@@ -125,8 +125,11 @@ public class CCupo extends CGenerico {
 		buscadorProductos();
 		buscadorRestringidos();
 		mostrarCatalogo();
-		listaProduct = servicioProducto.buscarMarcas();
-		cmbMarca.setModel(new ListModelList<String>(listaProduct));
+		// listaProduct = servicioProducto.buscarMarcas();
+		List<String> lista = new ArrayList<String>();
+		lista.add("TODAS");
+		lista.addAll(servicioProducto.buscarMarcas());
+		cmbMarca.setModel(new ListModelList<String>(lista));
 
 		llenarListas();
 
@@ -207,13 +210,12 @@ public class CCupo extends CGenerico {
 			@Override
 			protected List<Cupo> buscar(String valor) {
 				List<Cupo> cuposFiltrados = new ArrayList<Cupo>();
-				List<Cupo> cuposJ = servicioCupo
-						.filtroCodigoProducto(valor);
+				List<Cupo> cuposJ = servicioCupo.filtroCodigoProducto(valor);
 				for (int i = 0; i < itemsRestringidos.size(); i++) {
 					Cupo cupi = itemsRestringidos.get(i);
 					for (int j = 0; j < cuposJ.size(); j++) {
-						if (cupi.getId().getProducto().equals(cuposJ.get(
-								j).getId().getProducto()))
+						if (cupi.getId().getProducto()
+								.equals(cuposJ.get(j).getId().getProducto()))
 							cuposFiltrados.add(cupi);
 					}
 				}
@@ -223,18 +225,16 @@ public class CCupo extends CGenerico {
 	}
 
 	private void buscadorProductos() {
-		buscarProductos = new Buscar<Product>(ltbItems,
-				txtBuscadorProducto) {
+		buscarProductos = new Buscar<Product>(ltbItems, txtBuscadorProducto) {
 			@Override
 			protected List<Product> buscar(String valor) {
 				List<Product> productosFiltrados = new ArrayList<Product>();
-				List<Product> productosJ = servicioProducto
-						.filtroCodigo(valor);
+				List<Product> productosJ = servicioProducto.filtroCodigo(valor);
 				for (int i = 0; i < itemsDisponibles.size(); i++) {
 					Product item = itemsDisponibles.get(i);
 					for (int j = 0; j < productosJ.size(); j++) {
-						if (item.getProductId().equals(productosJ.get(
-								j).getProductId()))
+						if (item.getProductId().equals(
+								productosJ.get(j).getProductId()))
 							productosFiltrados.add(item);
 					}
 				}
@@ -373,10 +373,15 @@ public class CCupo extends CGenerico {
 		if (!idVendedor.equals("")) {
 			if (!idMarca.equals("")) {
 				List<String> itemsFaltan = new ArrayList<String>();
-				cupos = servicioCupo.buscarPorVendedoryMarca(idVendedor,
-						idMarca);
+				if (!idMarca.equals("TODAS"))
+					cupos = servicioCupo.buscarPorVendedoryMarca(idVendedor,
+							idMarca);
+				else
+					cupos = servicioCupo.buscarCuposVendedor(idVendedor);
 
 				List<Product> items = servicioProducto.buscarPorMarca(idMarca);
+				if (idMarca.equals("TODAS"))
+					items = servicioProducto.buscarTodos();
 				for (int i = 0; i < items.size(); i++) {
 					String id = items.get(i).getProductId();
 					itemsFaltan.add(id);
