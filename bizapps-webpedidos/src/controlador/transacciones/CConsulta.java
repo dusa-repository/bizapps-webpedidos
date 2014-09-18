@@ -17,7 +17,6 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
-import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
@@ -202,16 +201,16 @@ public class CConsulta extends CGenerico {
 				List<Order> ordenFiltro = new ArrayList<Order>();
 
 				for (Order orden : ordenes) {
-					if (String.valueOf(orden.getOrderId()).toLowerCase()
+					if (String.valueOf(orden.getOrderId())
 							.startsWith(valores.get(0))
-							&& orden.getOrderDate().trim().toLowerCase()
+							&& orden.getOrderDate().trim()
 									.startsWith(valores.get(1))
-							&& orden.getRequiredDate().trim().toLowerCase()
+							&& orden.getRequiredDate().trim()
 									.startsWith(valores.get(2))
 							&& servicioVendedor.buscar(orden.getSalesmanId())
-									.getName().toLowerCase()
+									.getName()
 									.startsWith(valores.get(3))
-							&& orden.getStatus().toLowerCase()
+							&& orden.getStatus()
 									.startsWith(valores.get(4))) {
 						ordenFiltro.add(orden);
 					}
@@ -256,9 +255,9 @@ public class CConsulta extends CGenerico {
 				for (Salesmen vendedor : vendedores) {
 					if (vendedor.getSalesmanId().toLowerCase()
 							.startsWith(valores.get(0))
-							&& vendedor.getName().trim().toLowerCase()
+							&& vendedor.getName().trim()
 									.startsWith(valores.get(1))
-							&& vendedor.getRegion().trim().toLowerCase()
+							&& vendedor.getRegion().trim()
 									.startsWith(valores.get(2))) {
 						lista.add(vendedor);
 					}

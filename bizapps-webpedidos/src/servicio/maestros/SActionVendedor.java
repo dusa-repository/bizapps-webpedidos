@@ -4,7 +4,6 @@ import interfacedao.maestros.IActionVendedorDAO;
 
 import java.util.List;
 
-import modelo.maestros.Action;
 import modelo.maestros.SalesmenAction;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -42,10 +42,10 @@ import servicio.maestros.SProducto;
 import servicio.transacciones.SCupo;
 
 import componente.Botonera;
+import componente.Buscar;
 import componente.Catalogo;
 import componente.Mensaje;
 import componente.Validador;
-import componente.Buscar;
 
 import controlador.maestros.CGenerico;
 
@@ -827,6 +827,7 @@ public class CCupo extends CGenerico {
 
 	public void guardarMarcas() {
 		List<Cupo> guardarLista = new ArrayList<Cupo>();
+
 		ltbMarcasAgregadas.renderAll();
 
 		List<Cupo> eliminar = new ArrayList<Cupo>();
@@ -888,7 +889,7 @@ public class CCupo extends CGenerico {
 
 				guardarLista.add(cupo);
 			}
-		}
+		}	
 		servicioCupo.guardarVarios(guardarLista);
 	}
 
@@ -944,11 +945,16 @@ public class CCupo extends CGenerico {
 
 	}
 
-	@Listen("onClick = #btnGuardarListas")
-	public void guardar() {
-		guardarItems();
+	@Listen("onClick = #btnGuardarMarca")
+	public void guardarMarca() {
 		guardarMarcas();
 		marcasFinales.clear();
+		llenarListas();
+		msj.mensajeInformacion(Mensaje.guardado);
+	}
+	@Listen("onClick = #btnGuardarItem")
+	public void guardarItem() {
+		guardarItems();
 		llenarListas();
 		msj.mensajeInformacion(Mensaje.guardado);
 	}

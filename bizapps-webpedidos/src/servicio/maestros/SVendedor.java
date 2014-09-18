@@ -1,10 +1,8 @@
 package servicio.maestros;
 import interfacedao.maestros.IVendedorDAO;
-import interfacedao.transacciones.ICupoDAO;
 
 import java.util.List;
 
-import modelo.maestros.Cupo;
 import modelo.maestros.Salesmen;
 
 import org.springframework.beans.factory.annotation.Autowired;

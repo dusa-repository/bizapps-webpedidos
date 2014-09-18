@@ -1,7 +1,9 @@
 package modelo.maestros;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the orders_details_history database table.

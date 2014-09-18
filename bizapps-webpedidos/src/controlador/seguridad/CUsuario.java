@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,7 +12,6 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
-import modelo.seguridad.Arbol;
 import modelo.seguridad.Grupo;
 import modelo.seguridad.Usuario;
 
@@ -46,6 +44,7 @@ import componente.Botonera;
 import componente.Catalogo;
 import componente.Mensaje;
 import componente.Validador;
+
 import controlador.maestros.CGenerico;
 
 public class CUsuario extends CGenerico {
@@ -140,7 +139,7 @@ public class CUsuario extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				cerrar = (String) map.get("titulo");		
+				cerrar = (String) map.get("titulo");
 				System.out.println(tabs.size());
 				map.clear();
 				map = null;
@@ -259,7 +258,8 @@ public class CUsuario extends CGenerico {
 					servicioUsuario.guardar(usuario);
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
-					catalogo.actualizarLista(servicioUsuario.buscarTodos(),false);
+					catalogo.actualizarLista(servicioUsuario.buscarTodos(),
+							false);
 				}
 			}
 
@@ -284,8 +284,10 @@ public class CUsuario extends CGenerico {
 													servicioUsuario
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
-													catalogo.actualizarLista(servicioUsuario
-															.buscarTodos(),false);
+													catalogo.actualizarLista(
+															servicioUsuario
+																	.buscarTodos(),
+															false);
 												}
 											}
 										});
@@ -307,8 +309,10 @@ public class CUsuario extends CGenerico {
 															.eliminarClave(id);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
-													catalogo.actualizarLista(servicioUsuario
-															.buscarTodos(),false);
+													catalogo.actualizarLista(
+															servicioUsuario
+																	.buscarTodos(),
+															false);
 												}
 											}
 										});
@@ -633,24 +637,23 @@ public class CUsuario extends CGenerico {
 				List<Usuario> user = new ArrayList<Usuario>();
 
 				for (Usuario actividadord : usuario) {
-					if (actividadord.getCedula().toLowerCase()
-							.startsWith(valores.get(0))
-							&& actividadord.getEmail().toLowerCase()
-									.startsWith(valores.get(1))
-							&& actividadord.getPrimerNombre().toLowerCase()
-									.startsWith(valores.get(2))
-							&& actividadord.getSegundoNombre().toLowerCase()
-									.startsWith(valores.get(3))
-							&& actividadord.getPrimerApellido().toLowerCase()
-									.startsWith(valores.get(4))
-							&& actividadord.getSegundoApellido().toLowerCase()
-									.startsWith(valores.get(5))
-							&& actividadord.getSexo().toLowerCase()
+					if (actividadord.getCedula().startsWith(valores.get(0))
+							&& actividadord.getEmail().startsWith(
+									valores.get(1))
+							&& actividadord.getPrimerNombre().startsWith(
+									valores.get(2))
+							&& actividadord.getSegundoNombre().startsWith(
+									valores.get(3))
+							&& actividadord.getPrimerApellido().startsWith(
+									valores.get(4))
+							&& actividadord.getSegundoApellido().startsWith(
+									valores.get(5))
+							&& actividadord.getSexo()
 									.startsWith(valores.get(6))
-							&& actividadord.getTelefono().toLowerCase()
-									.startsWith(valores.get(7))
-							&& actividadord.getDireccion().toLowerCase()
-									.startsWith(valores.get(8))) {
+							&& actividadord.getTelefono().startsWith(
+									valores.get(7))
+							&& actividadord.getDireccion().startsWith(
+									valores.get(8))) {
 
 						user.add(actividadord);
 					}

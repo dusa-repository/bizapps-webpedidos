@@ -1,6 +1,5 @@
 package interfacedao.transacciones;
 
-import java.util.Date;
 import java.util.List;
 
 import modelo.maestros.Order;

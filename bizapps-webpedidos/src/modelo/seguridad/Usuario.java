@@ -1,7 +1,6 @@
 package modelo.seguridad;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Set;
 
 import javax.persistence.Column;
