@@ -1,7 +1,8 @@
 package modelo.maestros;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the Cupo database table.

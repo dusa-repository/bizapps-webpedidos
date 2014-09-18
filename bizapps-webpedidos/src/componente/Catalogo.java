@@ -90,7 +90,7 @@ public abstract class Catalogo<Clase> extends Window {
 		lsbCatalogo = new Listbox();
 		lsbCatalogo.setMold("paging");
 		lsbCatalogo.setPagingPosition("top");
-		lsbCatalogo.setPageSize(10);
+		lsbCatalogo.setPageSize(9);
 		final Auxhead cabecera = new Auxhead();
 		Listhead lhdEncabezado = new Listhead();
 		lhdEncabezado.setSizable(true);

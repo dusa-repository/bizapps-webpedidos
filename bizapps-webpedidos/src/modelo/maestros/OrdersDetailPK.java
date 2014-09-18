@@ -1,12 +1,8 @@
 package modelo.maestros;
 import java.io.Serializable;
-import javax.persistence.*;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import servicio.maestros.SProducto;
-import servicio.maestros.SVendedor;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the orders_details database table.

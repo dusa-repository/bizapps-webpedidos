@@ -1,13 +1,12 @@
 package modelo.maestros;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
 
 /**
  * The persistent class for the Cupo database table.

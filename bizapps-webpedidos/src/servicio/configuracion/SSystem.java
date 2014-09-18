@@ -1,7 +1,6 @@
 package servicio.configuracion;
 
 import interfacedao.configuracion.ISystemDAO;
-
 import modelo.configuracion.System;
 
 import org.springframework.beans.factory.annotation.Autowired;

@@ -26,7 +26,6 @@ import controlador.maestros.CGenerico;
 
 public class CMenuArbol extends CGenerico {
 
-
 	private static final long serialVersionUID = -6868106910332150746L;
 	@Wire
 	private Textbox txtNombre;
@@ -56,7 +55,7 @@ public class CMenuArbol extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				cerrar = (String) map.get("titulo");		
+				cerrar = (String) map.get("titulo");
 				System.out.println(tabs.size());
 				map.clear();
 				map = null;
@@ -118,7 +117,7 @@ public class CMenuArbol extends CGenerico {
 					servicioArbol.guardar(arbol);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
-					catalogo.actualizarLista(servicioArbol.listarArbol(),false);
+					catalogo.actualizarLista(servicioArbol.listarArbol(), false);
 				}
 
 			}
@@ -144,8 +143,10 @@ public class CMenuArbol extends CGenerico {
 													servicioArbol
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
-													catalogo.actualizarLista(servicioArbol
-															.listarArbol(),false);
+													catalogo.actualizarLista(
+															servicioArbol
+																	.listarArbol(),
+															false);
 												}
 											}
 										});
@@ -167,8 +168,10 @@ public class CMenuArbol extends CGenerico {
 															.eliminarUno(clave);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
-													catalogo.actualizarLista(servicioArbol
-															.listarArbol(),false);
+													catalogo.actualizarLista(
+															servicioArbol
+																	.listarArbol(),
+															false);
 												}
 											}
 										});
@@ -295,7 +298,7 @@ public class CMenuArbol extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Arbol> listArbol = servicioArbol.listarArbol();
 		catalogo = new Catalogo<Arbol>(divCatalogoMenuArbol, "Arbol",
-				listArbol, false, false,false, "Codigo", "Nombre", "Padre",
+				listArbol, false, false, false, "Codigo", "Nombre", "Padre",
 				"Url") {
 
 			@Override
@@ -304,14 +307,12 @@ public class CMenuArbol extends CGenerico {
 				List<Arbol> lista = new ArrayList<Arbol>();
 
 				for (Arbol arbol : listArbol) {
-					if (String.valueOf(arbol.getIdArbol()).toLowerCase()
-							.startsWith(valores.get(0))
-							&& arbol.getNombre().toLowerCase()
-									.startsWith(valores.get(1))
-							&& String.valueOf(arbol.getPadre()).toLowerCase()
-									.startsWith(valores.get(2))
-							&& arbol.getUrl().toLowerCase()
-									.startsWith(valores.get(3))) {
+					if (String.valueOf(arbol.getIdArbol()).startsWith(
+							valores.get(0))
+							&& arbol.getNombre().startsWith(valores.get(1))
+							&& String.valueOf(arbol.getPadre()).startsWith(
+									valores.get(2))
+							&& arbol.getUrl().startsWith(valores.get(3))) {
 						lista.add(arbol);
 					}
 				}

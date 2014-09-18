@@ -1,9 +1,8 @@
 package servicio.maestros;
 
-import java.util.List;
-
 import interfacedao.maestros.ISubVendedorDAO;
-import interfacedao.seguridad.IGrupoDAO;
+
+import java.util.List;
 
 import modelo.maestros.SalesmenSub;
 

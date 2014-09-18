@@ -1,9 +1,9 @@
 package modelo.maestros;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
-import controlador.maestros.CGenerico;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  * The primary key class for the salesmen_sub database table.

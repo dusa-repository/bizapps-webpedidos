@@ -20,7 +20,6 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Groupbox;
-import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
@@ -690,13 +689,12 @@ public class CVendedor extends CGenerico {
 				List<Salesmen> user = new ArrayList<Salesmen>();
 
 				for (Salesmen vende : vendedores) {
-					if (vende.getSalesmanId().trim().toLowerCase()
-							.startsWith(valores.get(0))
-							&& vende.getName().trim().toLowerCase()
+					if (vende.getSalesmanId().trim().startsWith(valores.get(0))
+							&& vende.getName().trim()
 									.startsWith(valores.get(1))
-							&& vende.getRegion().trim().toLowerCase()
+							&& vende.getRegion().trim()
 									.startsWith(valores.get(2))
-							&& vende.getMail().trim().toLowerCase()
+							&& vende.getMail().trim()
 									.startsWith(valores.get(3))) {
 						user.add(vende);
 					}

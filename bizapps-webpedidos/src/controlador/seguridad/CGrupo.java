@@ -38,10 +38,11 @@ import arbol.Nodos;
 import componente.Botonera;
 import componente.Catalogo;
 import componente.Mensaje;
+
 import controlador.maestros.CGenerico;
 
 public class CGrupo extends CGenerico {
-	
+
 	private static final long serialVersionUID = -6585413345823481429L;
 	@Wire
 	private Tree treeGrupo;
@@ -60,7 +61,7 @@ public class CGrupo extends CGenerico {
 	private Groupbox gpxDatos;
 	@Wire
 	private Groupbox gpxRegistro;
-	
+
 	TreeModel _model;
 	Catalogo<Grupo> catalogo;
 	public static List<String> funcionalidades = new ArrayList<String>();
@@ -73,7 +74,7 @@ public class CGrupo extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				cerrar = (String) map.get("titulo");		
+				cerrar = (String) map.get("titulo");
 				map.clear();
 				map = null;
 			}
@@ -86,7 +87,7 @@ public class CGrupo extends CGenerico {
 		mostrarCatalogo();
 
 		botonera = new Botonera() {
-			
+
 			@Override
 			public void seleccionar() {
 				if (validarSeleccion()) {
@@ -123,36 +124,36 @@ public class CGrupo extends CGenerico {
 			@Override
 			public void guardar() {
 				boolean guardar = true;
-				if (id ==0)
+				if (id == 0)
 					guardar = validar();
-				if (guardar) {				
+				if (guardar) {
 					List<Arbol> listaArbol = servicioArbol.listarArbol();
 					Set<Arbol> arboles = new HashSet<Arbol>();
 					Treechildren treeChildren = treeGrupo.getTreechildren();
 					Collection<Treeitem> lista = treeChildren.getItems();
 					String nombreGrupo = txtNombreGrupo.getValue();
-						for (int i = 0; i < listaArbol.size(); i++) {
-							for (Iterator<?> iterator = lista.iterator(); iterator
-									.hasNext();) {
-								Treeitem treeitem = (Treeitem) iterator.next();
-								if (listaArbol.get(i).getNombre()
-										.equals(treeitem.getLabel())) {
-									if (treeitem.isSelected()) {
+					for (int i = 0; i < listaArbol.size(); i++) {
+						for (Iterator<?> iterator = lista.iterator(); iterator
+								.hasNext();) {
+							Treeitem treeitem = (Treeitem) iterator.next();
+							if (listaArbol.get(i).getNombre()
+									.equals(treeitem.getLabel())) {
+								if (treeitem.isSelected()) {
 
-										Arbol arbol = listaArbol.get(i);
-										arboles.add(arbol);
-									}
+									Arbol arbol = listaArbol.get(i);
+									arboles.add(arbol);
 								}
 							}
 						}
-						Boolean estatus = true;
-						String nombre = txtNombreGrupo.getValue();
-						Grupo grupo1 = new Grupo(id, estatus, nombre, arboles);
-						servicioGrupo.guardarGrupo(grupo1);
+					}
+					Boolean estatus = true;
+					String nombre = txtNombreGrupo.getValue();
+					Grupo grupo1 = new Grupo(id, estatus, nombre, arboles);
+					servicioGrupo.guardarGrupo(grupo1);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
-					catalogo.actualizarLista(servicioGrupo
-							.buscarTodosOrdenados(),false);
+					catalogo.actualizarLista(
+							servicioGrupo.buscarTodosOrdenados(), false);
 				}
 
 			}
@@ -178,8 +179,10 @@ public class CGrupo extends CGenerico {
 													servicioGrupo
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
-													catalogo.actualizarLista(servicioGrupo
-															.buscarTodosOrdenados(),false);
+													catalogo.actualizarLista(
+															servicioGrupo
+																	.buscarTodosOrdenados(),
+															false);
 												}
 											}
 										});
@@ -201,8 +204,10 @@ public class CGrupo extends CGenerico {
 															.eliminarUno(id);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
-													catalogo.actualizarLista(servicioGrupo
-															.buscarTodosOrdenados(),false);
+													catalogo.actualizarLista(
+															servicioGrupo
+																	.buscarTodosOrdenados(),
+															false);
 												}
 											}
 										});
@@ -230,35 +235,35 @@ public class CGrupo extends CGenerico {
 		botonera.getChildren().get(3).setVisible(false);
 		botonera.getChildren().get(5).setVisible(false);
 		botoneraGrupo.appendChild(botonera);
-		
+
 	}
 
 	private void mostrarCatalogo() {
 		final List<Grupo> grupos = servicioGrupo.buscarTodosOrdenados();
 		catalogo = new Catalogo<Grupo>(divCatalogoGrupo, "Catalogo de Grupos",
-				grupos, false,false,false,"Nombre") {
+				grupos, false, false, false, "Nombre") {
 			@Override
 			protected String[] crearRegistros(Grupo grupo) {
 				String[] registros = new String[1];
 				registros[0] = grupo.getNombre();
 				return registros;
 			}
+
 			@Override
 			protected List<Grupo> buscar(List<String> valores) {
 				List<Grupo> lista = new ArrayList<Grupo>();
 
 				for (Grupo grupo : grupos) {
-					if (grupo.getNombre().toLowerCase()
-							.startsWith(valores.get(0))) {
+					if (grupo.getNombre().startsWith(valores.get(0))) {
 						lista.add(grupo);
 					}
 				}
 				return lista;
 			}
 		};
-		catalogo.setParent(divCatalogoGrupo);		
+		catalogo.setParent(divCatalogoGrupo);
 	}
-	
+
 	public void mostrarBotones(boolean bol) {
 		botonera.getChildren().get(1).setVisible(bol);
 		botonera.getChildren().get(2).setVisible(bol);
@@ -294,7 +299,7 @@ public class CGrupo extends CGenerico {
 		ltbFuncionalidadesSeleccionados.setModel(new ListModelList<String>(
 				funcionalidades));
 	}
-	
+
 	public void visualizarFuncionalidades() {
 		llenarFuncionalidadesSeleccionadas();
 		treeGrupo.setVisible(true);
@@ -350,14 +355,14 @@ public class CGrupo extends CGenerico {
 			}
 		}
 	}
-	
+
 	@Listen("onClick = #gpxRegistro")
 	public void abrirRegistro() {
 		gpxDatos.setOpen(false);
 		gpxRegistro.setOpen(true);
 		mostrarBotones(false);
 	}
-	
+
 	@Listen("onOpen = #gpxDatos")
 	public void abrirCatalogo() {
 		gpxDatos.setOpen(false);
@@ -387,6 +392,7 @@ public class CGrupo extends CGenerico {
 			mostrarBotones(true);
 		}
 	}
+
 	@Listen("onSelect = #treeGrupo")
 	public void selectedNode(SelectEvent<Treeitem, String> event) {
 		if (!validarNodoHijo(event)) {
@@ -496,6 +502,7 @@ public class CGrupo extends CGenerico {
 			}
 		}
 	}
+
 	public void llenarFuncionalidadesSeleccionadas() {
 		Grupo grupo = servicioGrupo.buscarGrupo(id);
 		List<Arbol> listaArbol = servicioArbol.buscarporGrupo(grupo);
@@ -517,7 +524,7 @@ public class CGrupo extends CGenerico {
 		ltbFuncionalidadesSeleccionados.setModel(new ListModelList<String>(
 				funcionalidades));
 	}
-	
+
 	public boolean validarNodoHijo(SelectEvent<Treeitem, String> event) {
 		Treeitem itemSeleccionado = event.getReference();
 		Treecell celda = (Treecell) itemSeleccionado.getChildren().get(0)
@@ -547,14 +554,14 @@ public class CGrupo extends CGenerico {
 		}
 		return encontrado;
 	}
-	
+
 	public TreeModel getModel() {
 		if (_model == null) {
 			_model = new MArbol(getFooRoot());
 		}
 		return _model;
 	}
-	
+
 	private Nodos getFooRoot() {
 		List<Arbol> listaArbol = servicioArbol.listarArbol();
 		ArrayList<Arbol> arbole = new ArrayList<Arbol>();
@@ -579,7 +586,7 @@ public class CGrupo extends CGenerico {
 		Nodos root = new Nodos(null, 0, "");
 		return crearArbol(root, nodos, arboles, 0, idsPadre);
 	}
-	
+
 	private Nodos crearArbol(Nodos roote, List<Nodos> nodos,
 			List<Arbol> arboles, int i, List<Long> idsPadre) {
 		for (int z = 0; z < arboles.size(); z++) {

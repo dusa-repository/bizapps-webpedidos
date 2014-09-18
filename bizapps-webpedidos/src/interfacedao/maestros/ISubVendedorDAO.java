@@ -2,7 +2,6 @@ package interfacedao.maestros;
 
 import java.util.List;
 
-import modelo.maestros.Salesmen;
 import modelo.maestros.SalesmenSub;
 import modelo.maestros.SalesmenSubPK;
 
