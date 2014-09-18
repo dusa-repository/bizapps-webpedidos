@@ -1,7 +1,7 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div id="divGrupo" apply="controlador.seguridad.CGrupo">
-		<groupbox width="auto" mold="3d" title="Grupo (VGrupo)">
+		<groupbox width="65%" mold="3d" title="Grupo (VGrupo)">
 			<div id="botoneraGrupo" />
 			<separator />
 			<groupbox id="gpxRegistro" width="auto" class ="azul" title="" open="false">
@@ -42,16 +42,16 @@
 						</template>
 					</tree>
 					</groupbox>
-					<groupbox width="100%" title="Funcionalidades Seleccionadas" class="blanco">
+					<!-- <groupbox width="100%" title="Funcionalidades Seleccionadas" class="blanco">
 						<listbox width="auto" id="ltbFuncionalidadesSeleccionados">
-							<listhead></listhead>
+							<listhead><listheader label="Accion" width="100%" /></listhead>
 							<template name="model">
 								<listitem>
 									<listcell label="${each}"></listcell>
 								</listitem>
 							</template>
 						</listbox>
-					</groupbox>
+					</groupbox> -->
 				</hbox>
 				<separator />
 			</groupbox>
