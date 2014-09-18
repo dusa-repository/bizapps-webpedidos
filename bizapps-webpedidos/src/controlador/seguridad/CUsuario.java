@@ -259,7 +259,7 @@ public class CUsuario extends CGenerico {
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
 					catalogo.actualizarLista(servicioUsuario.buscarTodos(),
-							false);
+							true);
 				}
 			}
 
@@ -287,7 +287,7 @@ public class CUsuario extends CGenerico {
 													catalogo.actualizarLista(
 															servicioUsuario
 																	.buscarTodos(),
-															false);
+															true);
 												}
 											}
 										});
@@ -312,7 +312,7 @@ public class CUsuario extends CGenerico {
 													catalogo.actualizarLista(
 															servicioUsuario
 																	.buscarTodos(),
-															false);
+															true);
 												}
 											}
 										});
@@ -471,7 +471,7 @@ public class CUsuario extends CGenerico {
 				msj.mensajeAlerta(Mensaje.correoInvalido);
 				return false;
 			} else {
-				if (!Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
+				if (txtTelefonoUsuario.getText().compareTo("") != 0 && !Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
 					msj.mensajeAlerta(Mensaje.telefonoInvalido);
 					return false;
 				} else {
@@ -499,7 +499,7 @@ public class CUsuario extends CGenerico {
 	/* Valida el numero telefonico */
 	@Listen("onChange = #txtTelefonoUsuario")
 	public void validarTelefono() {
-		if (!Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
+		if (txtTelefonoUsuario.getText().compareTo("") != 0 && !Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
 			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
@@ -627,7 +627,7 @@ public class CUsuario extends CGenerico {
 	public void mostrarCatalogo() {
 		final List<Usuario> usuario = servicioUsuario.buscarTodos();
 		catalogo = new Catalogo<Usuario>(catalogoUsuario, "Usuario", usuario,
-				false, false, true, "Cedula", "Correo", "Primer Nombre",
+				false, false, false, "Cedula", "Correo", "Primer Nombre",
 				"Segundo Nombre", "Primer Apellido", "Segundo Apellido",
 				"Sexo", "Telefono", "Direccion") {
 

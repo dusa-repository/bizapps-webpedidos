@@ -23,7 +23,7 @@
 		a =
 		execution.getParameter("respuesta");
 	</zscript>
-	<window title="" style="zoom: 0.75" border="0" height="100%"
+	<window title="" border="0" height="100%"
 		apply="controlador.portal.CIndex">
 		<borderlayout height="100%"
 			style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=100%; width=100% ; background-color:white">

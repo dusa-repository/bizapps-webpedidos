@@ -278,7 +278,7 @@ public class CReportes extends CGenerico {
 			parameters.put("vendedor", part3);
 
 			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-			String url = "jdbc:sqlserver://localhost:1433;DatabaseName=dusa_web_pedido";
+			String url = "jdbc:sqlserver://localhost:1434;DatabaseName=dusa_pedidos";
 			String user = "client";
 			String password = "123";
 

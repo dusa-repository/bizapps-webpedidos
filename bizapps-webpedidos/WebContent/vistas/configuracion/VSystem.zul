@@ -2,6 +2,8 @@
 	<style src="/public/Estilo.css" />
 	<div apply="controlador.configuracion.CSystem" id="divSystem">
 		<groupbox width="50%" mold="3d" title="Administracion del Sistema">
+			<div id="botoneraSystem" />
+			<separator />
 			<grid width="100%">
 				<columns visible="false">
 					<column label="" width="50%" />
@@ -44,8 +46,6 @@
 					</row>
 				</rows>
 			</grid>
-			<separator />
-			<div id="botoneraSystem" />
 		</groupbox>
 	</div>
 </zk>

@@ -153,7 +153,7 @@ public class CGrupo extends CGenerico {
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 					catalogo.actualizarLista(
-							servicioGrupo.buscarTodosOrdenados(), false);
+							servicioGrupo.buscarTodosOrdenados(), true);
 				}
 
 			}
@@ -182,7 +182,7 @@ public class CGrupo extends CGenerico {
 													catalogo.actualizarLista(
 															servicioGrupo
 																	.buscarTodosOrdenados(),
-															false);
+															true);
 												}
 											}
 										});
@@ -207,7 +207,7 @@ public class CGrupo extends CGenerico {
 													catalogo.actualizarLista(
 															servicioGrupo
 																	.buscarTodosOrdenados(),
-															false);
+															true);
 												}
 											}
 										});
@@ -538,13 +538,13 @@ public class CGrupo extends CGenerico {
 			if (padre == listaArbol.get(i).getPadre()) {
 				if (itemSeleccionado.isSelected()) {
 					Messagebox.show("Seleccione las Funcionalidades", "Alerta",
-							Messagebox.OK, Messagebox.INFORMATION);
+							Messagebox.OK, Messagebox.EXCLAMATION);
 					itemSeleccionado.setSelected(false);
 					i = listaArbol.size();
 					encontrado = true;
 				} else {
 					Messagebox.show("Seleccione las Funcionalidades", "Error",
-							Messagebox.OK, Messagebox.INFORMATION);
+							Messagebox.OK, Messagebox.ERROR);
 					itemSeleccionado.setSelected(true);
 					i = listaArbol.size();
 					encontrado = true;
