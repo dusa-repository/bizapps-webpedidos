@@ -25,7 +25,8 @@
 							<space />
 							<label value="*" style="font-weight:bold;color:red" />
 						</hbox>
-						<textbox id="txtMotivo" maxlength="50" />
+						<textbox id="txtMotivo" maxlength="50" multiline="true"
+							class="multilinea" />
 					</row>
 
 					<row>

@@ -78,7 +78,7 @@ public class CReportes extends CGenerico {
 			}
 		}
 		List<String> listaProduct = new ArrayList<String>();
-		listaProduct.add("Todas");
+		listaProduct.add("TODAS");
 		listaProduct.addAll(servicioProducto.buscarMarcas());
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
@@ -127,14 +127,14 @@ public class CReportes extends CGenerico {
 					String marca = cmbMarca.getValue();
 					List<Cupo> cupos = new ArrayList<Cupo>();
 					String vendedor = idVendedor;
-					if (!idVendedor.equals("Todos") && !marca.equals("Todas")) {
+					if (!idVendedor.equals("TODOS") && !marca.equals("TODAS")) {
 						cupos = servicioCupo.buscarPorVendedoryMarca(
 								idVendedor, marca);
 					} else {
-						if (marca.equals("Todas") && idVendedor.equals("Todos")) {
+						if (marca.equals("TODAS") && idVendedor.equals("TODOS")) {
 							cupos = servicioCupo.buscarTodos();
 						} else {
-							if (idVendedor.equals("Todos")) {
+							if (idVendedor.equals("TODOS")) {
 								cupos = servicioCupo.buscarCuposMarca(marca);
 							} else {
 								cupos = servicioCupo
@@ -143,9 +143,9 @@ public class CReportes extends CGenerico {
 						}
 					}
 
-					if (marca.equals("Todas"))
+					if (marca.equals("TODAS"))
 						marca = "";
-					if (txtVendedor.getValue().equals("Todos"))
+					if (txtVendedor.getValue().equals("TODOS"))
 						vendedor = "";
 					if (!cupos.isEmpty()) {
 						Clients.evalJavaScript("window.open('/bizapps-webpedidos/Generador?valor1="
@@ -208,9 +208,9 @@ public class CReportes extends CGenerico {
 	public void mostrarCatalogoVendedor() {
 		final List<Salesmen> vendedores = new ArrayList<Salesmen>();
 		Salesmen vendedorTodo = new Salesmen();
-		vendedorTodo.setSalesmanId("Todos");
-		vendedorTodo.setRegion("Todos");
-		vendedorTodo.setName("Todos");
+		vendedorTodo.setSalesmanId("TODOS");
+		vendedorTodo.setRegion("TODOS");
+		vendedorTodo.setName("TODOS");
 		vendedores.add(vendedorTodo);
 		vendedores.addAll(servicioVendedor.buscarTodosOrdenados());
 		catalogoVendedor = new Catalogo<Salesmen>(divCatalogoVendedor2,

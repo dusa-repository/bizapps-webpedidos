@@ -56,11 +56,12 @@
 								<!-- </cell> -->
 							</row>
 							<row>
-								<cell colspan="3">
+								<cell colspan="2">
 									<hbox />
 								</cell>
 								<button id="btnRefrescar" label="Refrescar" class="btn"
 									image="/public/imagenes/botones/generar.png" width="115px" />
+								<hbox />
 							</row>
 							<!-- <row> <hbox /> <hbox /> </row> -->
 						</rows>
@@ -224,8 +225,8 @@
 								<hbox width="100%" widths="32%,3%,65%">
 									<vbox width="100%" align="center">
 										<label class="etiqueta" value="Items sin Restriccion" />
-										<textbox width="60%" id="txtBuscadorProducto" maxlength="50"
-											placeholder="Ingrese el Codigo del Producto"
+										<textbox width="60%" id="txtBuscadorProducto"
+											maxlength="50" placeholder="Ingrese el Codigo del Producto"
 											tooltiptext="Escriba el codigo del Producto que desee filtar en la lista de productos disponibles" />
 										<listbox mold="paging" pagingPosition="top" pageSize="10"
 											id="ltbItems" height="100%" width="100%" emptyMessage="No hay Items Registradas">
@@ -268,8 +269,8 @@
 									</vbox>
 									<vbox width="100%" align="center">
 										<label class="etiqueta" value="Items con Restriccion" />
-										<textbox width="25%" id="txtBuscadorRestringido" maxlength="50"
-											placeholder="Ingrese el Codigo del Item"
+										<textbox width="25%" id="txtBuscadorRestringido"
+											maxlength="50" placeholder="Ingrese el Codigo del Item"
 											tooltiptext="Escriba el codigo del Item que desee filtar en la lista de Items Restringidos" />
 										<listbox id="ltbItemsAgregados" mold="paging"
 											pagingPosition="top" pageSize="10" height="100%" width="100%"
