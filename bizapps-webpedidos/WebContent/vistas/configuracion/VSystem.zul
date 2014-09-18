@@ -1,0 +1,50 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div apply="controlador.configuracion.CSystem" id="divSystem">
+		<groupbox width="50%" mold="3d" title="Administracion del Sistema">
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="50%" />
+					<column label="" width="50%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Asigne el Estado del Sistema" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<radiogroup id="rdgTipoPaciente">
+							<radio label="Activo" value="doctor" id="rdoSI" />
+							<radio label="Inactivo" value="noDoctor" id="rdoNo" />
+						</radiogroup>
+					</row>
+					<row>
+						<hbox>
+							<label value="Motivo:" class="etiqueta" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox id="txtMotivo" maxlength="50" />
+					</row>
+
+					<row>
+						<hbox>
+							<label value="Destinatarios:" class="etiqueta" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<textbox id="txtDestinatario" maxlength="500" multiline="true"
+							class="multilinea" />
+					</row>
+					<row>
+						<label class="etiqueta" value="Estado Actual del Sistema:" />
+						<label id="lblEstado" class="etiqueta" style="font-weight:bold;color:red" />
+					</row>
+				</rows>
+			</grid>
+			<separator />
+			<div id="botoneraSystem" />
+		</groupbox>
+	</div>
+</zk>
