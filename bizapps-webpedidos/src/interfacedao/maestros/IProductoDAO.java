@@ -20,5 +20,7 @@ public interface IProductoDAO extends JpaRepository<Product, String> {
 
 	List<Product> findByProductIdStartingWithAllIgnoreCase(String valor);
 
+	@Query("select distinct p.productId from Product p where p.brand = ?1")
+	List<String> findByBrandString(String idMarca);
 
 }
