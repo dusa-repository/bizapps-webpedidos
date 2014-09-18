@@ -8,6 +8,7 @@ import java.util.List;
 import modelo.maestros.Order;
 import modelo.maestros.Salesmen;
 
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -20,6 +21,7 @@ import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import componente.Botonera;
 import componente.Catalogo;
@@ -103,10 +105,15 @@ public class CConsulta extends CGenerico {
 
 		}
 		mostrarCatalogo();
-		listaProduct = servicioProducto.buscarMarcas();
+
+		listaProduct.add("TODAS");
+		listaProduct.addAll(servicioProducto.buscarMarcas());
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
-		listaStatus = servicioOrden.buscarStatus();
+		// = servicioOrden.buscarStatus();
+		listaStatus.add("TODOS");
+		listaStatus.add("PEN");
+		listaStatus.add("PRO");
 		cmbStatus.setModel(new ListModelList<String>(listaStatus));
 
 		Botonera botonera = new Botonera() {
@@ -230,8 +237,13 @@ public class CConsulta extends CGenerico {
 
 	@Listen("onClick = #btnBuscarVendedor")
 	public void mostrarCatalogoVendedor() {
-		final List<Salesmen> vendedores = servicioVendedor
-				.buscarTodosOrdenados();
+		final List<Salesmen> vendedores = new ArrayList<Salesmen>();
+		Salesmen vendedorTodo = new Salesmen();
+		vendedorTodo.setSalesmanId("TODOS");
+		vendedorTodo.setRegion("TODOS");
+		vendedorTodo.setName("TODOS");
+		vendedores.add(vendedorTodo);
+		vendedores.addAll(servicioVendedor.buscarTodosOrdenados());
 		catalogoVendedor = new Catalogo<Salesmen>(divCatalogoVendedor,
 				"Vendedores", vendedores, true, false, false, "Codigo",
 				"Nombre", "Region") {
@@ -276,47 +288,39 @@ public class CConsulta extends CGenerico {
 		catalogoVendedor.setParent(null);
 	}
 
-	// @Listen("onDoubleClick = #catalogoCupo")
-	// public void seleccionarItem() {
-	//
-	// if (catalogo.objetoSeleccionadoDelCatalogo() != null) {
-	// Cupo cupo = catalogo.objetoSeleccionadoDelCatalogo();
-	// idMarca = cupo.getId().getMarca();
-	// catalogo.limpiarSeleccion();
-	// if (!idVendedor.equals("") || !idMarca.equals("")) {
-	// HashMap<String, Object> map = new HashMap<String, Object>();
-	// map.put("idProducto", cupo.getId().getProducto());
-	// map.put("idVendedor", idVendedor);
-	// map.put("idMarca", idMarca);
-	// map.put("cantidad", cupo.getCantidad());
-	// map.put("consumido", cupo.getConsumido());
-	// map.put("desde", cupo.getDesde());
-	// map.put("hasta", cupo.getHasta());
-	// map.put("catalogo", catalogo);
-	// map.put("lista", cupos);
-	// map.put("vendedor", servicioVendedor.buscar(idVendedor)
-	// .getName());
-	// Sessions.getCurrent().setAttribute("asignacion", map);
-	// Window window = (Window) Executions.createComponents(
-	// "/vistas/transacciones/VAsignacion.zul", null, null);
-	// window.doModal();
-	// } else
-	// msj.mensajeAlerta(Mensaje.seleccionarMarcaYVendedor);
-	// }
-	// }
+	 @Listen("onDoubleClick = #catalogoConsulta")
+	 public void seleccionarItem() {
+	
+	 if (catalogo.objetoSeleccionadoDelCatalogo() != null) {
+	 Order order = catalogo.objetoSeleccionadoDelCatalogo();
+	 catalogo.limpiarSeleccion();
+
+	 HashMap<String, Object> map = new HashMap<String, Object>();
+
+	 map.put("orden", order);
+	 Sessions.getCurrent().setAttribute("detalle", map);
+	 Window window = (Window) Executions.createComponents(
+	 "/vistas/transacciones/VDetalleOrden.zul", null, null);
+	 window.doModal();
+	 }
+	 }
 
 	@Listen("onClick = #btnRefrescar")
 	public void refrescar() {
 		if (tipo.equals("marca")) {
 			if (!idMarca.equals("")) {
 				if (validarFecha()) {
-					// Falta filtro d marca		
-					System.out.println("hola");
-					System.out.println(formatoFechaRara.format(dtbDesde.getValue()));					
-					System.out.println(formatoFechaRara.format(dtbHasta.getValue()));
-					ordenes = servicioOrden.buscarPorMarcaYFecha(idMarca,
-							formatoFechaRara.format(dtbDesde.getValue()),
-							formatoFechaRara.format(dtbHasta.getValue()));
+					if (idMarca.equals("TODAS")) {
+						ordenes = servicioOrden.buscarEntreFechas(
+								formatoFechaRara.format(dtbDesde.getValue()),
+								formatoFechaRara.format(dtbHasta.getValue()));
+					} else
+						ordenes = servicioOrden.buscarPorMarcaYFecha(idMarca,
+								formatoFechaRara.format(dtbDesde.getValue()),
+								formatoFechaRara.format(dtbHasta.getValue()));
+					
+					if(ordenes.isEmpty())
+						msj.mensajeInformacion(Mensaje.noHayRegistros);
 					catalogo.actualizarLista(ordenes, false);
 				}
 			} else
@@ -327,11 +331,31 @@ public class CConsulta extends CGenerico {
 				if (!idVendedor.equals("")) {
 					if (!status.equals("")) {
 						if (validarFecha()) {
-							
-							ordenes = servicioOrden
-									.buscarPorVendedorStatusYFecha(idVendedor,
-											status, formatoFechaRara.format(dtbDesde.getValue()),
-											formatoFechaRara.format(dtbHasta.getValue()));
+							String desde = formatoFechaRara.format(dtbDesde
+									.getValue());
+							String hasta = formatoFechaRara.format(dtbHasta
+									.getValue());
+							if (status.equals("TODOS")
+									&& idVendedor.equals("TODOS")) {
+								ordenes = servicioOrden.buscarEntreFechas(
+										desde, hasta);
+							} else if (status.equals("TODOS")
+									&& !idVendedor.equals("TODOS")) {
+								ordenes = servicioOrden
+										.buscarPorVendedorYFecha(idVendedor,
+												desde, hasta);
+							} else if (!status.equals("TODOS")
+									&& idVendedor.equals("TODOS")) {
+								ordenes = servicioOrden.buscarPorStatusYFecha(
+										status, desde, hasta);
+							} else
+								ordenes = servicioOrden
+										.buscarPorVendedorStatusYFecha(
+												idVendedor, status, desde,
+												hasta);
+
+							if(ordenes.isEmpty())
+								msj.mensajeInformacion(Mensaje.noHayRegistros);
 							catalogo.actualizarLista(ordenes, false);
 						}
 					} else
@@ -346,9 +370,8 @@ public class CConsulta extends CGenerico {
 		if (dtbDesde.getValue().after(dtbHasta.getValue())) {
 			msj.mensajeError(Mensaje.fechaPosterior);
 			return false;
-		}
-		else
-		return true;
+		} else
+			return true;
 	}
 
 	@Listen("onSelect = #cmbMarca")

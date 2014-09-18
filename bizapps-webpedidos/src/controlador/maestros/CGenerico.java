@@ -32,6 +32,7 @@ import org.zkoss.zul.Tab;
 import servicio.configuracion.SSystem;
 import servicio.maestros.SAction;
 import servicio.maestros.SActionVendedor;
+import servicio.maestros.SCliente;
 import servicio.maestros.SProducto;
 import servicio.maestros.SSubVendedor;
 import servicio.maestros.SVendedor;
@@ -39,6 +40,7 @@ import servicio.seguridad.SArbol;
 import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import servicio.transacciones.SCupo;
+import servicio.transacciones.SDetalleOrden;
 import servicio.transacciones.SOrden;
 
 import componente.Mensaje;
@@ -70,6 +72,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SSystem servicioSystem;
 	@WireVariable("SOrden")
 	protected SOrden servicioOrden;
+	@WireVariable("SCliente")
+	protected SCliente servicioCliente;
+	@WireVariable("SDetalleOrden")
+	protected SDetalleOrden servicioDetalleOrden;
 	
 	protected static SimpleDateFormat formatoFecha = new SimpleDateFormat(
 			"dd-MM-yyyy");

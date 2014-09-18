@@ -1,0 +1,83 @@
+<zk>
+	<window id="wdwDetalle" title="Detalle de la Orden" border="normal"
+		width="48em" height="auto" contentStyle="overflow:auto"
+		apply="controlador.transacciones.CDetalleOrden" closable="true">
+		<div id="botoneraDetalle" />
+		<separator />
+		<grid width="100%">
+			<columns visible="false">
+				<column label="" width="17%" />
+				<column label="" width="35%" />
+				<column label="" width="16%" />
+				<column label="" width="32%" />
+			</columns>
+			<rows>
+				<row>
+					<label class="etiqueta" value="Orden Nro.:" />
+					<label id="lblOrden" />
+					<label class="etiqueta" value="Status:" />
+					<label id="lblStatus" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Fecha:" />
+					<label id="lblFecha" />
+					<label class="etiqueta" value="Hora:" />
+					<label id="lblHora" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Cliente:" />
+					<label id="lblCliente" />
+					<label class="etiqueta" value="Monto:" />
+					<label id="lblMonto" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Vendedor:" />
+					<label id="lblVendedor" />
+					<label class="etiqueta" value="Fecha Req.:" />
+					<label id="lblFechaRequerida" />
+				</row>
+				<row>
+					<label class="etiqueta" value="Comentarios:" />
+					<cell colspan="3">
+						<hbox />
+					</cell>
+				</row>
+				<row>
+					<cell colspan="4">
+						<label id="lblComentarios" style="font-weight:bold;color:red" />
+					</cell>
+				</row>
+			</rows>
+		</grid>
+		<vbox width="100%" align="center">
+			<label class="etiqueta" value="Items" />
+			<listbox id="ltbDetalle" mold="paging" pagingPosition="top"
+				pageSize="10" height="430px" width="100%" emptyMessage="No ha Seleccionado Ningún Item">
+				<listhead>
+					<listheader label="Producto" width="40%" />
+					<listheader label="Cant" width="20%" />
+					<listheader label="Unidad" width="20%" />
+					<listheader label="Subtotal" width="20%" />
+				</listhead>
+				<template name="model">
+					<listitem>
+						<listcell label="${each.nombre()}">
+						</listcell>
+						<listcell label="${each.qty}">
+						</listcell>
+						<listcell label="${each.id.unit}">
+						</listcell>
+						<listcell label="${each.subtotal}">
+						</listcell>
+					</listitem>
+				</template>
+			</listbox>
+		</vbox>
+		<separator />
+		<hbox>
+			<label class="etiqueta" value="   Esta Orden fue descargada a las: " />
+			<label id="lblStatusChange" />
+		</hbox>
+		<separator />
+	</window>
+</zk>

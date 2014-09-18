@@ -2,6 +2,12 @@ package modelo.maestros;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import servicio.maestros.SProducto;
+import servicio.maestros.SVendedor;
+
 /**
  * The primary key class for the orders_details database table.
  * 
@@ -74,4 +80,6 @@ public class OrdersDetailPK implements Serializable {
 		
 		return hash;
 	}
+	
+
 }
