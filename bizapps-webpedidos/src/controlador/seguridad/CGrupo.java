@@ -154,6 +154,7 @@ public class CGrupo extends CGenerico {
 					limpiar();
 					catalogo.actualizarLista(
 							servicioGrupo.buscarTodosOrdenados(), true);
+					abrirCatalogo();
 				}
 
 			}
@@ -232,6 +233,7 @@ public class CGrupo extends CGenerico {
 				mostrarBotones(false);
 			}
 		};
+		botonera.getChildren().get(1).setVisible(false);
 		botonera.getChildren().get(3).setVisible(false);
 		botonera.getChildren().get(5).setVisible(false);
 		botoneraGrupo.appendChild(botonera);
@@ -265,7 +267,7 @@ public class CGrupo extends CGenerico {
 	}
 
 	public void mostrarBotones(boolean bol) {
-		botonera.getChildren().get(1).setVisible(bol);
+		botonera.getChildren().get(1).setVisible(false);
 		botonera.getChildren().get(2).setVisible(bol);
 		botonera.getChildren().get(6).setVisible(bol);
 		botonera.getChildren().get(0).setVisible(bol);

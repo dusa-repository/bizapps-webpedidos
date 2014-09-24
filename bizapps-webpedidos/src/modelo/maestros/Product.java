@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 
 /**
  * The persistent class for the products database table.
@@ -60,6 +62,9 @@ public class Product implements Serializable {
 
 	private String warehouse;
 
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean estado;
+	
 	public Product() {
 	}
 
@@ -213,6 +218,14 @@ public class Product implements Serializable {
 
 	public void setWarehouse(String warehouse) {
 		this.warehouse = warehouse;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 }

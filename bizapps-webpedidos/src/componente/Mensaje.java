@@ -55,6 +55,8 @@ public class Mensaje {
 	public static String seleccionarStatus= "Debe Seleccionar un Status";
 	public static String fechaPosterior = "La Fecha de Inicio no puede ser posterior a la Fecha Fin";
 	public static String movil = "Especificar que el Usuario sera Movil, hara que el mismo no pueda Ingresar a este Sistema Administrativo";
+	public static String seleccionarItem= "Debe Seleccionar un Item";
+	public static String seleccionarEstado= "Debe Seleccionar un Estado";
 	
 	public void mensajeInformacion(String msj) {
 	      Messagebox.show(msj, "Informacion",

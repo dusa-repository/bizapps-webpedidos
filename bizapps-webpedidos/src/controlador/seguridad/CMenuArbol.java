@@ -118,6 +118,7 @@ public class CMenuArbol extends CGenerico {
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
 					catalogo.actualizarLista(servicioArbol.listarArbol(), true);
+					abrirCatalogo();
 				}
 
 			}
@@ -196,6 +197,7 @@ public class CMenuArbol extends CGenerico {
 				mostrarBotones(false);
 			}
 		};
+		botonera.getChildren().get(1).setVisible(false);
 		botonera.getChildren().get(3).setVisible(false);
 		botonera.getChildren().get(5).setVisible(false);
 		botoneraMenuArbol.appendChild(botonera);
@@ -203,7 +205,7 @@ public class CMenuArbol extends CGenerico {
 	}
 
 	public void mostrarBotones(boolean bol) {
-		botonera.getChildren().get(1).setVisible(bol);
+		botonera.getChildren().get(1).setVisible(false);
 		botonera.getChildren().get(2).setVisible(bol);
 		botonera.getChildren().get(6).setVisible(bol);
 		botonera.getChildren().get(0).setVisible(bol);

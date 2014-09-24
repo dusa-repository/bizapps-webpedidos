@@ -139,9 +139,10 @@ public abstract class Botonera extends Hbox {
 				ayuda();
 			}
 		});
+		btnBuscar.setVisible(false);
 	}
 
-	/**
+	/**a
 	 * Metodo que guarda un registro nuevo si no a sido guardado con
 	 * anterioridad, de ser así se modifica aquellos datos que el usuario
 	 * cambie

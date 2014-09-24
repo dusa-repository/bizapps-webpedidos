@@ -144,6 +144,9 @@ public class CSystem extends CGenerico {
 				lblEstado.setValue("Activo");
 			else
 				lblEstado.setValue("Inactivo");
+			
+			txtDestinatario.setValue(actual.getDestinatarios());
+			txtMotivo.setValue(actual.getMotivo());
 		}
 	}
 
