@@ -9,7 +9,8 @@
 
 		.z-groupbox .z-groupbox-header {
 		background: #661313;
-		border-radius: 30px 30px 30px 30px
+		border-radius:
+		30px 30px 30px 30px
 		}
 	</style>
 	<zscript>
@@ -23,26 +24,18 @@
 		a =
 		execution.getParameter("respuesta");
 	</zscript>
-	<window title="" border="0" height="100%"
+	<window title="" border="0" height="100%" width="100%"
 		apply="controlador.portal.CIndex">
 		<borderlayout height="100%"
 			style="background-image: url('public/imagenes/generales/fondo.png'); background-repeat:no-repeat;height=100%; width=100% ; background-color:white">
-			<north height="4,5em" class="banner">
+			<north height="2%" class="banner">
 				<hbox hflex="1">
 					<separator />
 					<separator />
 					<separator />
 				</hbox>
 			</north>
-			<west border="none">
-				<borderlayout>
-					<center border="none">
-						<div align="center">
-						</div>
-					</center>
-				</borderlayout>
-			</west>
-			<east width="60%" border="none">
+			<east width="80%" border="none">
 				<vlayout>
 					<div align="center">
 						<separator />
@@ -52,7 +45,7 @@
 						<image src="/public/imagenes/generales/LogoDusa.png" height="4em"
 							width="15em" />
 					</div>
-					<div height="240px" align="rigth">
+					<div height="100%" align="left">
 						<separator />
 						<separator />
 						<separator />
@@ -62,8 +55,15 @@
 						<separator />
 						<label class="lblIndex" value="PANEL DE CONTROL WEB PEDIDOS" />
 					</div>
-					<div align="center">
-						<groupbox width="35em" height="18em">
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<div height="100%" width="100%" align="center">
+						<groupbox height="100%" width="40%">
 							<caption label="${a}"
 								style="color:black; font-size: 16px; font-weight:bold" />
 							<separator></separator>
@@ -106,8 +106,7 @@
 					</div>
 				</vlayout>
 			</east>
-			<south class="banner" vflex="2" border="0" height="3em"
-				collapsible="false">
+			<south class="banner" border="0" height="5%" collapsible="false">
 				<div align="center" sclass="footer">
 					<separator></separator>
 					<label style="padding-center:35%;color: white"

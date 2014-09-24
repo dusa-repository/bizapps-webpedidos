@@ -52,7 +52,7 @@ public abstract class Botonera extends Hbox {
 		btnSalir.setSclass("btn");
 		btnReporte.setSclass("btn");
 		btnSeleccionar.setSclass("btn");
-		btnSeleccionar.setWidth("125px");
+		btnSeleccionar.setWidth("115px");
 		
 		btnSeleccionar.setLabel("Seleccionar");
 		btnBuscar.setLabel("Buscar");

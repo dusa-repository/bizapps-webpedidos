@@ -7,12 +7,12 @@
 
 	<library-property>
 		<name>org.zkoss.zul.theme.fontSizeM</name>
-		<value>12px</value>
+		<value>10px</value>
 	</library-property>
 
 	<library-property>
 		<name>org.zkoss.zul.theme.fontSizeS</name>
-		<value>10px</value>
+		<value>8px</value>
 	</library-property>
 
 	<library-property>

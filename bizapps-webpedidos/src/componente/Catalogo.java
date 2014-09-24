@@ -223,7 +223,7 @@ public abstract class Catalogo<Clase> extends Window {
 				lsbCatalogo.setCheckmark(false);
 			} else {
 				Space espacio = new Space();
-				espacio.setHeight("10px");
+				espacio.setHeight("8px");
 				espacio.setStyle("background:white");
 				box.appendChild(espacio);
 				box.setStyle("background:white");
@@ -231,7 +231,7 @@ public abstract class Catalogo<Clase> extends Window {
 				box.appendChild(pagineo);
 				box.setWidth("100%");
 				box.setAlign("end");
-				box.setHeight("10px");
+				box.setHeight("8px");
 				box.setWidths("96%,2%,2%");
 				lsbCatalogo.setMultiple(false);
 				lsbCatalogo.setCheckmark(false);

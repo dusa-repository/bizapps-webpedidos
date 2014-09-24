@@ -21,7 +21,7 @@
 	font-weight: bold;
 	font-family: arial;
 	color: #771313;
-	font-size: 13px;
+	font-size: 11px;
 }
 
 .z-textbox {
@@ -44,11 +44,11 @@
 }
 
 .btn {
-	font-size: 12px;
+	font-size: 11px;
 	color: white;
 	cursor: pointer;
-	width: 105px;
-	height: 35px;
+	width: 95px;
+	height: 29px;
 	-webkit-border-radius: 0.7em;
 	-moz-border-radius: 0.7em;
 	border-radius: 0.7em;
@@ -122,4 +122,15 @@
 div.z-listbox-header th.z-listheader,div.z-listbox-header th.z-auxheader
 	{
 	white-space: pre-line;
+	font-size: 10px;
+}
+
+body * {
+	font-family: Arial;
+	font-size: 11px;
+}
+
+.z-listheader-content,.z-listcell-content,.z-listgroup-content,.z-listgroupfoot-content,.z-listfooter-content
+	{
+	font-size: 10px;
 }

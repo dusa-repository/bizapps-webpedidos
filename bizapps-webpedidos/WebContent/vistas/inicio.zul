@@ -1,11 +1,10 @@
 <?page id="mainPage" title="BIENVENIDO" contentType="text/html;charset=utf-8"?>
 <zk>
- 	<style src="../public/Estilo.css" /> 
+	<style src="../public/Estilo.css" />
 	<script src="/public/progress.js" />
-	<window title="" border="0" height="100%"
-		apply="arbol.CArbol">
+	<window title="" border="0" height="100%" width="100%" apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
-			<north height="4,5em" class="banner">
+			<north height="11%" class="banner">
 				<hbox hflex="1">
 					<separator />
 					<separator />
@@ -13,16 +12,20 @@
 					<vbox>
 						<separator />
 						<image src="../public/imagenes/generales/LogoDusa.png"
-							height="3em" width="13em" />
+							height="4em" width="18em" />
 					</vbox>
 					<separator />
 					<separator />
 					<separator />
 					<separator />
-					<div align="center" width="40em">
+					<div align="center" width="100%">
 						<separator />
 						<separator />
 						<hbox>
+							<separator />
+							<separator />
+							<separator />
+							<separator />
 							<separator />
 							<separator />
 							<separator />
@@ -31,8 +34,16 @@
 						</hbox>
 					</div>
 					<div align="center" width="100%">
-						<hbox>
-							<vbox>
+						<hbox height="100%" width="100%">
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<separator />
+							<vbox height="100%" width="100%">
 								<separator />
 								<image id="imagenes" width="60px" height="55px" />
 							</vbox>
@@ -71,7 +82,7 @@
 					</div>
 				</hbox>
 			</north>
-			<west title="Menú" id="west" size="20%" splittable="true"
+			<west title="Menú" id="west" size="17%" splittable="true"
 				collapsible="true" autoscroll="true">
 				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
 					<template name="model">
@@ -88,7 +99,7 @@
 					<center
 						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 						border="none" autoscroll="true">
-						<tabbox width="auto" id="tabBox" hflex="1">
+						<tabbox width="100%" id="tabBox">
 							<tabs>
 								<tab visible="false">Tab A</tab>
 								<tab id="tab" label="+" visible="false">
@@ -104,8 +115,7 @@
 					</center>
 				</borderlayout>
 			</center>
-			<south class="banner" vflex="2" border="0" height="3em"
-				collapsible="false">
+			<south class="banner" border="0" height="6%" collapsible="false">
 				<div align="center" sclass="footer">
 					<a style="color: white" href="../j_spring_security_logout">
 						<label value="INICIO">

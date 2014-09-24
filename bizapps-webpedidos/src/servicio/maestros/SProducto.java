@@ -29,6 +29,11 @@ public class SProducto {
 		return productoDAO.findAll();
 	}
 
+	public List<Product> buscarActivos() {
+		// TODO Auto-generated method stub
+		return productoDAO.findByEstadoTrue();
+	}
+	
 	public List<Product> buscarPorMarca(String marca) {
 		return productoDAO.findByBrand(marca);
 	}

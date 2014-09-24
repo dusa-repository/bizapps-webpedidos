@@ -1,11 +1,11 @@
 <zk>
 	<style src="/public/Estilo.css" />
 	<div apply="controlador.seguridad.CEditarUsuario" id="divEditarUsuario">
-		<groupbox width="40em" mold="3d" title="Editar Usuario">
+		<groupbox width="50%" mold="3d" title="Editar Usuario">
 			<grid width="100%">
 				<columns visible="false">
-					<column label="" width="34%" />
-					<column label="" width="64%" />
+					<column label="" width="40%" />
+					<column label="" width="60%" />
 				</columns>
 				<rows>
 					<row>
@@ -40,7 +40,7 @@
 					<row>
 						<label class="etiqueta" value="Adjuntar Imagen:" />
 						<fileupload
-							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+							style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 							id="fudImagenUsuario" image="/public/imagenes/botones/cargar.png" label="Foto"/>
 					</row>
 					<row>
