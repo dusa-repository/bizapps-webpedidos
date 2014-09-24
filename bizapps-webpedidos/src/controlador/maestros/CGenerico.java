@@ -23,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
@@ -274,5 +275,10 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		}
 
 		return fecha;
+	}
+	
+
+	public String damePath(){
+		return Executions.getCurrent().getContextPath()+"/";
 	}
 }

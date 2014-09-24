@@ -132,7 +132,9 @@ public class CReportes extends CGenerico {
 					if (txtVendedor.getValue().equals("TODOS"))
 						vendedor = "";
 					if (!cupos.isEmpty()) {
-						Clients.evalJavaScript("window.open('/bizapps-webpedidos/Generador?valor1="
+						Clients.evalJavaScript("window.open('"
+								+ damePath()
+								+ "Generador?valor1="
 								+ tipo
 								+ "&valor2="
 								+ marca
