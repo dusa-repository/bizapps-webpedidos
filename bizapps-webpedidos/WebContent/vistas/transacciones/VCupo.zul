@@ -2,8 +2,8 @@
 	<style src="/public/Estilo.css" />
 	<div style="background-color: white" id="divCupo" width="100%"
 		apply="controlador.transacciones.CCupo">
-							<div id="botoneraCupo" />
-					<separator />
+		<div id="botoneraCupo" />
+		<separator />
 		<tabbox width="100%">
 			<tabs>
 				<tab label="Cupos" id="tabCupos" />
@@ -100,6 +100,16 @@
 										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
 										label="Guardar" tooltiptext="Guardar Datos del Archivo"
 										image="/public/imagenes/botones/guardar.png" />
+								</row>
+								<row>
+									<label class="etiqueta" value="Descargar Formato de Cupo:" />
+									<button autodisable="self" id="btnDescargarArchivo"
+										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										label="Descargar" tooltiptext="Descargar Formato"
+										image="/public/imagenes/botones/exportar.png" />
+									<cell colspan="3">
+										<hbox />
+									</cell>
 								</row>
 							</rows>
 						</grid>
@@ -221,9 +231,10 @@
 										</listbox>
 									</vbox>
 								</hbox>
-									<separator />
-								<button id="btnGuardarMarca" label="Guardar Marcas " class="btn"  width="230px" 
-									image="/public/imagenes/botones/guardar.png" tooltiptext="Guardar Restricciones de Marcas" />
+								<separator />
+								<button id="btnGuardarMarca" label="Guardar Marcas "
+									class="btn" width="230px" image="/public/imagenes/botones/guardar.png"
+									tooltiptext="Guardar Restricciones de Marcas" />
 								<separator />
 							</tabpanel>
 							<tabpanel>
@@ -234,7 +245,7 @@
 											maxlength="50" placeholder="Ingrese el Codigo del Item"
 											tooltiptext="Escriba el codigo del Producto que desee filtar en la lista de productos disponibles" />
 										<listbox mold="paging" pagingPosition="top" pageSize="10"
-											id="ltbItems" height="405px"  width="100%" emptyMessage="No hay Items Registradas">
+											id="ltbItems" height="405px" width="100%" emptyMessage="No hay Items Registradas">
 											<listhead>
 												<listheader label="Codigo" width="30%" />
 												<listheader label="Item" width="70%" />
@@ -278,7 +289,7 @@
 											maxlength="50" placeholder="Ingrese el Codigo del Item"
 											tooltiptext="Escriba el codigo del Item que desee filtar en la lista de Items Restringidos" />
 										<listbox id="ltbItemsAgregados" mold="paging"
-											pagingPosition="top" pageSize="10" height="405px"  width="100%"
+											pagingPosition="top" pageSize="10" height="405px" width="100%"
 											emptyMessage="No ha Seleccionado Ningún Item">
 											<listhead>
 												<listheader label="Codigo" width="20%" />
@@ -311,8 +322,9 @@
 									</vbox>
 								</hbox>
 								<separator />
-								<button id="btnGuardarItem" label="Guardar Items "  class="btn"  width="230px" 
-									image="/public/imagenes/botones/guardar.png" tooltiptext="Guardar Restricciones de Items" />
+								<button id="btnGuardarItem" label="Guardar Items " class="btn"
+									width="230px" image="/public/imagenes/botones/guardar.png"
+									tooltiptext="Guardar Restricciones de Items" />
 								<separator />
 							</tabpanel>
 						</tabpanels>

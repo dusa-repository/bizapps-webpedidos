@@ -1,4 +1,5 @@
 package servicio.maestros;
+
 import interfacedao.maestros.IVendedorDAO;
 
 import java.util.List;
@@ -26,12 +27,12 @@ public class SVendedor {
 
 	public void guardar(Salesmen vendedor) {
 		vendedorDAO.save(vendedor);
-		
+
 	}
 
 	public void eliminarVarios(List<Salesmen> eliminarLista) {
 		vendedorDAO.delete(eliminarLista);
-		
+
 	}
 
 	public void eliminarClave(String id) {
@@ -40,6 +41,10 @@ public class SVendedor {
 
 	public List<Salesmen> buscarSubordinadosDisponibles(List<String> ids) {
 		return vendedorDAO.findBySalesmanIdNotIn(ids);
+	}
+
+	public List<Salesmen> buscarTodosNoCero() {
+		return vendedorDAO.findBySalesmanIdNot("0");
 	}
 
 }

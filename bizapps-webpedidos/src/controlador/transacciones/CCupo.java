@@ -1,5 +1,6 @@
 package controlador.transacciones;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.zkoss.exporter.excel.ExcelExporter;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -29,9 +31,13 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listcell;
+import org.zkoss.zul.Listhead;
+import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
@@ -889,7 +895,7 @@ public class CCupo extends CGenerico {
 
 				guardarLista.add(cupo);
 			}
-		}	
+		}
 		servicioCupo.guardarVarios(guardarLista);
 	}
 
@@ -952,6 +958,7 @@ public class CCupo extends CGenerico {
 		llenarListas();
 		msj.mensajeInformacion(Mensaje.guardado);
 	}
+
 	@Listen("onClick = #btnGuardarItem")
 	public void guardarItem() {
 		guardarItems();
@@ -962,6 +969,7 @@ public class CCupo extends CGenerico {
 	@Listen("onUpload = #btnImportarArchivo")
 	public void cargarArchivo(UploadEvent event) {
 		mediaArchivo = event.getMedia();
+		System.out.println(mediaArchivo.getContentType());
 		if (mediaArchivo != null) {
 			if (validarArchivo()) {
 				lblNombreArchivo.setValue(mediaArchivo.getName());
@@ -1032,19 +1040,19 @@ public class CCupo extends CGenerico {
 						if (vendedorRef != null && vendedorRef.length() > 3)
 							errorLong = true;
 						break;
-					case 1:
+					case 2:
 						marcaRef = obtenerStringCualquiera(cell,
 								marcaReferencia, marcaRef);
 						if (marcaRef != null && marcaRef.length() > 3)
 							errorLong = true;
 						break;
-					case 2:
+					case 3:
 						productoRef = obtenerStringCualquiera(cell,
 								productoReferencia, productoRef);
 						if (productoRef != null && productoRef.length() > 50)
 							errorLong = true;
 						break;
-					case 3:
+					case 5:
 						if (cell.getCellType() == 0) {
 							desde = cell.getNumericCellValue();
 							if (String.valueOf(desde.longValue()).length() > 8) {
@@ -1053,7 +1061,7 @@ public class CCupo extends CGenerico {
 						} else
 							error = true;
 						break;
-					case 4:
+					case 6:
 						if (cell.getCellType() == 0) {
 							hasta = cell.getNumericCellValue();
 							if (String.valueOf(hasta.longValue()).length() > 8)
@@ -1061,19 +1069,19 @@ public class CCupo extends CGenerico {
 						} else
 							error = true;
 						break;
-					case 5:
+					case 7:
 						if (cell.getCellType() == 0) {
 							cantidad = cell.getNumericCellValue();
 						} else
 							error = true;
 						break;
-					case 6:
+					case 8:
 						if (cell.getCellType() == 0) {
 							consumido = cell.getNumericCellValue();
 						} else
 							error = true;
 						break;
-					case 7:
+					case 4:
 						descripcionRef = obtenerStringCualquiera(cell,
 								descripcionReferencia, descripcionRef);
 						if (descripcionRef != null
@@ -1205,5 +1213,52 @@ public class CCupo extends CGenerico {
 			msj.mensajeInformacion(Mensaje.guardado);
 			llenarListas();
 		}
+	}
+
+	@Listen("onClick = #btnDescargarArchivo")
+	public void descargar() {
+		List<Salesmen> vendedores = servicioVendedor.buscarTodosNoCero();
+		List<Product> productos = servicioProducto.buscarTodos();
+		if (!vendedores.isEmpty()) {
+			if (!productos.isEmpty()) {
+				StringBuffer sb = new StringBuffer();
+				String s = ";";
+				// String r = "";
+				String h = "";
+				h += "Codigo_Vendedor" + s;
+				h += "Vendedor" + s;
+				h += "Codigo_Marca" + s;
+				h += "Codigo_Item" + s;
+				h += "Descripcion_Item" + s;
+				h += "Desde" + s;
+				h += "Hasta" + s;
+				h += "Cantidad" + s;
+				h += "Consumido" + s;
+				sb.append(h + "\n");
+				for (int i = 0; i < vendedores.size(); i++) {
+					for (int j = 0; j < productos.size(); j++) {
+						// String h = "";
+						h = "";
+						h += vendedores.get(i).getSalesmanId() + s;
+						h += vendedores.get(i).getName() + s;
+						h += productos.get(j).getBrand() + s;
+						h += productos.get(j).getProductId() + s;
+						h += productos.get(j).getDescription() + s;
+						h += " " + s;
+						h += " " + s;
+						h += 0 + s;
+						h += 0 + s;
+						sb.append(h + "\n");
+					}
+				}
+				Filedownload.save(sb.toString().getBytes(), "text/plain",
+						"Formato.csv");
+
+				msj.mensajeInformacion("Archivo descargado con Exito");
+
+			} else
+				msj.mensajeError("No existen Productos Registrados");
+		} else
+			msj.mensajeError("No existen Vendedores Registrados");
 	}
 }
