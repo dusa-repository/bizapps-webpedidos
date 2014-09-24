@@ -33,7 +33,7 @@
 								<button id="btnBuscarVendedor" label="Buscar" class="btn"
 									image="/public/imagenes/botones/buscar.png" />
 								<button id="btnLimpiarVendedor" label="Limpiar Cupo por Vendedor"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px" />
 								<!-- </cell> -->
 							</row>
 							<row>
@@ -53,7 +53,7 @@
 								<!-- <cell colspan="2"> -->
 								<hbox />
 								<button id="btnLimpiarMarca" label="Limpiar Cupo por Marca"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px" />
 								<!-- </cell> -->
 							</row>
 							<row>
@@ -61,7 +61,7 @@
 									<hbox />
 								</cell>
 								<button id="btnRefrescar" label="Refrescar" class="btn"
-									image="/public/imagenes/botones/generar.png" width="115px" />
+									image="/public/imagenes/botones/generar.png" width="110px" />
 								<hbox />
 							</row>
 							<!-- <row> <hbox /> <hbox /> </row> -->
@@ -69,7 +69,7 @@
 					</grid>
 					<separator />
 					<div id="catalogoCupo" tooltiptext="Doble Click al Item para Editar" />
-					<div align="right" width="100%">
+					<div  width="100%">
 						<grid width="100%">
 							<columns visible="false">
 								<column label="" width="20%" />
@@ -86,25 +86,25 @@
 									<cell colspan="2">
 										<label id="lblDescripcion"
 											value="* Para modificar los cupos debe hacer doble click sobre ellos ! "
-											style="font-size: 14px;font-weight:bold;font-color:black;"></label>
+											style="font-size: 12px;font-weight:bold;font-color:black;"></label>
 									</cell>
 								</row>
 								<row id="rowArchivo">
 									<label class="etiqueta" value="Importar Cupos desde Archivo:" />
 									<button autodisable="self" id="btnImportarArchivo"
-										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;text-shadow: 0 1px #3A0202;"
 										upload="true" label="Buscar" tooltiptext="Buscar Archivo de Datos"
 										image="/public/imagenes/botones/cargar.png" />
 									<label id="lblNombreArchivo" />
 									<button visible="false" autodisable="self" id="btnGuardarArchivo"
-										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;text-shadow: 0 1px #3A0202;"
 										label="Guardar" tooltiptext="Guardar Datos del Archivo"
 										image="/public/imagenes/botones/guardar.png" />
 								</row>
 								<row>
 									<label class="etiqueta" value="Descargar Formato de Cupo:" />
 									<button autodisable="self" id="btnDescargarArchivo"
-										style="	background: #952C2C;font-size: 13px;color: white;cursor: pointer;width: 100px;height: 33px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;"
+										style="	background: #952C2C;font-size: 11px;color: white;cursor: pointer;width: 95px;height: 29px;	-webkit-border-radius: 0.7em;-moz-border-radius: 0.7em;	border-radius: 0.7em;text-shadow: 0 1px #3A0202;"
 										label="Descargar" tooltiptext="Descargar Formato"
 										image="/public/imagenes/botones/exportar.png" />
 									<cell colspan="3">
@@ -139,7 +139,7 @@
 								<hbox />
 								<hbox />
 								<button id="btnLimpiarTodo" label="Limpiar Todos los Cupos"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="230px" />
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px" />
 								<hbox />
 							</row>
 							<row>
@@ -233,7 +233,7 @@
 								</hbox>
 								<separator />
 								<button id="btnGuardarMarca" label="Guardar Marcas "
-									class="btn" width="230px" image="/public/imagenes/botones/guardar.png"
+									class="btn" width="192px" image="/public/imagenes/botones/guardar.png"
 									tooltiptext="Guardar Restricciones de Marcas" />
 								<separator />
 							</tabpanel>
@@ -293,9 +293,9 @@
 											emptyMessage="No ha Seleccionado Ningún Item">
 											<listhead>
 												<listheader label="Codigo" width="20%" />
-												<listheader label="Item" width="40%" />
-												<listheader label="Desde" width="15%" />
-												<listheader label="Hasta" width="15%" />
+												<listheader label="Item" width="36%" />
+												<listheader label="Desde" width="17%" />
+												<listheader label="Hasta" width="17%" />
 												<listheader label="id" visible="false" />
 											</listhead>
 											<template name="model">
@@ -323,7 +323,7 @@
 								</hbox>
 								<separator />
 								<button id="btnGuardarItem" label="Guardar Items " class="btn"
-									width="230px" image="/public/imagenes/botones/guardar.png"
+									width="192px" image="/public/imagenes/botones/guardar.png"
 									tooltiptext="Guardar Restricciones de Items" />
 								<separator />
 							</tabpanel>

@@ -8,8 +8,8 @@
 			<columns visible="false">
 				<column label="" width="20%" />
 				<column label="" width="30%" />
-				<column label="" width="38%" />
-				<column label="" width="12%" />
+				<column label="" width="36%" />
+				<column label="" width="14%" />
 			</columns>
 			<rows>
 				<row>
@@ -64,7 +64,7 @@
 						<hbox />
 					</cell>
 					<button id="btnRefrescar" label="Refrescar" class="btn"
-						image="/public/imagenes/botones/generar.png" width="115px" />
+						image="/public/imagenes/botones/generar.png" width="110px" />
 				</row>
 			</rows>
 		</grid>

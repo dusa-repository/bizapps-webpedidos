@@ -1,6 +1,5 @@
 package controlador.transacciones;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +16,6 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.zkoss.exporter.excel.ExcelExporter;
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
@@ -35,9 +33,6 @@ import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
-import org.zkoss.zul.Listcell;
-import org.zkoss.zul.Listhead;
-import org.zkoss.zul.Listheader;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Tab;
@@ -1218,7 +1213,7 @@ public class CCupo extends CGenerico {
 	@Listen("onClick = #btnDescargarArchivo")
 	public void descargar() {
 		List<Salesmen> vendedores = servicioVendedor.buscarTodosNoCero();
-		List<Product> productos = servicioProducto.buscarTodos();
+		List<Product> productos = servicioProducto.buscarActivos();
 		if (!vendedores.isEmpty()) {
 			if (!productos.isEmpty()) {
 				StringBuffer sb = new StringBuffer();
