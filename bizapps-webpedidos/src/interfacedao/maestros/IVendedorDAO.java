@@ -12,4 +12,6 @@ public interface IVendedorDAO extends JpaRepository<Salesmen, String> {
 
 	List<Salesmen> findBySalesmanIdNotIn(List<String> ids);
 
+	List<Salesmen> findBySalesmanIdNot(String string);
+
 }
