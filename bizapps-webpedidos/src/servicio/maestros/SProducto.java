@@ -41,4 +41,9 @@ public class SProducto {
 		return productoDAO.findByProductIdStartingWithAllIgnoreCase(valor);
 	}
 
+	public void guardar(Product item) {
+		productoDAO.save(item);
+		
+	}
+
 }

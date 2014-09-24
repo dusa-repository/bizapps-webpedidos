@@ -1,0 +1,51 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div apply="controlador.transacciones.CInactivarItem" id="divInactivarItem">
+		<groupbox width="60%" mold="3d" title="Administracion del Sistema">
+			<div id="botoneraInactivarItem" />
+			<separator />
+			<grid width="100%">
+				<columns visible="false">
+					<column label="" width="30%" />
+					<column label="" width="40%" />
+					<column label="" width="30%" />
+				</columns>
+				<rows>
+					<row>
+						<hbox>
+							<label value="Codigo:" class="etiqueta" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<label id="lblCodigo" />
+						<button id="btnBuscarItem" label="Buscar" class="btn"
+							image="/public/imagenes/botones/buscar.png" />
+					</row>
+					<row>
+						<label value="Descripcion:" class="etiqueta" />
+						<label id="lblDescripcion" />
+						<hbox />
+					</row>
+					<row>
+						<label class="etiqueta" value="Estado Actual del Item:" />
+						<label id="lblEstado" class="etiqueta" style="font-weight:bold;color:red" />
+						<hbox />
+					</row>
+					<row>
+						<hbox>
+							<label class="etiqueta" value="Asigne el Estado del Item" />
+							<space />
+							<label value="*" style="font-weight:bold;color:red" />
+						</hbox>
+						<radiogroup id="rdgActivacion">
+							<radio label="Activo" id="rdoSI" />
+							<radio label="Inactivo" id="rdoNo" />
+						</radiogroup>
+						<hbox />
+					</row>
+				</rows>
+			</grid>
+		</groupbox>
+		<div id="divCatalogoProducto" />
+	</div>
+</zk>
