@@ -256,17 +256,20 @@ public class CCupo extends CGenerico {
 				List<Cupo> cuposFiltro = new ArrayList<Cupo>();
 
 				for (Cupo cupo : cupos) {
-					if (cupo.getId().getProducto().startsWith(valores.get(0))
+					if (cupo.getId().getProducto().toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
 							&& servicioProducto
 									.buscar(cupo.getId().getProducto())
-									.getDescription()
-									.startsWith(valores.get(1))
-							&& cupo.getDesde().startsWith(valores.get(2))
-							&& cupo.getHasta().startsWith(valores.get(3))
-							&& String.valueOf(cupo.getCantidad()).startsWith(
-									valores.get(4))
+									.getDescription().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& cupo.getDesde().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())
+							&& cupo.getHasta().toLowerCase()
+									.startsWith(valores.get(3).toLowerCase())
+							&& String.valueOf(cupo.getCantidad()).toLowerCase()
+									.startsWith(valores.get(4).toLowerCase())
 							&& String.valueOf(cupo.getConsumido()).startsWith(
-									valores.get(5))
+									valores.get(5).toLowerCase())
 							&& String.valueOf(cupo.getRestante()).startsWith(
 									valores.get(6))) {
 						cuposFiltro.add(cupo);
@@ -307,11 +310,12 @@ public class CCupo extends CGenerico {
 				List<Salesmen> lista = new ArrayList<Salesmen>();
 
 				for (Salesmen vendedor : vendedores) {
-					if (vendedor.getSalesmanId().startsWith(valores.get(0))
-							&& vendedor.getName().trim()
-									.startsWith(valores.get(1))
-							&& vendedor.getRegion().trim()
-									.startsWith(valores.get(2))) {
+					if (vendedor.getSalesmanId().toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& vendedor.getName().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& vendedor.getRegion().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())) {
 						lista.add(vendedor);
 					}
 				}

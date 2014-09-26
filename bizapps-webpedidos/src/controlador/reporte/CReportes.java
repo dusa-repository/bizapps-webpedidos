@@ -209,18 +209,12 @@ public class CReportes extends CGenerico {
 				List<Salesmen> lista = new ArrayList<Salesmen>();
 
 				for (Salesmen vendedor : vendedores) {
-					if ((vendedor.getSalesmanId().toLowerCase()
-							.startsWith(valores.get(0)) || vendedor
-							.getSalesmanId().toUpperCase()
-							.startsWith(valores.get(0)))
-							&& (vendedor.getName().trim().toLowerCase()
-									.startsWith(valores.get(1)) || vendedor
-									.getName().trim().toUpperCase()
-									.startsWith(valores.get(1)))
-							&& (vendedor.getRegion().trim().toLowerCase()
-									.startsWith(valores.get(2)) || vendedor
-									.getRegion().trim().toUpperCase()
-									.startsWith(valores.get(2)))) {
+					if (vendedor.getSalesmanId().toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& vendedor.getName().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& vendedor.getRegion().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())) {
 						lista.add(vendedor);
 					}
 				}

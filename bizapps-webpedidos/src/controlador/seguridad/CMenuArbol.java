@@ -312,12 +312,14 @@ public class CMenuArbol extends CGenerico {
 				List<Arbol> lista = new ArrayList<Arbol>();
 
 				for (Arbol arbol : listArbol) {
-					if (String.valueOf(arbol.getIdArbol()).startsWith(
-							valores.get(0))
-							&& arbol.getNombre().startsWith(valores.get(1))
-							&& String.valueOf(arbol.getPadre()).startsWith(
-									valores.get(2))
-							&& arbol.getUrl().startsWith(valores.get(3))) {
+					if (String.valueOf(arbol.getIdArbol()).toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& arbol.getNombre().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& String.valueOf(arbol.getPadre()).toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())
+							&& arbol.getUrl().toLowerCase()
+									.startsWith(valores.get(3).toLowerCase())) {
 						lista.add(arbol);
 					}
 				}

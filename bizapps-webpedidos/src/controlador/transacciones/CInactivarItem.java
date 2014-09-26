@@ -146,8 +146,7 @@ public class CInactivarItem extends CGenerico {
 			if (!rdoSI.isChecked() && !rdoNo.isChecked()) {
 				msj.mensajeError(Mensaje.seleccionarEstado);
 				return false;
-			}
-			else
+			} else
 				return true;
 		}
 	}
@@ -164,11 +163,12 @@ public class CInactivarItem extends CGenerico {
 				List<Product> lista = new ArrayList<Product>();
 
 				for (Product item : productos) {
-					if (item.getProductId().startsWith(valores.get(0))
-							&& item.getDescription().trim()
-									.startsWith(valores.get(1))
-							&& item.getBrand().trim()
-									.startsWith(valores.get(2))) {
+					if (item.getProductId().toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& item.getDescription().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& item.getBrand().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())) {
 						lista.add(item);
 					}
 				}

@@ -694,13 +694,14 @@ public class CVendedor extends CGenerico {
 				List<Salesmen> user = new ArrayList<Salesmen>();
 
 				for (Salesmen vende : vendedores) {
-					if (vende.getSalesmanId().trim().startsWith(valores.get(0))
-							&& vende.getName().trim()
-									.startsWith(valores.get(1))
-							&& vende.getRegion().trim()
-									.startsWith(valores.get(2))
-							&& vende.getMail().trim()
-									.startsWith(valores.get(3))) {
+					if (vende.getSalesmanId().toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& vende.getName().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& vende.getRegion().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())
+							&& vende.getMail().toLowerCase()
+									.startsWith(valores.get(3).toLowerCase())) {
 						user.add(vende);
 					}
 				}

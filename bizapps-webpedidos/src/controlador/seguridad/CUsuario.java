@@ -475,7 +475,9 @@ public class CUsuario extends CGenerico {
 				msj.mensajeAlerta(Mensaje.correoInvalido);
 				return false;
 			} else {
-				if (txtTelefonoUsuario.getText().compareTo("") != 0 && !Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
+				if (txtTelefonoUsuario.getText().compareTo("") != 0
+						&& !Validador.validarTelefono(txtTelefonoUsuario
+								.getValue())) {
 					msj.mensajeAlerta(Mensaje.telefonoInvalido);
 					return false;
 				} else {
@@ -503,7 +505,8 @@ public class CUsuario extends CGenerico {
 	/* Valida el numero telefonico */
 	@Listen("onChange = #txtTelefonoUsuario")
 	public void validarTelefono() {
-		if (txtTelefonoUsuario.getText().compareTo("") != 0 && !Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
+		if (txtTelefonoUsuario.getText().compareTo("") != 0
+				&& !Validador.validarTelefono(txtTelefonoUsuario.getValue())) {
 			msj.mensajeAlerta(Mensaje.telefonoInvalido);
 		}
 	}
@@ -641,23 +644,24 @@ public class CUsuario extends CGenerico {
 				List<Usuario> user = new ArrayList<Usuario>();
 
 				for (Usuario actividadord : usuario) {
-					if (actividadord.getCedula().startsWith(valores.get(0))
-							&& actividadord.getEmail().startsWith(
-									valores.get(1))
-							&& actividadord.getPrimerNombre().startsWith(
-									valores.get(2))
-							&& actividadord.getSegundoNombre().startsWith(
-									valores.get(3))
-							&& actividadord.getPrimerApellido().startsWith(
-									valores.get(4))
-							&& actividadord.getSegundoApellido().startsWith(
-									valores.get(5))
-							&& actividadord.getSexo()
-									.startsWith(valores.get(6))
-							&& actividadord.getTelefono().startsWith(
-									valores.get(7))
-							&& actividadord.getDireccion().startsWith(
-									valores.get(8))) {
+					if (actividadord.getCedula().toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& actividadord.getEmail().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& actividadord.getPrimerNombre().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())
+							&& actividadord.getSegundoNombre().toLowerCase()
+									.startsWith(valores.get(3).toLowerCase())
+							&& actividadord.getPrimerApellido().toLowerCase()
+									.startsWith(valores.get(4).toLowerCase())
+							&& actividadord.getSegundoApellido().toLowerCase()
+									.startsWith(valores.get(5).toLowerCase())
+							&& actividadord.getSexo().toLowerCase()
+									.startsWith(valores.get(6).toLowerCase())
+							&& actividadord.getTelefono().toLowerCase()
+									.startsWith(valores.get(7).toLowerCase())
+							&& actividadord.getDireccion().toLowerCase()
+									.startsWith(valores.get(8).toLowerCase())) {
 
 						user.add(actividadord);
 					}
