@@ -273,10 +273,10 @@ public class CReportes extends CGenerico {
 			parameters.put("marca", part2);
 			parameters.put("vendedor", part3);
 
-			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-			String url = "jdbc:sqlserver://localhost:1434;DatabaseName=dusa_pedidos";
-			String user = "client";
-			String password = "123";
+			List<String> lista = obtenerPropiedades();
+			String user = lista.get(0);
+			String password = lista.get(1);
+			String url = lista.get(2);
 
 			switch (part1) {
 			case "1":
