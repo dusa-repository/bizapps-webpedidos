@@ -201,17 +201,17 @@ public class CConsulta extends CGenerico {
 				List<Order> ordenFiltro = new ArrayList<Order>();
 
 				for (Order orden : ordenes) {
-					if (String.valueOf(orden.getOrderId())
-							.startsWith(valores.get(0))
-							&& orden.getOrderDate().trim()
-									.startsWith(valores.get(1))
-							&& orden.getRequiredDate().trim()
-									.startsWith(valores.get(2))
+					if (String.valueOf(orden.getOrderId()).toLowerCase()
+							.startsWith(valores.get(0).toLowerCase())
+							&& orden.getOrderDate().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& orden.getRequiredDate().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())
 							&& servicioVendedor.buscar(orden.getSalesmanId())
-									.getName()
-									.startsWith(valores.get(3))
-							&& orden.getStatus()
-									.startsWith(valores.get(4))) {
+									.getName().toLowerCase()
+									.startsWith(valores.get(3).toLowerCase())
+							&& orden.getStatus().toLowerCase()
+									.startsWith(valores.get(4).toLowerCase())) {
 						ordenFiltro.add(orden);
 					}
 				}
@@ -254,11 +254,11 @@ public class CConsulta extends CGenerico {
 
 				for (Salesmen vendedor : vendedores) {
 					if (vendedor.getSalesmanId().toLowerCase()
-							.startsWith(valores.get(0))
-							&& vendedor.getName().trim()
-									.startsWith(valores.get(1))
-							&& vendedor.getRegion().trim()
-									.startsWith(valores.get(2))) {
+							.startsWith(valores.get(0).toLowerCase())
+							&& vendedor.getName().toLowerCase()
+									.startsWith(valores.get(1).toLowerCase())
+							&& vendedor.getRegion().toLowerCase()
+									.startsWith(valores.get(2).toLowerCase())) {
 						lista.add(vendedor);
 					}
 				}
@@ -287,22 +287,22 @@ public class CConsulta extends CGenerico {
 		catalogoVendedor.setParent(null);
 	}
 
-	 @Listen("onDoubleClick = #catalogoConsulta")
-	 public void seleccionarItem() {
-	
-	 if (catalogo.objetoSeleccionadoDelCatalogo() != null) {
-	 Order order = catalogo.objetoSeleccionadoDelCatalogo();
-	 catalogo.limpiarSeleccion();
+	@Listen("onDoubleClick = #catalogoConsulta")
+	public void seleccionarItem() {
 
-	 HashMap<String, Object> map = new HashMap<String, Object>();
+		if (catalogo.objetoSeleccionadoDelCatalogo() != null) {
+			Order order = catalogo.objetoSeleccionadoDelCatalogo();
+			catalogo.limpiarSeleccion();
 
-	 map.put("orden", order);
-	 Sessions.getCurrent().setAttribute("detalle", map);
-	 Window window = (Window) Executions.createComponents(
-	 "/vistas/transacciones/VDetalleOrden.zul", null, null);
-	 window.doModal();
-	 }
-	 }
+			HashMap<String, Object> map = new HashMap<String, Object>();
+
+			map.put("orden", order);
+			Sessions.getCurrent().setAttribute("detalle", map);
+			Window window = (Window) Executions.createComponents(
+					"/vistas/transacciones/VDetalleOrden.zul", null, null);
+			window.doModal();
+		}
+	}
 
 	@Listen("onClick = #btnRefrescar")
 	public void refrescar() {
@@ -317,8 +317,8 @@ public class CConsulta extends CGenerico {
 						ordenes = servicioOrden.buscarPorMarcaYFecha(idMarca,
 								formatoFechaRara.format(dtbDesde.getValue()),
 								formatoFechaRara.format(dtbHasta.getValue()));
-					
-					if(ordenes.isEmpty())
+
+					if (ordenes.isEmpty())
 						msj.mensajeInformacion(Mensaje.noHayRegistros);
 					catalogo.actualizarLista(ordenes, false);
 				}
@@ -353,7 +353,7 @@ public class CConsulta extends CGenerico {
 												idVendedor, status, desde,
 												hasta);
 
-							if(ordenes.isEmpty())
+							if (ordenes.isEmpty())
 								msj.mensajeInformacion(Mensaje.noHayRegistros);
 							catalogo.actualizarLista(ordenes, false);
 						}
