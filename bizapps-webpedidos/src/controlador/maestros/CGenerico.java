@@ -20,6 +20,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.zkoss.zk.ui.Component;
@@ -77,7 +80,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCliente servicioCliente;
 	@WireVariable("SDetalleOrden")
 	protected SDetalleOrden servicioDetalleOrden;
-	
+
 	protected static SimpleDateFormat formatoFecha = new SimpleDateFormat(
 			"dd-MM-yyyy");
 	protected static SimpleDateFormat formatoFechaRara = new SimpleDateFormat(
@@ -94,6 +97,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public Timestamp fechaHora = new Timestamp(fecha.getTime());
 	public Mensaje msj = new Mensaje();
 	public String cerrar;
+	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+			"/META-INF/PropiedadesBaseDatos.xml");
 
 	@Override
 	public void doAfterCompose(Component comp) throws Exception {
@@ -157,6 +162,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 		return date;
 
 	}
+
 	public Date transformarJulianaAGregoriadeLong(Long valor) {
 		String j = valor.toString();
 		Date date = new Date();
@@ -192,7 +198,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	public abstract void inicializar() throws IOException;
 
-	public void cerrarVentana(Div div, String id,List<Tab> tabs2) {
+	public void cerrarVentana(Div div, String id, List<Tab> tabs2) {
 		div.setVisible(false);
 		tabs = tabs2;
 		for (int i = 0; i < tabs.size(); i++) {
@@ -261,7 +267,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 			return false;
 		}
 	}
-	
+
 	public Date traerFech(String fechaString) {
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
@@ -276,9 +282,18 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 		return fecha;
 	}
-	
 
-	public String damePath(){
-		return Executions.getCurrent().getContextPath()+"/";
+	public String damePath() {
+		return Executions.getCurrent().getContextPath() + "/";
+	}
+
+	public List<String> obtenerPropiedades() {
+		List<String> arreglo = new ArrayList<String>();
+		DriverManagerDataSource ds = (DriverManagerDataSource) applicationContext
+				.getBean("dataSource");
+		arreglo.add(ds.getUsername());
+		arreglo.add(ds.getPassword());
+		arreglo.add(ds.getUrl());
+		return arreglo;
 	}
 }
