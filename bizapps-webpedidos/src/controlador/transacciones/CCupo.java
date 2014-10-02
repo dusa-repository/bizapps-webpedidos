@@ -1211,6 +1211,7 @@ public class CCupo extends CGenerico {
 			btnGuardarArchivo.setVisible(false);
 			msj.mensajeInformacion(Mensaje.guardado);
 			llenarListas();
+			errorGeneral=false;
 		}
 	}
 
