@@ -257,20 +257,20 @@ public class CCupo extends CGenerico {
 
 				for (Cupo cupo : cupos) {
 					if (cupo.getId().getProducto().toLowerCase()
-							.startsWith(valores.get(0).toLowerCase())
+							.contains(valores.get(0).toLowerCase())
 							&& servicioProducto
 									.buscar(cupo.getId().getProducto())
 									.getDescription().toLowerCase()
-									.startsWith(valores.get(1).toLowerCase())
+									.contains(valores.get(1).toLowerCase())
 							&& cupo.getDesde().toLowerCase()
-									.startsWith(valores.get(2).toLowerCase())
+									.contains(valores.get(2).toLowerCase())
 							&& cupo.getHasta().toLowerCase()
-									.startsWith(valores.get(3).toLowerCase())
+									.contains(valores.get(3).toLowerCase())
 							&& String.valueOf(cupo.getCantidad()).toLowerCase()
-									.startsWith(valores.get(4).toLowerCase())
-							&& String.valueOf(cupo.getConsumido()).startsWith(
+									.contains(valores.get(4).toLowerCase())
+							&& String.valueOf(cupo.getConsumido()).contains(
 									valores.get(5).toLowerCase())
-							&& String.valueOf(cupo.getRestante()).startsWith(
+							&& String.valueOf(cupo.getRestante()).contains(
 									valores.get(6))) {
 						cuposFiltro.add(cupo);
 					}
@@ -311,11 +311,11 @@ public class CCupo extends CGenerico {
 
 				for (Salesmen vendedor : vendedores) {
 					if (vendedor.getSalesmanId().toLowerCase()
-							.startsWith(valores.get(0).toLowerCase())
+							.contains(valores.get(0).toLowerCase())
 							&& vendedor.getName().toLowerCase()
-									.startsWith(valores.get(1).toLowerCase())
+									.contains(valores.get(1).toLowerCase())
 							&& vendedor.getRegion().toLowerCase()
-									.startsWith(valores.get(2).toLowerCase())) {
+									.contains(valores.get(2).toLowerCase())) {
 						lista.add(vendedor);
 					}
 				}

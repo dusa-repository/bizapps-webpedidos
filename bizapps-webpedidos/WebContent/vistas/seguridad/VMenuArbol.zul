@@ -3,7 +3,6 @@
 	<div id="divVMenuArbol" apply="controlador.seguridad.CMenuArbol">
 		<groupbox width="auto" mold="3d" title="Menu Arbol (VMenuArbol)">
 			<div id="botoneraMenuArbol" />
-			<separator />
 			<groupbox id="gpxRegistro" width="auto" class ="azul" title="" open="false">
 				<caption label="Añadir"  style="font-weight:bold; font-size: 13px"
 					tooltiptext="Presione para Registrar un Nuevo Item del Menu Arbol" />

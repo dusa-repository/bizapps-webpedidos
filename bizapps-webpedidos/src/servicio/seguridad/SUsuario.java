@@ -47,4 +47,12 @@ public class SUsuario {
 		usuarioDAO.delete(id);
 	}
 
+	public Usuario buscarPorCedulayCorreo(String value, String value2) {
+		return usuarioDAO.findByCedulaAndEmail(value,value2);
+	}
+
+	public Usuario buscarPorLogin(String value) {
+		return usuarioDAO.findByLogin(value);
+	}
+
 }

@@ -164,11 +164,11 @@ public class CInactivarItem extends CGenerico {
 
 				for (Product item : productos) {
 					if (item.getProductId().toLowerCase()
-							.startsWith(valores.get(0).toLowerCase())
+							.contains(valores.get(0).toLowerCase())
 							&& item.getDescription().toLowerCase()
-									.startsWith(valores.get(1).toLowerCase())
+									.contains(valores.get(1).toLowerCase())
 							&& item.getBrand().toLowerCase()
-									.startsWith(valores.get(2).toLowerCase())) {
+									.contains(valores.get(2).toLowerCase())) {
 						lista.add(item);
 					}
 				}

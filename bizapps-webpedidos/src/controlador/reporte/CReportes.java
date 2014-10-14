@@ -210,11 +210,11 @@ public class CReportes extends CGenerico {
 
 				for (Salesmen vendedor : vendedores) {
 					if (vendedor.getSalesmanId().toLowerCase()
-							.startsWith(valores.get(0).toLowerCase())
+							.contains(valores.get(0).toLowerCase())
 							&& vendedor.getName().toLowerCase()
-									.startsWith(valores.get(1).toLowerCase())
+									.contains(valores.get(1).toLowerCase())
 							&& vendedor.getRegion().toLowerCase()
-									.startsWith(valores.get(2).toLowerCase())) {
+									.contains(valores.get(2).toLowerCase())) {
 						lista.add(vendedor);
 					}
 				}
