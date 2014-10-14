@@ -97,8 +97,7 @@
 	-moz-border-radius: 0.7em;
 	border-radius: 0.7em;
 	background: #952C2C;
-	width: 28px;
-	height: 28px;
+		white-space: pre-line;
 }
 
 .banner {
@@ -133,14 +132,4 @@ body * {
 .z-listheader-content,.z-listcell-content,.z-listgroup-content,.z-listgroupfoot-content,.z-listfooter-content
 	{
 	font-size: 10px;
-}
-
-.z-tree-icon .z-tree-open {
-	background-image: url('/imagenes/botones/agregar.png');
-	background-size: cover;
-	width: "100%";
-}
-
-.z-tree-icon .z-tree-open::before,.z-tree-icon .z-tree-close::before {
-	content: '';
 }

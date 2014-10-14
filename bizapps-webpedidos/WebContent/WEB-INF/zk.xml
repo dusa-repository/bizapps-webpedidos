@@ -19,15 +19,19 @@
 		<name>org.zkoss.zul.progressbox.position</name>
 		<value>center,center</value>
 	</library-property>
-	
+
 	<library-property>
 		<name>org.zkoss.zul.progressbox.mask</name>
 		<value>true</value>
 	</library-property>
-	
+
 	<library-property>
 		<name>org.zkoss.zul.progressbox.msg</name>
 		<value>"Por Favor, Espere..."</value>
 	</library-property>
+<!-- 	<library-property>
+		<name>org.zkoss.theme.preferred</name>
+		<value>roller</value> or silvertail, atlantic
+	</library-property> -->
 
 </zk>
