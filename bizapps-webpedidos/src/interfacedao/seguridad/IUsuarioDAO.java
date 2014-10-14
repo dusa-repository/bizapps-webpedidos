@@ -8,5 +8,7 @@ public interface IUsuarioDAO extends JpaRepository<Usuario, Long> {
 	Usuario findByLogin(String nombre);
 
 	Usuario findByCedula(String value);
+
+	Usuario findByCedulaAndEmail(String value, String value2);
 	
 }

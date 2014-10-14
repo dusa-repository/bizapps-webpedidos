@@ -259,7 +259,7 @@ public class CGrupo extends CGenerico {
 
 				for (Grupo grupo : grupos) {
 					if (grupo.getNombre().toLowerCase()
-							.startsWith(valores.get(0).toLowerCase())) {
+							.contains(valores.get(0).toLowerCase())) {
 						lista.add(grupo);
 					}
 				}

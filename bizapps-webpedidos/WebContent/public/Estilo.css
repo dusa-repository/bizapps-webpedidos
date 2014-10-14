@@ -134,3 +134,13 @@ body * {
 	{
 	font-size: 10px;
 }
+
+.z-tree-icon .z-tree-open {
+	background-image: url('/imagenes/botones/agregar.png');
+	background-size: cover;
+	width: "100%";
+}
+
+.z-tree-icon .z-tree-open::before,.z-tree-icon .z-tree-close::before {
+	content: '';
+}

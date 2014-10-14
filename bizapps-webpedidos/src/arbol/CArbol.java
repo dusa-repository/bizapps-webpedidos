@@ -320,4 +320,13 @@ public class CArbol extends CGenerico {
 		} else
 			taba.setSelected(true);
 	}
+	
+	@Listen("onClick = #mnuItem")
+	public void cerrarTodas() {
+		for (int i = 0; i < tabs.size(); i++) {
+			tabs.get(i).close();
+			tabs.remove(i);
+			i--;
+		}
+	}
 }

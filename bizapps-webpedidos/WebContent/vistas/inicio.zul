@@ -122,7 +122,7 @@
 						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
 						border="none" autoscroll="true">
 						<tabbox width="100%" id="tabBox">
-							<tabs>
+							<tabs context="editPopup">
 								<tab visible="false">Tab A</tab>
 								<tab id="tab" label="+" visible="false">
 								</tab>
@@ -145,10 +145,13 @@
 					</a>
 					<separator></separator>
 					<label style="padding-center:35%;color: white"
-							value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
+						value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
 					</label>
 				</div>
 			</south>
 		</borderlayout>
+				<menupopup id="editPopup">
+			<menuitem id="mnuItem" label="Cerrar Todas" apply="arbol.CArbol" />
+		</menupopup>
 	</window>
 </zk>

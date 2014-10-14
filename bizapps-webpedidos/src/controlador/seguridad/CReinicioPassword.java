@@ -9,6 +9,7 @@ import org.springframework.security.crypto.keygen.KeyGenerators;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
@@ -56,27 +57,24 @@ public class CReinicioPassword extends CGenerico {
 				String password = KeyGenerators.string().generateKey();
 				String correo;
 				if (validar()) {
-					Usuario usuario = servicioUsuario
-							.buscarPorCedula(txtCedulaUsuario.getValue());
+					Usuario usuario = servicioUsuario.buscarPorCedulayCorreo(
+							txtCedulaUsuario.getValue(),
+							txtCorreoUsuario.getValue());
 					if (usuario != null) {
-						if (usuario.getEmail() != null) {
-							correo = usuario.getEmail();
-						} else {
-							correo = txtCorreoUsuario.getValue();
-						}
-						usuario.setPassword(password);
-						servicioUsuario.guardar(usuario);
+						correo = usuario.getEmail();
 						enviarEmailNotificacion(
 								correo,
 								"Ha Solicitado Reiniciar su Password, sus nuevos datos para el inicio de sesion son: "
 										+ " Usuario: "
 										+ usuario.getLogin()
 										+ "  " + " Password: " + password);
-						limpiar();
+						usuario.setPassword(password);
+						servicioUsuario.guardar(usuario);
 						msj.mensajeInformacion(Mensaje.reinicioContrasenna);
+						limpiar();
 						salir();
 					} else {
-						msj.mensajeError(Mensaje.cedulaNoExiste);
+						msj.mensajeError(Mensaje.usuarioNoRegistrado);
 					}
 				}
 			}
@@ -88,31 +86,31 @@ public class CReinicioPassword extends CGenerico {
 			@Override
 			public void seleccionar() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void buscar() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void annadir() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void reporte() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void ayuda() {
 				// TODO Auto-generated method stub
-				
+
 			}
 		};
 		botonera.getChildren().get(0).setVisible(false);
@@ -121,6 +119,9 @@ public class CReinicioPassword extends CGenerico {
 		botonera.getChildren().get(4).setVisible(false);
 		botonera.getChildren().get(6).setVisible(false);
 		botonera.getChildren().get(8).setVisible(false);
+		
+		Button guardar = (Button) botonera.getChildren().get(3);
+		guardar.setLabel("Enviar");
 		botoneraReinicio.appendChild(botonera);
 	}
 

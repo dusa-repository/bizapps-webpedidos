@@ -215,6 +215,7 @@ public class CUsuario extends CGenerico {
 			@Override
 			public void guardar() {
 				if (validar()) {
+					if (buscarPorLogin()) {
 					Set<Grupo> gruposUsuario = new HashSet<Grupo>();
 					for (int i = 0; i < ltbGruposAgregados.getItemCount(); i++) {
 						Grupo grupo = ltbGruposAgregados.getItems().get(i)
@@ -261,6 +262,7 @@ public class CUsuario extends CGenerico {
 					catalogo.actualizarLista(servicioUsuario.buscarTodos(),
 							true);
 					abrirCatalogo();
+				}
 				}
 			}
 
@@ -645,23 +647,23 @@ public class CUsuario extends CGenerico {
 
 				for (Usuario actividadord : usuario) {
 					if (actividadord.getCedula().toLowerCase()
-							.startsWith(valores.get(0).toLowerCase())
+							.contains(valores.get(0).toLowerCase())
 							&& actividadord.getEmail().toLowerCase()
-									.startsWith(valores.get(1).toLowerCase())
+									.contains(valores.get(1).toLowerCase())
 							&& actividadord.getPrimerNombre().toLowerCase()
-									.startsWith(valores.get(2).toLowerCase())
+									.contains(valores.get(2).toLowerCase())
 							&& actividadord.getSegundoNombre().toLowerCase()
-									.startsWith(valores.get(3).toLowerCase())
+									.contains(valores.get(3).toLowerCase())
 							&& actividadord.getPrimerApellido().toLowerCase()
-									.startsWith(valores.get(4).toLowerCase())
+									.contains(valores.get(4).toLowerCase())
 							&& actividadord.getSegundoApellido().toLowerCase()
-									.startsWith(valores.get(5).toLowerCase())
+									.contains(valores.get(5).toLowerCase())
 							&& actividadord.getSexo().toLowerCase()
-									.startsWith(valores.get(6).toLowerCase())
+									.contains(valores.get(6).toLowerCase())
 							&& actividadord.getTelefono().toLowerCase()
-									.startsWith(valores.get(7).toLowerCase())
+									.contains(valores.get(7).toLowerCase())
 							&& actividadord.getDireccion().toLowerCase()
-									.startsWith(valores.get(8).toLowerCase())) {
+									.contains(valores.get(8).toLowerCase())) {
 
 						user.add(actividadord);
 					}
@@ -686,5 +688,25 @@ public class CUsuario extends CGenerico {
 
 		};
 		catalogo.setParent(catalogoUsuario);
+	}
+	
+
+	/* Busca si existe un usuario con el mismo login */
+	@Listen("onChange = #txtLoginUsuario")
+	public boolean buscarPorLogin() {
+		Usuario usuario = servicioUsuario.buscarPorLogin(txtLoginUsuario
+				.getValue());
+		if (usuario == null)
+			return true;
+		else {
+			if (usuario.getCedula().equals(id))
+				return true;
+			else {
+				msj.mensajeAlerta(Mensaje.loginUsado);
+				txtLoginUsuario.setValue("");
+				txtLoginUsuario.setFocus(true);
+				return false;
+			}
+		}
 	}
 }
