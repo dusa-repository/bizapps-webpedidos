@@ -192,6 +192,8 @@
 								</vbox>
 								<vbox>
 									<separator />
+									<separator />
+									<separator />
 									<button id="pasar11" class="abrir"
 										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Vendedor" />
 									<separator />

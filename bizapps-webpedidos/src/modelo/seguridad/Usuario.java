@@ -30,6 +30,7 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario", unique = true, nullable = false)
 	private long idUsuario;
+	
 	@Column(length = 50)
 	private String email;
 
