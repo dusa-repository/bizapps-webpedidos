@@ -100,6 +100,23 @@
 										<textbox id="txtEmailCoordinador" hflex="1" maxlength="50"
 											tooltiptext="Ingrese el e-mail del Vendedor" />
 									</row>
+									<row>
+										<hbox>
+											<label class="etiqueta" value="¿Vendedor Activo?:" />
+											<space />
+											<label value="*" style="font-weight:bold;color:red">
+											</label>
+										</hbox>
+										<radiogroup id="rdgRitmico">
+											<hbox>
+												<radio label="Si" value="si" id="rdoSi" />
+												<separator />
+												<radio label="No" value="no" id="rdoNo" />
+											</hbox>
+										</radiogroup>
+										<hbox />
+										<hbox />
+									</row>
 								</rows>
 							</grid>
 							<separator />

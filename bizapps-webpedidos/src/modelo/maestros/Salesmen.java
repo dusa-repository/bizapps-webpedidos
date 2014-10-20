@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 
 /**
  * The persistent class for the salesmen database table.
@@ -47,6 +49,9 @@ public class Salesmen implements Serializable {
 
 	@Column(name="top_serial")
 	private int topSerial;
+	
+	@Type(type = "org.hibernate.type.NumericBooleanType")
+	private boolean estado;
 
 	public Salesmen() {
 	}
@@ -145,6 +150,14 @@ public class Salesmen implements Serializable {
 
 	public void setTopSerial(int topSerial) {
 		this.topSerial = topSerial;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 }
