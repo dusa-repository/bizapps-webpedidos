@@ -19,6 +19,10 @@ public class SVendedor {
 		// TODO Auto-generated method stub
 		return vendedorDAO.findAll();
 	}
+	
+	public List<Salesmen> buscarActivos() {
+		return vendedorDAO.findByEstadoTrue();
+	}
 
 	public Salesmen buscar(String idVendedor) {
 		// TODO Auto-generated method stub

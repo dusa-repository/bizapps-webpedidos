@@ -24,17 +24,16 @@ import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Radio;
 import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
 import arbol.CArbol;
-
 import componente.Botonera;
 import componente.Catalogo;
 import componente.Mensaje;
 import componente.Validador;
-
 import controlador.maestros.CGenerico;
 
 public class CVendedor extends CGenerico {
@@ -84,6 +83,10 @@ public class CVendedor extends CGenerico {
 	private Listbox ltbVendedoresDisponibles;
 	@Wire
 	private Listbox ltbVendedoresAgregados;
+	@Wire
+	private Radio rdoSi;
+	@Wire
+	private Radio rdoNo;
 	Botonera botonera;
 	@Wire
 	private Groupbox gpxDatos;
@@ -133,6 +136,10 @@ public class CVendedor extends CGenerico {
 						spnUltimoSerial.setValue(vendedor.getLastSerial());
 						txtPassword.setValue(vendedor.getComments());
 						txtUsername.setDisabled(true);
+						if (vendedor.isEstado())
+							rdoSi.setChecked(true);
+						else
+							rdoNo.setChecked(true);
 						// ??
 						if (vendedor.getMovil() != 0)
 							chxMovil.setChecked(true);
@@ -184,6 +191,10 @@ public class CVendedor extends CGenerico {
 					vendedor.setRegion(region);
 					vendedor.setSalesmanId(usuario);
 					vendedor.setMovil((short) movil);
+					boolean estado = false;
+					if (rdoSi.isChecked())
+						estado = true;
+					vendedor.setEstado(estado);
 					servicioVendedor.guardar(vendedor);
 
 					Salesmen vende = servicioVendedor.buscar(usuario);
@@ -323,6 +334,8 @@ public class CVendedor extends CGenerico {
 	}
 
 	public void limpiarCampos() {
+		rdoSi.setChecked(false);
+		rdoNo.setChecked(false);
 		ltbAccionesAgregadas.getItems().clear();
 		ltbAccionesDisponibles.getItems().clear();
 		ltbVendedoresDisponibles.getItems().clear();
@@ -394,7 +407,8 @@ public class CVendedor extends CGenerico {
 				|| txtPassword.getText().compareTo("") == 0
 				|| spnSerialDesde.getText().compareTo("") == 0
 				|| spnSerialHasta.getText().compareTo("") == 0
-				|| spnUltimoSerial.getText().compareTo("") == 0) {
+				|| spnUltimoSerial.getText().compareTo("") == 0
+				|| (!rdoNo.isChecked() && !rdoSi.isChecked())) {
 			msj.mensajeError(Mensaje.camposVacios);
 			return false;
 		} else {
@@ -445,7 +459,7 @@ public class CVendedor extends CGenerico {
 	/* LLena las listas dado un usario */
 	public void llenarListas(Salesmen usuario) {
 
-		vendedoresDisponibles = servicioVendedor.buscarTodosOrdenados();
+		vendedoresDisponibles = servicioVendedor.buscarActivos();
 		accionesDisponibles = servicioAction.buscarTodos();
 		if (usuario == null) {
 			ltbAccionesDisponibles.setModel(new ListModelList<Action>(

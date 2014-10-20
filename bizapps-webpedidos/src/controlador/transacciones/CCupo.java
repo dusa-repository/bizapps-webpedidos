@@ -299,7 +299,7 @@ public class CCupo extends CGenerico {
 	@Listen("onClick = #btnBuscarVendedor")
 	public void mostrarCatalogoVendedor() {
 		final List<Salesmen> vendedores = servicioVendedor
-				.buscarTodosOrdenados();
+				.buscarActivos();
 		catalogoVendedor = new Catalogo<Salesmen>(divCatalogoVendedor,
 				"Vendedores", vendedores, true, false, false, "Codigo",
 				"Nombre", "Region") {
@@ -384,9 +384,9 @@ public class CCupo extends CGenerico {
 				else
 					cupos = servicioCupo.buscarCuposVendedor(idVendedor);
 
-				List<Product> items = servicioProducto.buscarPorMarca(idMarca);
+				List<Product> items = servicioProducto.buscarPorMarcaActivo(idMarca);
 				if (idMarca.equals("TODAS"))
-					items = servicioProducto.buscarTodos();
+					items = servicioProducto.buscarActivos();
 				for (int i = 0; i < items.size(); i++) {
 					String id = items.get(i).getProductId();
 					itemsFaltan.add(id);
@@ -446,7 +446,7 @@ public class CCupo extends CGenerico {
 	public void llenarListas() {
 		marcasDisponibles = servicioProducto.buscarMarcas();
 
-		itemsDisponibles = servicioProducto.buscarTodos();
+		itemsDisponibles = servicioProducto.buscarActivos();
 
 		itemsRestringidos = servicioCupo.buscarItemsRestringidos();
 

@@ -198,7 +198,7 @@ public class CReportes extends CGenerico {
 		vendedorTodo.setRegion("TODOS");
 		vendedorTodo.setName("TODOS");
 		vendedores.add(vendedorTodo);
-		vendedores.addAll(servicioVendedor.buscarTodosOrdenados());
+		vendedores.addAll(servicioVendedor.buscarActivos());
 		catalogoVendedor = new Catalogo<Salesmen>(divCatalogoVendedor2,
 				"Vendedores", vendedores, true, false, false, "Codigo",
 				"Nombre", "Region") {

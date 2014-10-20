@@ -51,4 +51,8 @@ public class SProducto {
 		
 	}
 
+	public List<Product> buscarPorMarcaActivo(String idMarca) {
+		return productoDAO.findByBrandAndEstadoTrue(idMarca);
+	}
+
 }
