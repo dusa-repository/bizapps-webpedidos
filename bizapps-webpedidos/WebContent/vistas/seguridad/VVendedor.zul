@@ -123,7 +123,7 @@
 							<div align="right" style="float: right;">
 								<separator />
 								<button class="btn" id="btnSiguientePestanna" label="Siguiente"
-									image="/public/imagenes/botones/adelante.png" />
+									image="/public/imagenes/botones/adelante.png" autodisable="self" />
 							</div>
 						</tabpanel>
 						<tabpanel>
@@ -149,10 +149,12 @@
 									<separator />
 									<separator />
 									<button id="pasar1" class="abrir"
-										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Accion" />
+										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Accion"
+										autodisable="self" />
 									<separator />
 									<button id="pasar2" class="abrir"
-										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Accion" />
+										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Accion"
+										autodisable="self" />
 								</vbox>
 								<vbox align="center">
 									<label class="etiqueta" value="Acciones Permitidas" />
@@ -177,12 +179,12 @@
 							<hbox>
 								<div align="left" style="float: right;">
 									<button label="Anterior" class="btn" id="btnAnteriorPestanna"
-										image="/public/imagenes/botones/atras.png" />
+										image="/public/imagenes/botones/atras.png" autodisable="self" />
 								</div>
 								<space width="700px" />
 								<div align="right" style="float: left;">
 									<button class="btn" id="btnSiguientePestanna2" label="Siguiente"
-										image="/public/imagenes/botones/adelante.png" />
+										image="/public/imagenes/botones/adelante.png" autodisable="self" />
 								</div>
 							</hbox>
 						</tabpanel>
@@ -212,10 +214,12 @@
 									<separator />
 									<separator />
 									<button id="pasar11" class="abrir"
-										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Vendedor" />
+										image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Vendedor"
+										autodisable="self" />
 									<separator />
 									<button id="pasar22" class="abrir"
-										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Vendedores" />
+										image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Vendedores"
+										autodisable="self" />
 								</vbox>
 								<vbox align="center">
 									<label class="etiqueta" value="Vendedores Asignados" />
@@ -243,7 +247,7 @@
 							<div align="left" style="float: right;">
 								<separator />
 								<button label="Anterior" class="btn" id="btnAnteriorPestanna2"
-									image="/public/imagenes/botones/atras.png" />
+									image="/public/imagenes/botones/atras.png" autodisable="self" />
 							</div>
 						</tabpanel>
 					</tabpanels>

@@ -32,7 +32,7 @@
 						tooltiptext="Ingrese el Codigo del Vendedor" />
 					<cell colspan="2">
 						<button id="btnBuscarVendedor" label="Buscar" class="btn"
-							image="/public/imagenes/botones/buscar.png" />
+							image="/public/imagenes/botones/buscar.png"  autodisable="self"/>
 					</cell>
 				</row>
 				<row id="rowMarca">
@@ -64,7 +64,7 @@
 						<hbox />
 					</cell>
 					<button id="btnRefrescar" label="Refrescar" class="btn"
-						image="/public/imagenes/botones/generar.png" width="110px" />
+						image="/public/imagenes/botones/generar.png" width="110px"  autodisable="self" />
 				</row>
 			</rows>
 		</grid>

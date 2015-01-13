@@ -1,14 +1,13 @@
-<?page title="PEDIDOS" contentType="text/html;charset=UTF-8"  ?>
 <zk>
 	<style src="public/Estilo.css" />
 
-	<style>
-		.z-groupbox-hr { background:#661313;border-radius: 30px 30px
+<style>
+		.z-groupbox-hr { background:#800400;border-radius: 30px 30px
 		30px 30px }
 		.z-groupbox { border-radius: 30px 30px 30px 30px }
 
 		.z-groupbox .z-groupbox-header {
-		background: #661313;
+		background: #800400;
 		border-radius:
 		30px 30px 30px 30px
 		}
@@ -27,34 +26,22 @@
 	<window title="" border="0" height="100%" width="100%"
 		apply="controlador.portal.CIndex">
 		<borderlayout height="100%"
-			style="background-image: url('public/imagenes/generales/pedidos.jpeg'); background-repeat:no-repeat;height=100%; width=100% ; background-color:white">
+			style="background-image: url('public/imagenes/generales/pedidos.jpeg'); background-repeat:no-repeat;height=50%; width=50% ; background-color:white">
 			<north height="2%" class="banner">
-				<hbox hflex="1">
-					<separator />
-					<separator />
-					<separator />
-				</hbox>
 			</north>
 			<east width="80%" border="none">
-				<vlayout>
-					<div align="center">
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<image src="/public/imagenes/generales/LogoDusa.png" height="4em"
-							width="15em" />
+				<vbox height="100%" align="end" pack="center">
+					<div width="100%" height="100%" align="right">
+					<image src="/public/imagenes/generales/LogoIndex.jpg" />
 					</div>
-					<div height="100%" align="center">
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<separator />
-						<label class="lblIndex" value="PANEL DE CONTROL WEB PEDIDOS" />
-					</div>
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<separator />
+					<label height="100%" class="lblIndex" value="PANEL DE CONTROL WEB PEDIDOS" style="padding-left: 
+						100px;" />
 					<separator />
 					<separator />
 					<separator />
@@ -63,23 +50,25 @@
 					<separator />
 					<separator />
 					<div height="100%" width="100%" align="center">
-						<groupbox height="100%" width="40%">
+						<groupbox style="padding-left: 
+						20%;" closable="false"
+							height="100%" width="80%">
 							<caption label="${a}"
-								style="color:black; font-size: 16px; font-weight:bold" />
-							<separator></separator>
-							<separator></separator>
+								style="color:black; font-size: 24px; font-weight:bold" />
+							<separator />
+							<separator />
 							<hlayout width="100%">
 								<h:form id="inicioSesion" action="j_spring_security_check"
 									method="POST" xmlns:h="native" align="left">
 									<vlayout width="100%">
-										<label class="etiqueta" height="20px" style="font-size:16px"
+										<label class="etiqueta" height="20px" style="font-size:14px"
 											value="Nombre de Usuario :" />
 										<textbox placeholder="Usuario" height="22px" id="log_usuario"
 											name="j_username" hflex="1" width="200px" />
 									</vlayout>
-									<separator></separator>
+									<separator />
 									<vlayout width="100%">
-										<label class="etiqueta" height="20px" style="font-size:16px"
+										<label class="etiqueta" height="20px" style="font-size:14px"
 											value="Contraseña :" />
 										<textbox placeholder="Contraseña" height="22px" id="log_clave"
 											hflex="1" type="password" name="j_password" width="200px" />
@@ -88,8 +77,8 @@
 									<separator />
 									<hlayout width="100%">
 										<button type="submit" class="btn" label="Entrar"
-											style="font-size:18px" image="/public/imagenes/botones/entrar.png"
-											height="37px" width="170px" />
+											image="/public/imagenes/botones/entrar.png" height="37px"
+											width="170px" style="font-size:18px" />
 									</hlayout>
 								</h:form>
 							</hlayout>
@@ -104,13 +93,13 @@
 							</vlayout>
 						</groupbox>
 					</div>
-				</vlayout>
+				</vbox>
 			</east>
 			<south class="banner" border="0" height="5%" collapsible="false">
 				<div align="center" sclass="footer">
 					<separator></separator>
 					<label style="padding-center:35%;color: white"
-							value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
+						value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
 					</label>
 				</div>
 			</south>

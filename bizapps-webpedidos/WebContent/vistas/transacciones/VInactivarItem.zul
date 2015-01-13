@@ -19,7 +19,7 @@
 						</hbox>
 						<label id="lblCodigo" />
 						<button id="btnBuscarItem" label="Buscar" class="btn"
-							image="/public/imagenes/botones/buscar.png" />
+							image="/public/imagenes/botones/buscar.png"  autodisable="self"/>
 					</row>
 					<row>
 						<label value="Descripcion:" class="etiqueta" />

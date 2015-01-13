@@ -47,6 +47,7 @@ public class CMenuArbol extends CGenerico {
 	Botonera botonera;
 	Catalogo<Arbol> catalogo;
 	long clave = 0;
+	protected List<Arbol> listaGeneral = new ArrayList<Arbol>();
 
 	@Override
 	public void inicializar() throws IOException {
@@ -56,7 +57,6 @@ public class CMenuArbol extends CGenerico {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
 				cerrar = (String) map.get("titulo");
-				System.out.println(tabs.size());
 				map.clear();
 				map = null;
 			}
@@ -102,10 +102,7 @@ public class CMenuArbol extends CGenerico {
 
 			@Override
 			public void guardar() {
-				boolean guardar = true;
-				if (clave == 0)
-					guardar = validar();
-				if (guardar) {
+				if ( validar()) {
 					String url = txtUrl.getValue();
 					String nombre = txtNombre.getValue();
 					Long padre = txtPadre.getValue();
@@ -117,7 +114,9 @@ public class CMenuArbol extends CGenerico {
 					servicioArbol.guardar(arbol);
 					msj.mensajeInformacion(Mensaje.guardado);
 					limpiar();
-					catalogo.actualizarLista(servicioArbol.listarArbol(), true);
+					
+					listaGeneral = servicioArbol.listarArbol();
+					catalogo.actualizarLista(listaGeneral,true);
 					abrirCatalogo();
 				}
 
@@ -144,10 +143,9 @@ public class CMenuArbol extends CGenerico {
 													servicioArbol
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
-													catalogo.actualizarLista(
-															servicioArbol
-																	.listarArbol(),
-															true);
+										
+													listaGeneral = servicioArbol.listarArbol();
+													catalogo.actualizarLista(listaGeneral,true);
 												}
 											}
 										});
@@ -169,10 +167,8 @@ public class CMenuArbol extends CGenerico {
 															.eliminarUno(clave);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
-													catalogo.actualizarLista(
-															servicioArbol
-																	.listarArbol(),
-															true);
+													listaGeneral = servicioArbol.listarArbol();
+													catalogo.actualizarLista(listaGeneral,true);
 												}
 											}
 										});
@@ -184,6 +180,8 @@ public class CMenuArbol extends CGenerico {
 
 			@Override
 			public void buscar() {
+				abrirCatalogo();
+				
 			}
 
 			@Override
@@ -207,7 +205,7 @@ public class CMenuArbol extends CGenerico {
 	}
 
 	public void mostrarBotones(boolean bol) {
-		botonera.getChildren().get(1).setVisible(false);
+		botonera.getChildren().get(1).setVisible(!bol);
 		botonera.getChildren().get(2).setVisible(bol);
 		botonera.getChildren().get(6).setVisible(false);
 		botonera.getChildren().get(8).setVisible(false);
@@ -301,9 +299,9 @@ public class CMenuArbol extends CGenerico {
 	}
 
 	public void mostrarCatalogo() {
-		final List<Arbol> listArbol = servicioArbol.listarArbol();
+		listaGeneral = servicioArbol.listarArbol();
 		catalogo = new Catalogo<Arbol>(divCatalogoMenuArbol, "Arbol",
-				listArbol, false, false, false, "Codigo", "Nombre", "Padre",
+				listaGeneral, false, false, false, "Codigo", "Nombre", "Padre",
 				"Url") {
 
 			@Override
@@ -311,7 +309,7 @@ public class CMenuArbol extends CGenerico {
 
 				List<Arbol> lista = new ArrayList<Arbol>();
 
-				for (Arbol arbol : listArbol) {
+				for (Arbol arbol : listaGeneral) {
 					if (String.valueOf(arbol.getIdArbol()).toLowerCase()
 							.contains(valores.get(0).toLowerCase())
 							&& arbol.getNombre().toLowerCase()

@@ -30,12 +30,6 @@ public class SArbol {
 		return arbolDAO.buscarTodos();
 	}
 
-//	public Arbol buscarPorNombreArbol(String nombre) {
-//		Arbol arbol;
-//		arbol = arbolDAO.findByNombre(nombre);
-//		return arbol;
-//	}
-
 	public List<Arbol> ordenarPorID(ArrayList<Long> ids) {
 
 		List<Arbol> arboles;
@@ -59,12 +53,12 @@ public class SArbol {
 
 	public void eliminarUno(long clave) {
 		arbolDAO.delete(clave);
-		
+
 	}
 
 	public void eliminarVarios(List<Arbol> eliminarLista) {
 		arbolDAO.delete(eliminarLista);
-		
+
 	}
 
 }
