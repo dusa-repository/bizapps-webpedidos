@@ -56,7 +56,6 @@ public class CArbol extends CGenerico {
 	private Image imagenes;
 	TreeModel _model;
 	URL url = getClass().getResource("/controlador/seguridad/usuario.png");
-	// List<String> listmenu1 = new ArrayList<String>();
 	@Wire
 	private Tab tab;
 	@Wire

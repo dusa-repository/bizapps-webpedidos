@@ -31,9 +31,10 @@
 									tooltiptext="Ingrese el Codigo del Vendedor" />
 								<!-- <cell colspan="2"> -->
 								<button id="btnBuscarVendedor" label="Buscar" class="btn"
-									image="/public/imagenes/botones/buscar.png" />
+									image="/public/imagenes/botones/buscar.png" autodisable="self" />
 								<button id="btnLimpiarVendedor" label="Limpiar Cupo por Vendedor"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px" />
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px"
+									autodisable="self" />
 								<!-- </cell> -->
 							</row>
 							<row>
@@ -53,7 +54,8 @@
 								<!-- <cell colspan="2"> -->
 								<hbox />
 								<button id="btnLimpiarMarca" label="Limpiar Cupo por Marca"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px" />
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px"
+									autodisable="self" />
 								<!-- </cell> -->
 							</row>
 							<row>
@@ -61,7 +63,8 @@
 									<hbox />
 								</cell>
 								<button id="btnRefrescar" label="Refrescar" class="btn"
-									image="/public/imagenes/botones/generar.png" width="110px" />
+									image="/public/imagenes/botones/generar.png" width="110px"
+									autodisable="self" />
 								<hbox />
 							</row>
 							<!-- <row> <hbox /> <hbox /> </row> -->
@@ -69,7 +72,7 @@
 					</grid>
 					<separator />
 					<div id="catalogoCupo" tooltiptext="Doble Click al Item para Editar" />
-					<div  width="100%">
+					<div width="100%">
 						<grid width="100%">
 							<columns visible="false">
 								<column label="" width="20%" />
@@ -139,7 +142,8 @@
 								<hbox />
 								<hbox />
 								<button id="btnLimpiarTodo" label="Limpiar Todos los Cupos"
-									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px" />
+									class="btn" image="/public/imagenes/botones/limpiar.png" width="192px"
+									autodisable="self" />
 								<hbox />
 							</row>
 							<row>
@@ -173,7 +177,7 @@
 													<listcell label="${each}">
 													</listcell>
 													<listcell>
-														<datebox width="98%" onCreate="self.value = new Date()" />
+														<datebox width="98%" onCreate="self.value = new Date()"  />
 													</listcell>
 													<listcell>
 														<datebox width="98%" onCreate="self.value = new Date()" />
@@ -194,10 +198,12 @@
 										<separator />
 										<separator />
 										<button class="abrir" id="pasar1Marca"
-											image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Marcas" />
+											image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Marcas"
+											autodisable="self" />
 										<separator />
 										<button class="abrir" id="pasar2Marca"
-											image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Marcas" />
+											image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Marcas"
+											autodisable="self" />
 									</vbox>
 									<vbox align="center">
 										<label class="etiqueta" value="Marcas con Restriccion" />
@@ -234,7 +240,7 @@
 								<separator />
 								<button id="btnGuardarMarca" label="Guardar Marcas "
 									class="btn" width="192px" image="/public/imagenes/botones/guardar.png"
-									tooltiptext="Guardar Restricciones de Marcas" />
+									tooltiptext="Guardar Restricciones de Marcas" autodisable="self" />
 								<separator />
 							</tabpanel>
 							<tabpanel>
@@ -278,10 +284,12 @@
 										<separator />
 										<separator />
 										<button class="abrir" id="pasar1Item"
-											image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Items" />
+											image="/public/imagenes/botones/adelante.png" tooltiptext="Agregar Items"
+											autodisable="self" />
 										<separator />
 										<button class="abrir" id="pasar2Item"
-											image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Items" />
+											image="/public/imagenes/botones/atras.png" tooltiptext="Quitar Items"
+											autodisable="self" />
 									</vbox>
 									<vbox width="100%" align="center">
 										<label class="etiqueta" value="Items con Restriccion" />
@@ -324,7 +332,7 @@
 								<separator />
 								<button id="btnGuardarItem" label="Guardar Items " class="btn"
 									width="192px" image="/public/imagenes/botones/guardar.png"
-									tooltiptext="Guardar Restricciones de Items" />
+									tooltiptext="Guardar Restricciones de Items" autodisable="self" />
 								<separator />
 							</tabpanel>
 						</tabpanels>

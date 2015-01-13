@@ -99,6 +99,7 @@ public class CVendedor extends CGenerico {
 	List<SalesmenAction> accionesAgregadas = new ArrayList<SalesmenAction>();
 	List<Salesmen> vendedoresDisponibles = new ArrayList<Salesmen>();
 	List<SalesmenSub> vendedoresAgregados = new ArrayList<SalesmenSub>();
+	protected List<Salesmen> listaGeneral = new ArrayList<Salesmen>();
 
 	@Override
 	public void inicializar() throws IOException {
@@ -202,9 +203,11 @@ public class CVendedor extends CGenerico {
 					guardarSubordinados(vende);
 					limpiar();
 					msj.mensajeInformacion(Mensaje.guardado);
-					catalogo.actualizarLista(
-							servicioVendedor.buscarTodosOrdenados(), true);
+					listaGeneral = servicioVendedor.buscarTodosOrdenados();
+					catalogo.actualizarLista(listaGeneral,true);
 					abrirCatalogo();
+					
+			
 
 				}
 			}
@@ -230,10 +233,8 @@ public class CVendedor extends CGenerico {
 													servicioVendedor
 															.eliminarVarios(eliminarLista);
 													msj.mensajeInformacion(Mensaje.eliminado);
-													catalogo.actualizarLista(
-															servicioVendedor
-																	.buscarTodosOrdenados(),
-															true);
+													listaGeneral = servicioVendedor.buscarTodosOrdenados();
+													catalogo.actualizarLista(listaGeneral,true);
 												}
 											}
 										});
@@ -255,10 +256,8 @@ public class CVendedor extends CGenerico {
 															.eliminarClave(id);
 													msj.mensajeInformacion(Mensaje.eliminado);
 													limpiar();
-													catalogo.actualizarLista(
-															servicioVendedor
-																	.buscarTodosOrdenados(),
-															true);
+													listaGeneral = servicioVendedor.buscarTodosOrdenados();
+													catalogo.actualizarLista(listaGeneral,true);
 												}
 											}
 										});
@@ -270,7 +269,8 @@ public class CVendedor extends CGenerico {
 
 			@Override
 			public void buscar() {
-				// TODO Auto-generated method stub
+				abrirCatalogo();
+				
 
 			}
 
@@ -302,7 +302,7 @@ public class CVendedor extends CGenerico {
 	}
 
 	public void mostrarBotones(boolean bol) {
-		botonera.getChildren().get(1).setVisible(false);
+		botonera.getChildren().get(1).setVisible(!bol);
 		botonera.getChildren().get(2).setVisible(bol);
 		botonera.getChildren().get(0).setVisible(bol);
 		botonera.getChildren().get(3).setVisible(!bol);
@@ -696,10 +696,10 @@ public class CVendedor extends CGenerico {
 	}
 
 	public void mostrarCatalogo() {
-		final List<Salesmen> vendedores = servicioVendedor
+		listaGeneral  = servicioVendedor
 				.buscarTodosOrdenados();
 		catalogo = new Catalogo<Salesmen>(catalogoVendedor, "Salesmen",
-				vendedores, false, false, false, "Username", "Nombre",
+				listaGeneral, false, false, false, "Username", "Nombre",
 				"Region", "Email") {
 
 			@Override
@@ -707,7 +707,7 @@ public class CVendedor extends CGenerico {
 
 				List<Salesmen> user = new ArrayList<Salesmen>();
 
-				for (Salesmen vende : vendedores) {
+				for (Salesmen vende : listaGeneral) {
 					if (vende.getSalesmanId().toLowerCase()
 							.contains(valores.get(0).toLowerCase())
 							&& vende.getName().toLowerCase()

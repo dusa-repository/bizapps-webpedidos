@@ -82,6 +82,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCliente servicioCliente;
 	@WireVariable("SDetalleOrden")
 	protected SDetalleOrden servicioDetalleOrden;
+	
+	public String titulo = "";
 
 	protected static SimpleDateFormat formatoFecha = new SimpleDateFormat(
 			"dd-MM-yyyy");
@@ -223,7 +225,7 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public boolean enviarEmailNotificacion(String correo, String mensajes) {
 		try {
 
-			String cc = "CAMBIO DE CONTRASEÑA WEB PEDIDOS";
+			String cc = "NOTIFICACION DE SISTEMA WEB PEDIDOS";
 			Properties props = new Properties();
 			props.setProperty("mail.smtp.host", "172.23.20.66");
 			props.setProperty("mail.smtp.starttls.enable", "true");

@@ -1,6 +1,8 @@
-<?page id="mainPage" title="BIENVENIDO" contentType="text/html;charset=utf-8"?>
+<?page id="mainPage" title="PEDIDOS" contentType="text/html;charset=utf-8"?>
 <zk>
-	<style>
+	<style src="../public/Estilo.css" />
+	<script src="/public/progress.js" />
+		<style>
 		.z-tree-icon .z-tree-open {
 		background-image:
 		url('../public/imagenes/generales/abierto.png');
@@ -30,18 +32,16 @@
 		content: '';
 		}
 	</style>
-	<style src="../public/Estilo.css" />
-	<script src="/public/progress.js" />
-	<window title="" border="0" height="100%" width="100%" apply="arbol.CArbol">
+	<window id="wdwIndex" title="" height="100%" width="100%"
+		border="0" apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
-			<north height="11%" class="banner">
+			<north height="10%" class="banner">
 				<hbox width="100%" widths="12%,55%,33%">
 					<vbox width="100%">
-						<separator />
-						<image src="../public/imagenes/generales/LogoDusa.png"
-							height="4em" width="18em" />
+						<image src="../public/imagenes/generales/LogoInicio.jpg" />
 					</vbox>
 					<div align="center" width="100%">
+						<separator />
 						<separator />
 						<separator />
 						<hbox>
@@ -76,12 +76,12 @@
 							<separator />
 							<separator />
 							<vbox>
-								<listbox style="border:none" width="220px" id="ltbRoles">
+								<listbox style="border:none" width="200px" id="ltbRoles">
 									<template name="model">
 										<listitem>
 											<listcell
-												style="font-size:14px;color:white;font-weight: bold; background:#661313"
-												label="${each.nombre}">
+												style="border:none;font-size:14px;color:white;font-weight: bold"
+												class="gruposUsuario" label="${each.nombre}">
 											</listcell>
 										</listitem>
 									</template>
@@ -91,9 +91,9 @@
 					</div>
 				</hbox>
 			</north>
-			<west title="Menú" id="west" size="17%" splittable="true"
+			<west title="Menú" id="west" size="19%" splittable="true"
 				collapsible="true" autoscroll="true">
-				<tree id="arbolMenu" width="99%">
+				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
 					<template name="model">
 						<treeitem context="menupopup">
 							<treerow>
@@ -106,7 +106,7 @@
 			<center border="none">
 				<borderlayout sclass="complex-layout">
 					<center
-						style="background-image: url('../public/imagenes/generales/LogoDusaAgua.png'); background-repeat:no-repeat; "
+						style="background-image: url('../public/imagenes/generales/LogoAgua.png'); background-repeat:no-repeat; "
 						border="none" autoscroll="true">
 						<tabbox width="100%" id="tabBox">
 							<tabs context="editPopup">
@@ -119,14 +119,13 @@
 									<include id="contenido"></include>
 								</tabpanel>
 							</tabpanels>
-
 						</tabbox>
 					</center>
 				</borderlayout>
 			</center>
-			<south class="banner" border="0" height="4,2%" collapsible="false">
+			<south class="banner" border="0" height="3%" collapsible="false">
 				<div align="center" sclass="footer">
-					<separator></separator>
+					<separator />
 					<label style="padding-center:35%;color: white"
 						value="© 2014 Destilería Unidas S.A | RIF: J-30940783-0 | Todos los derechos reservados | Desarrollado por BIZAPPS,C.A">
 					</label>

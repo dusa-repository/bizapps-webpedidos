@@ -12,12 +12,14 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import componente.Botonera;
 import componente.Mensaje;
 import componente.Validador;
+
 
 import controlador.maestros.CGenerico;
 
@@ -38,7 +40,7 @@ public class CReinicioPassword extends CGenerico {
 
 	@Override
 	public void inicializar() throws IOException {
-
+		// TODO Auto-generated method stub
 		Botonera botonera = new Botonera() {
 
 			@Override
@@ -62,19 +64,19 @@ public class CReinicioPassword extends CGenerico {
 							txtCorreoUsuario.getValue());
 					if (usuario != null) {
 						correo = usuario.getEmail();
+						usuario.setPassword(password);
+						servicioUsuario.guardar(usuario);
 						enviarEmailNotificacion(
 								correo,
 								"Ha Solicitado Reiniciar su Password, sus nuevos datos para el inicio de sesion son: "
 										+ " Usuario: "
 										+ usuario.getLogin()
 										+ "  " + " Password: " + password);
-						usuario.setPassword(password);
-						servicioUsuario.guardar(usuario);
-						msj.mensajeInformacion(Mensaje.reinicioContrasenna);
 						limpiar();
+						msj.mensajeInformacion(Mensaje.reinicioContrasenna);
 						salir();
 					} else {
-						msj.mensajeError(Mensaje.usuarioNoRegistrado);
+						msj.mensajeError(Mensaje.cedulaNoExiste);
 					}
 				}
 			}
@@ -86,31 +88,31 @@ public class CReinicioPassword extends CGenerico {
 			@Override
 			public void seleccionar() {
 				// TODO Auto-generated method stub
-
+				
 			}
 
 			@Override
 			public void buscar() {
 				// TODO Auto-generated method stub
-
+				
 			}
 
 			@Override
 			public void annadir() {
 				// TODO Auto-generated method stub
-
+				
 			}
 
 			@Override
 			public void reporte() {
 				// TODO Auto-generated method stub
-
+				
 			}
 
 			@Override
 			public void ayuda() {
 				// TODO Auto-generated method stub
-
+				
 			}
 		};
 		botonera.getChildren().get(0).setVisible(false);

@@ -33,7 +33,7 @@ public abstract class Botonera extends Hbox {
 		this.appendChild(btnAyuda);
 
 		btnSeleccionar.setSrc("/public/imagenes/botones/seleccionar.png");
-		btnBuscar.setSrc("/public/imagenes/botones/buscar.png");
+		btnBuscar.setSrc("/public/imagenes/botones/volver.png");
 		btnAnnadir.setSrc("/public/imagenes/botones/annadir.png");
 		btnGuardar.setSrc("/public/imagenes/botones/guardar.png");
 		btnEliminar.setSrc("/public/imagenes/botones/eliminar.png");
@@ -55,7 +55,7 @@ public abstract class Botonera extends Hbox {
 		btnSeleccionar.setWidth("115px");
 		
 		btnSeleccionar.setLabel("Seleccionar");
-		btnBuscar.setLabel("Buscar");
+		btnBuscar.setLabel("Volver");
 		btnAnnadir.setLabel("Añadir");
 		btnGuardar.setLabel("Guardar");
 		btnEliminar.setLabel("Eliminar");
@@ -65,7 +65,7 @@ public abstract class Botonera extends Hbox {
 		btnAyuda.setLabel("Ayuda");
 
 		btnSeleccionar.setTooltiptext("Seleccionar");
-		btnBuscar.setTooltiptext("Buscar");
+		btnBuscar.setTooltiptext("Volver");
 		btnAnnadir.setTooltiptext("Añadir");
 		btnGuardar.setTooltiptext("Guardar");
 		btnEliminar.setTooltiptext("Eliminar");

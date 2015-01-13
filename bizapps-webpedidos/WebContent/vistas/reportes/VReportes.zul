@@ -23,7 +23,7 @@
 						tooltiptext="Ingrese el Codigo del Vendedor" />
 					<cell colspan="2">
 						<button id="btnBuscarVendedor" label="Buscar" class="btn"
-							image="/public/imagenes/botones/buscar.png" />
+							image="/public/imagenes/botones/buscar.png"  autodisable="self"/>
 					</cell>
 				</row>
 				<row>

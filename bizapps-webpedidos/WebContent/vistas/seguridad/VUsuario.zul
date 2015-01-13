@@ -117,7 +117,7 @@
 							<div align="right" style="float: right;">
 								<separator />
 								<button class="btn" id="btnSiguientePestanna" label="Siguiente"
-									image="/public/imagenes/botones/adelante.png" />
+									image="/public/imagenes/botones/adelante.png"  autodisable="self" />
 							</div>
 						</tabpanel>
 						<tabpanel>
@@ -176,10 +176,10 @@
 									</listbox>
 									<vbox>
 										<button class="abrir" id="pasar1" image="/public/imagenes/botones/adelante.png"
-											tooltiptext="Agregar Grupos"  />
+											tooltiptext="Agregar Grupos"  autodisable="self" />
 										<separator />
 										<button id="pasar2" class="abrir" image="/public/imagenes/botones/atras.png"
-											tooltiptext="Quitar Grupos"  />
+											tooltiptext="Quitar Grupos"  autodisable="self" />
 									</vbox>
 									<listbox id="ltbGruposAgregados" height="160px"
 										emptyMessage="No ha Seleccionado ningun Grupo" checkmark="true">
@@ -195,7 +195,7 @@
 							<div align="left" style="float: right;">
 							<separator/>
 								<button label="Anterior" class="btn" id="btnAnteriorPestanna"
-									image="/public/imagenes/botones/atras.png" />
+									image="/public/imagenes/botones/atras.png"  autodisable="self"/>
 							</div>
 						</tabpanel>
 					</tabpanels>
