@@ -4,6 +4,7 @@ import interfacedao.maestros.IProductoDAO;
 import interfacedao.transacciones.IDetalleOrdenDAO;
 import interfacedao.transacciones.IOrdenDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.maestros.Order;
@@ -33,12 +34,15 @@ public class SOrden {
 
 	public List<Order> buscarPorMarcaYFecha(String idMarca, String string,
 			String string2) {
-		// List<Order> ordenes =
+		 List<Order> ordeness = new ArrayList<Order>();
 		// ordenDAO.findByOrderDateBetween(string,string2);
 		List<String> productos = productoDAO.findByBrandString(idMarca);
 		List<Integer> ordenes = detalleOrdenDAO.findByIdProductIdIn(productos);
+		if(!ordenes.isEmpty())
 		return ordenDAO.findByOrderDateBetweenAndOrderIdIn(string, string2,
 				ordenes);
+		else
+			return ordeness;
 
 	}
 
