@@ -1,7 +1,6 @@
 <?page id="mainPage" title="PEDIDOS" contentType="text/html;charset=utf-8"?>
 <zk>
-	<style src="../public/Estilo.css" />
-	<script src="/public/progress.js" />
+
 		<style>
 		.z-tree-icon .z-tree-open {
 		background-image:
@@ -32,6 +31,8 @@
 		content: '';
 		}
 	</style>
+		<style src="../public/Estilo.css" />
+	<script src="/public/progress.js" />
 	<window id="wdwIndex" title="" height="100%" width="100%"
 		border="0" apply="arbol.CArbol">
 		<borderlayout height="100%" style="background-color:#fff;">
@@ -93,7 +94,7 @@
 			</north>
 			<west title="Menú" id="west" size="19%" splittable="true"
 				collapsible="true" autoscroll="true">
-				<tree id="arbolMenu" width="99%" zclass="z-vfiletree">
+				<tree id="arbolMenu" width="99%">
 					<template name="model">
 						<treeitem context="menupopup">
 							<treerow>

@@ -52,8 +52,6 @@ public class CGrupo extends CGenerico {
 	@Wire
 	private Textbox txtNombreGrupo;
 	@Wire
-	private Listbox ltbFuncionalidadesSeleccionados;
-	@Wire
 	private Div botoneraGrupo;
 	@Wire
 	private Div divCatalogoGrupo;
@@ -67,7 +65,6 @@ public class CGrupo extends CGenerico {
 	
 	TreeModel _model;
 	Catalogo<Grupo> catalogo;
-	public static List<String> funcionalidades = new ArrayList<String>();
 	protected List<Grupo> listaGeneral = new ArrayList<Grupo>();
 	Botonera botonera;
 
@@ -86,7 +83,6 @@ public class CGrupo extends CGenerico {
 		treeGrupo.setModel(getModel());
 		treeGrupo.setCheckmark(true);
 		treeGrupo.setMultiple(true);
-		ltbFuncionalidadesSeleccionados.getItems().clear();
 		txtNombreGrupo.setFocus(true);
 		mostrarCatalogo();
 
@@ -299,14 +295,12 @@ public class CGrupo extends CGenerico {
 		}
 		id = 0;
 		treeGrupo.setVisible(true);
-		funcionalidades.clear();
-		ltbFuncionalidadesSeleccionados.setModel(new ListModelList<String>(
-				funcionalidades));
+
+
 		catalogo.limpiarSeleccion();
 	}
 	
 	public void visualizarFuncionalidades() {
-		llenarFuncionalidadesSeleccionadas();
 		treeGrupo.setVisible(true);
 		Treechildren treeChildren = treeGrupo.getTreechildren();
 		Collection<Treeitem> lista = treeChildren.getItems();
@@ -417,28 +411,8 @@ public class CGrupo extends CGenerico {
 			for (int y = 0; y < ids.size(); y++) {
 				listaArbol.add(servicioArbol.buscar(ids.get(y)));
 			}
-			String nombreItem = String.valueOf(itemSeleccionado.getLabel());
-			if (itemSeleccionado.isSelected()) {
-				funcionalidades.add(nombreItem);
-				ltbFuncionalidadesSeleccionados
-						.setModel(new ListModelList<String>(funcionalidades));
-			} else {
-				List<Listitem> listaFuncionalidadesSeleccionadas = ltbFuncionalidadesSeleccionados
-						.getItems();
-				for (int i = 0; i < listaFuncionalidadesSeleccionadas.size(); i++) {
-					if (listaFuncionalidadesSeleccionadas.get(i).getLabel()
-							.equals(nombreItem)) {
-						ltbFuncionalidadesSeleccionados
-								.removeItemAt(listaFuncionalidadesSeleccionadas
-										.get(i).getIndex());
-					}
-				}
-				funcionalidades.remove(nombreItem);
-				ltbFuncionalidadesSeleccionados
-						.setModel(new ListModelList<String>(funcionalidades));
-			}
 			Arbol arbolItem = servicioArbol.buscarPorId(idArbol);
-//			listaArbol.remove((int) (long) arbolItem.getIdArbol() - 1);
+
 			listaArbol.remove(arbolItem);
 			long temp = arbolItem.getPadre();
 			long temp2 = 0;
@@ -506,27 +480,7 @@ public class CGrupo extends CGenerico {
 			}
 		}
 	}
-	public void llenarFuncionalidadesSeleccionadas() {
-		Grupo grupo = servicioGrupo.buscarGrupo(id);
-		List<Arbol> listaArbol = servicioArbol.buscarporGrupo(grupo);
-		int ItemEncontrado = 0;
-		for (int i = 0; i < listaArbol.size(); i++) {
-			long padre = listaArbol.get(i).getIdArbol();
-			ItemEncontrado = 0;
-			for (int j = 0; j < listaArbol.size(); j++) {
-				long hijo = listaArbol.get(j).getPadre();
-				if (padre == hijo) {
-					ItemEncontrado = 1;
-					j = listaArbol.size();
-				}
-			}
-			if (ItemEncontrado == 0) {
-				funcionalidades.add(listaArbol.get(i).getNombre());
-			}
-		}
-		ltbFuncionalidadesSeleccionados.setModel(new ListModelList<String>(
-				funcionalidades));
-	}
+
 	
 	public boolean validarNodoHijo(SelectEvent<Treeitem, String> event) {
 		Treeitem itemSeleccionado = event.getReference();
