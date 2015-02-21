@@ -1,0 +1,49 @@
+<zk>
+	<style src="/public/Estilo.css" />
+	<div id="divFacturacion" width="100%" apply="controlador.maestros.CFacturacion">
+		<groupbox mold="3d" width="auto" title="Facturacion de Cliente">
+			<div id="botoneraFacturacion" />
+			<groupbox id="gpxRegistro" class="azul" width="auto" title=""
+				open="false">
+				<caption label="Nuevo" style="font-weight:bold"
+					tooltiptext="Presione para ingresar una nueva Facturacion de Cliente" />
+				<grid width="100%">
+					<columns visible="false">
+						<column label="" width="20%" />
+						<column label="" width="30%" />
+						<column label="" width="20%" />
+						<column label="" width="30%" />
+					</columns>
+					<rows>
+						<row>
+							<hbox>
+								<label class="etiqueta" value="Warehouse Facturacion:" />
+								<space />
+								<label value="*" style="font-weight:bold;color:red">
+								</label>
+							</hbox>
+							<textbox id="txtFacturacion" hflex="1" maxlength="50"
+								tooltiptext="Ingrese el codigo del Customer Facturacion" />
+							<hbox />
+							<hbox />
+						</row>
+						<row>
+							<label class="etiqueta" value="Warehouse:" />
+							<cell colspan="3">
+								<textbox multiline="true" class="multilinea" id="txtWarehouse"
+									hflex="1" maxlength="50"
+									tooltiptext="Ingrese los Warehouse asociados, debe separarlos con comas (,)" />
+							</cell>
+						</row>
+					</rows>
+				</grid>
+				<separator />
+			</groupbox>
+			<groupbox class="azul" id="gpxDatos" width="auto" title="">
+				<caption label="Registros" style="font-weight:bold"
+					tooltiptext="Presione para ver las Facturaciones de Cliente registrados" />
+				<div id="catalogoFacturacion" tooltiptext="Seleccione el vendedor para Realizar una Accion" />
+			</groupbox>
+		</groupbox>
+	</div>
+</zk>
