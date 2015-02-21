@@ -38,6 +38,12 @@ public class Customer implements Serializable {
 
 	private String warehouse;
 
+	@Column(name="lista_precio")
+	private String listaPrecio;
+
+	@Column(name="warehouse_facturacion")
+	private String facturacion;
+
 	public Customer() {
 	}
 
@@ -103,6 +109,22 @@ public class Customer implements Serializable {
 
 	public void setWarehouse(String warehouse) {
 		this.warehouse = warehouse;
+	}
+
+	public String getListaPrecio() {
+		return listaPrecio;
+	}
+
+	public void setListaPrecio(String listaPrecio) {
+		this.listaPrecio = listaPrecio;
+	}
+
+	public String getFacturacion() {
+		return facturacion;
+	}
+
+	public void setFacturacion(String facturacion) {
+		this.facturacion = facturacion;
 	}
 
 }

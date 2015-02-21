@@ -39,6 +39,7 @@ import servicio.configuracion.SSystem;
 import servicio.maestros.SAction;
 import servicio.maestros.SActionVendedor;
 import servicio.maestros.SCliente;
+import servicio.maestros.SCustomerFacturacion;
 import servicio.maestros.SProducto;
 import servicio.maestros.SSubVendedor;
 import servicio.maestros.SVendedor;
@@ -48,7 +49,6 @@ import servicio.seguridad.SUsuario;
 import servicio.transacciones.SCupo;
 import servicio.transacciones.SDetalleOrden;
 import servicio.transacciones.SOrden;
-
 import componente.Mensaje;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -82,6 +82,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	protected SCliente servicioCliente;
 	@WireVariable("SDetalleOrden")
 	protected SDetalleOrden servicioDetalleOrden;
+	@WireVariable("SCustomerFacturacion")
+	protected SCustomerFacturacion servicioCustomerFacturacion;
 	
 	public String titulo = "";
 
