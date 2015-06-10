@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import modelo.configuracion.System;
 import modelo.maestros.Product;
-import modelo.maestros.Salesmen;
 
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -16,7 +14,6 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Radio;
 import org.zkoss.zul.Tab;
-import org.zkoss.zul.Textbox;
 
 import componente.Botonera;
 import componente.Catalogo;
