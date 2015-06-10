@@ -1,17 +1,13 @@
 package modelo.seguridad;
 
 import java.io.Serializable;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -58,10 +54,6 @@ public class Usuario implements Serializable {
 	@Column(name = "usuario_auditoria", length = 50)
 	private String usuarioAuditoria;
 
-	@ManyToMany
-	@JoinTable(name = "grupo_usuario", joinColumns = { @JoinColumn(name = "id_usuario", nullable = false) }, inverseJoinColumns = { @JoinColumn(name = "id_grupo", nullable = false) })
-	private Set<Grupo> grupos;
-
 	@Column(name = "primer_apellido", length = 100)
 	private String primerApellido;
 
@@ -89,7 +81,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(long cedula, String cedulas, String email, String login,
-			String password, byte[] imagen, boolean estado, Set<Grupo> grupos,
+			String password, byte[] imagen, boolean estado, 
 			String nombre, String apellido, String segundoNombre,
 			String segundoApellido, String sexo, String telefono,
 			String direccion) {
@@ -101,8 +93,6 @@ public class Usuario implements Serializable {
 		this.password = password;
 		this.imagen = imagen;
 		this.estado = estado;
-		// this.horaAuditoria = horaAuditoria;
-		this.grupos = grupos;
 		this.primerNombre = nombre;
 		this.primerApellido = apellido;
 		this.segundoNombre = segundoNombre;
@@ -110,7 +100,6 @@ public class Usuario implements Serializable {
 		this.sexo = sexo;
 		this.telefono = telefono;
 		this.direccion = direccion;
-		// this.fechaAuditoria = fechaAuditoria;
 	}
 
 	public long getIdUsuario() {
@@ -192,15 +181,7 @@ public class Usuario implements Serializable {
 	public void setUsuarioAuditoria(String usuarioAuditoria) {
 		this.usuarioAuditoria = usuarioAuditoria;
 	}
-
-	public Set<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	public void setGrupos(Set<Grupo> grupos) {
-		this.grupos = grupos;
-	}
-
+	
 	public String getPrimerApellido() {
 		return primerApellido;
 	}

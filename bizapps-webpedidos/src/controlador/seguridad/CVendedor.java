@@ -29,11 +29,13 @@ import org.zkoss.zul.Spinner;
 import org.zkoss.zul.Tab;
 import org.zkoss.zul.Textbox;
 
-import arbol.CArbol;
+import security.controlador.CArbol;
+
 import componente.Botonera;
 import componente.Catalogo;
 import componente.Mensaje;
 import componente.Validador;
+
 import controlador.maestros.CGenerico;
 
 public class CVendedor extends CGenerico {

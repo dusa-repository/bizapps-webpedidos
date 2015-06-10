@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -21,6 +22,8 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import modelo.seguridad.Usuario;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -35,6 +38,11 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Tab;
 
+import security.modelo.Grupo;
+import security.modelo.UsuarioSeguridad;
+import security.servicio.SArbol;
+import security.servicio.SGrupo;
+import security.servicio.SUsuarioSeguridad;
 import servicio.configuracion.SSystem;
 import servicio.maestros.SAction;
 import servicio.maestros.SActionVendedor;
@@ -43,8 +51,6 @@ import servicio.maestros.SCustomerFacturacion;
 import servicio.maestros.SProducto;
 import servicio.maestros.SSubVendedor;
 import servicio.maestros.SVendedor;
-import servicio.seguridad.SArbol;
-import servicio.seguridad.SGrupo;
 import servicio.seguridad.SUsuario;
 import servicio.transacciones.SCupo;
 import servicio.transacciones.SDetalleOrden;
@@ -58,6 +64,8 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 
 	@WireVariable("SArbol")
 	protected SArbol servicioArbol;
+	@WireVariable("SUsuarioSeguridad")
+	protected SUsuarioSeguridad servicioUsuarioSeguridad;
 	@WireVariable("SGrupo")
 	protected SGrupo servicioGrupo;
 	@WireVariable("SUsuario")
@@ -298,6 +306,26 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	class SMTPAuthenticator extends javax.mail.Authenticator {
 		public PasswordAuthentication getPasswordAuthentication() {
 			return new PasswordAuthentication("cdusa", "cartucho");
+		}
+	}
+
+	public void guardarDatosSeguridad(Usuario usuarioLogica,
+			Set<Grupo> gruposUsuario) {
+		UsuarioSeguridad usuario = new UsuarioSeguridad(
+				usuarioLogica.getLogin(), usuarioLogica.getEmail(),
+				usuarioLogica.getPassword(), usuarioLogica.getImagen(), true,
+				usuarioLogica.getPrimerNombre(),
+				usuarioLogica.getPrimerApellido(), fechaHora, horaAuditoria,
+				nombreUsuarioSesion(), gruposUsuario);
+		servicioUsuarioSeguridad.guardar(usuario);
+	}
+
+	public void inhabilitarSeguridad(List<Usuario> list) {
+		for (int i = 0; i < list.size(); i++) {
+			UsuarioSeguridad usuario = servicioUsuarioSeguridad
+					.buscarPorLogin(list.get(i).getLogin());
+			usuario.setEstado(false);
+			servicioUsuarioSeguridad.guardar(usuario);
 		}
 	}
 }
