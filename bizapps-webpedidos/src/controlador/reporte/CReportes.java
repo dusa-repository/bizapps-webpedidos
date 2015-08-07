@@ -43,7 +43,6 @@ public class CReportes extends CGenerico {
 	private Div botoneraReporte;
 	@Wire
 	private Div divCatalogoVendedor2;
-	private String nombre;
 	protected Connection conexion;
 	private String tipo;
 	Catalogo<Salesmen> catalogoVendedor;
@@ -56,7 +55,7 @@ public class CReportes extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				nombre = (String) map.get("nombre");
+				titulo = (String) map.get("titulo");
 				map.clear();
 				map = null;
 			}
@@ -66,7 +65,7 @@ public class CReportes extends CGenerico {
 		listaProduct.addAll(servicioProducto.buscarMarcas());
 		cmbMarca.setModel(new ListModelList<String>(listaProduct));
 
-		switch (nombre) {
+		switch (titulo) {
 		case "Cupos por Vendedor/Marca/Item":
 			tipo = "1";
 			break;
@@ -83,7 +82,7 @@ public class CReportes extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divReporte, nombre, tabs);
+				cerrarVentana(divReporte, titulo, tabs);
 			}
 
 			@Override

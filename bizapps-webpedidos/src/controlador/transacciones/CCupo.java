@@ -118,7 +118,7 @@ public class CCupo extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				cerrar = (String) map.get("titulo");
+				titulo = (String) map.get("titulo");
 				map.clear();
 				map = null;
 			}
@@ -144,7 +144,7 @@ public class CCupo extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divCupo, cerrar, tabs);
+				cerrarVentana(divCupo, titulo, tabs);
 			}
 
 			@Override

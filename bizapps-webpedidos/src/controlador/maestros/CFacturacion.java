@@ -82,7 +82,7 @@ public class CFacturacion extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divFacturacion, cerrar, tabs);
+				cerrarVentana(divFacturacion, titulo, tabs);
 			}
 
 			@Override
