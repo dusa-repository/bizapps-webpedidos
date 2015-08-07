@@ -52,7 +52,7 @@ public class CInactivarItem extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				nombre = (String) map.get("nombre");
+				titulo = (String) map.get("titulo");
 				map.clear();
 				map = null;
 			}
@@ -68,7 +68,7 @@ public class CInactivarItem extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divInactivarItem, nombre, tabs);
+				cerrarVentana(divInactivarItem, titulo, tabs);
 			}
 
 			@Override

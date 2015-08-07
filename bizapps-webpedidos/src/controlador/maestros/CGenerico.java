@@ -110,7 +110,6 @@ public abstract class CGenerico extends SelectorComposer<Component> {
 	public java.util.Date fecha = new Date();
 	public Timestamp fechaHora = new Timestamp(fecha.getTime());
 	public Mensaje msj = new Mensaje();
-	public String cerrar;
 	private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 			"/META-INF/PropiedadesBaseDatos.xml");
 

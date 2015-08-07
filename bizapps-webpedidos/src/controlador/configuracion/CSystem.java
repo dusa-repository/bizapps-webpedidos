@@ -36,7 +36,6 @@ public class CSystem extends CGenerico {
 	private Radio rdoSI;
 	@Wire
 	private Radio rdoNo;
-	private String nombre;
 
 	@Override
 	public void inicializar() throws IOException {
@@ -45,7 +44,7 @@ public class CSystem extends CGenerico {
 		if (map != null) {
 			if (map.get("tabsGenerales") != null) {
 				tabs = (List<Tab>) map.get("tabsGenerales");
-				nombre = (String) map.get("nombre");
+				titulo = (String) map.get("titulo");
 				map.clear();
 				map = null;
 			}
@@ -61,7 +60,7 @@ public class CSystem extends CGenerico {
 
 			@Override
 			public void salir() {
-				cerrarVentana(divSystem, nombre, tabs);
+				cerrarVentana(divSystem, titulo, tabs);
 			}
 
 			@Override
